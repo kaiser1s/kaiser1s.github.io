@@ -2,94 +2,116 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Kaiser | Professional Portfolio</title>
+    <title>Kaiser | Senior Developer Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;900&family=Fira+Code&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Outfit', sans-serif; background: #f4f7fa; color: #1e293b; }
-        .card { background: white; border-radius: 1.5rem; border: 1px solid #e2e8f0; transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 12px 24px rgba(0,0,0,0.05); }
-        .code-block { background: #1a1b26; border-radius: 1rem; font-family: 'Fira Code', monospace; padding: 1.5rem; color: #a9b1d6; overflow-x: auto; }
-        .nav-btn { text-align: left; padding: 0.75rem 1rem; border-radius: 0.75rem; font-weight: 700; transition: 0.2s; }
-        .nav-btn.active { background: #dbeafe; color: #2563eb; }
-        .badge { font-size: 0.7rem; padding: 2px 10px; border-radius: 99px; font-weight: 800; text-transform: uppercase; }
+        body { font-family: 'Outfit', sans-serif; transition: 0.5s; min-height: screen; }
+        
+        /* ערכות נושא */
+        .theme-white { background: #f8fafc; --text-main: #1e293b; --card-bg: white; --sidebar-bg: #ffffff; }
+        .theme-black { background: #0f172a; --text-main: #f1f5f9; --card-bg: #1e293b; --sidebar-bg: #020617; }
+        .theme-blue { background: #1e3a8a; --text-main: #ffffff; --card-bg: #1e40af; --sidebar-bg: #172554; }
+
+        body { color: var(--text-main); }
+        .sidebar { background: var(--sidebar-bg); border-right: 1px solid rgba(255,255,255,0.1); }
+        .card { background: var(--card-bg); border-radius: 1.5rem; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 12px 24px rgba(0,0,0,0.2); }
+        
+        .code-block { background: #1a1b26; border-radius: 1rem; font-family: 'Fira Code', monospace; padding: 1.5rem; color: #a9b1d6; overflow-x: auto; border: 1px solid #2ac3de33; }
+        .nav-btn { text-align: left; padding: 0.75rem 1rem; border-radius: 0.75rem; font-weight: 700; transition: 0.2s; color: #94a3b8; }
+        .nav-btn.active { background: rgba(37, 99, 235, 0.2); color: #3b82f6; }
+        
+        .section { display: none; animation: fadeIn 0.4s ease; }
+        .section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body class="flex min-h-screen">
+<body class="theme-black flex min-h-screen" id="body-main">
 
-    <aside class="w-64 bg-white border-r border-slate-200 p-8 flex flex-col fixed h-full">
+    <aside class="w-64 sidebar p-8 flex flex-col fixed h-full z-50">
         <div class="text-2xl font-black mb-12 tracking-tighter">KAISER👑</div>
-        <nav class="flex flex-col gap-2">
+        <nav class="flex flex-col gap-2 flex-1">
             <button onclick="showSec('profile')" class="nav-btn active">👤 Profile</button>
-            <button onclick="showSec('exp')" class="nav-btn text-slate-500">🏆 Journey</button>
-            <button onclick="showSec('proj')" class="nav-btn text-slate-500">📂 Projects</button>
-            <button onclick="showSec('code')" class="nav-btn text-slate-500">💻 Showcase</button>
+            <button onclick="showSec('exp')" class="nav-btn">🏆 Journey</button>
+            <button onclick="showSec('proj')" class="nav-btn">📂 Projects</button>
+            <button onclick="showSec('code')" class="nav-btn">💻 Showcase</button>
         </nav>
+
+        <div class="pt-6 border-t border-white/10">
+            <p class="text-[10px] font-bold uppercase mb-3 opacity-50">Switch Theme</p>
+            <div class="flex gap-3">
+                <button onclick="setTheme('theme-white')" class="w-6 h-6 rounded-full bg-white border border-gray-300"></button>
+                <button onclick="setTheme('theme-black')" class="w-6 h-6 rounded-full bg-slate-900 border border-gray-600"></button>
+                <button onclick="setTheme('theme-blue')" class="w-6 h-6 rounded-full bg-blue-700 border border-blue-400"></button>
+            </div>
+        </div>
     </aside>
 
-    <main class="flex-1 ml-64 p-12">
+    <main class="flex-1 ml-64 p-12 lg:p-20">
         
-        <section id="profile" class="section active max-w-4xl">
-            <h1 class="text-6xl font-black mb-6">Crafting Digital <span class="text-blue-600">Worlds</span></h1>
-            <div class="grid grid-cols-3 gap-6 mt-12">
-                <div class="card p-6 text-center">
-                    <div class="text-4xl font-black text-blue-600">37K+</div>
-                    <div class="text-xs font-bold text-slate-400 uppercase">Downloads</div>
+        <section id="profile" class="section active max-w-5xl">
+            <h1 class="text-7xl font-black mb-6 leading-tight">Digital <br><span class="text-blue-500">Architect.</span></h1>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
+                <div class="card p-8">
+                    <div class="text-4xl font-black text-blue-500 mb-1">8,429+</div>
+                    <div class="text-xs font-bold opacity-50 uppercase tracking-widest">Downloads</div>
                 </div>
-                <div class="card p-6 text-center">
-                    <div class="text-4xl font-black text-blue-600">4.2★</div>
-                    <div class="text-xs font-bold text-slate-400 uppercase">Rating</div>
+                <div class="card p-8">
+                    <div class="text-4xl font-black text-blue-500 mb-1">4.2★</div>
+                    <div class="text-xs font-bold opacity-50 uppercase tracking-widest">User Rating</div>
                 </div>
-                <div class="card p-6 text-center">
-                    <div class="text-4xl font-black text-blue-600">117+</div>
-                    <div class="text-xs font-bold text-slate-400 uppercase">Projects</div>
-                </div>
-            </div>
-        </section>
-
-        <section id="exp" class="section hidden max-w-4xl">
-            <h2 class="text-3xl font-black mb-10">Professional Journey</h2>
-            <div class="grid grid-cols-2 gap-6">
-                <div class="card p-8 border-l-4 border-blue-500">
-                    <div class="flex justify-between mb-4"><h3 class="text-xl font-black">ShakeBox</h3><span class="badge bg-green-100 text-green-700">Owner</span></div>
-                    <p class="text-slate-500 text-sm mb-6">Innovative BoxSMP Experience.</p>
-                    <a href="https://discord.gg/Fh54yGNazT" class="text-blue-600 font-bold text-sm">Join Discord →</a>
-                </div>
-                <div class="card p-8 border-l-4 border-blue-500">
-                    <div class="flex justify-between mb-4"><h3 class="text-xl font-black">SwiftBox</h3><span class="badge bg-green-100 text-green-700">Owner</span></div>
-                    <p class="text-slate-500 text-sm mb-6">Competitive Survival Mechanics.</p>
-                    <a href="https://discord.gg/4d2fEQQ2Vu" class="text-blue-600 font-bold text-sm">Join Discord →</a>
-                </div>
-                <div class="card p-8 border-l-4 border-slate-300">
-                    <div class="flex justify-between mb-4"><h3 class="text-xl font-black">AscendBox</h3><span class="badge bg-blue-100 text-blue-700">Developer</span></div>
-                    <p class="text-slate-500 text-sm mb-6">Custom Core Systems.</p>
-                    <a href="https://discord.gg/ascendbox" class="text-slate-400 font-bold text-sm">View Server →</a>
+                <div class="card p-8">
+                    <div class="text-4xl font-black text-blue-500 mb-1">100%</div>
+                    <div class="text-xs font-bold opacity-50 uppercase tracking-widest">Plugin Uptime</div>
                 </div>
             </div>
         </section>
 
-        <section id="code" class="section hidden max-w-4xl">
-            <h2 class="text-3xl font-black mb-10">Development Showcase</h2>
-            <div class="space-y-8">
-                <div>
-                    <h4 class="text-xs font-black text-slate-400 uppercase mb-4">Java / Bukkit API</h4>
-                    <div class="code-block">
-<pre><span class="text-pink-400">@EventHandler</span>
-<span class="text-blue-400">public void</span> <span class="text-yellow-400">onPlayerJoin</span>(PlayerJoinEvent event) {
-    Player player = event.getPlayer();
-    player.sendMessage(ChatColor.GREEN + <span class="text-orange-300">"Welcome to the server!"</span>);
-    player.addPotionEffect(<span class="text-blue-400">new</span> PotionEffect(PotionEffectType.GLOWING, <span class="text-orange-300">200</span>, <span class="text-orange-300">1</span>));
-}</pre>
+        <section id="exp" class="section max-w-5xl">
+            <h2 class="text-4xl font-black mb-12 italic">Professional Journey</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card p-8 border-l-4 border-blue-500">
+                    <h3 class="text-2xl font-black mb-1">ShakeBox</h3>
+                    <p class="text-blue-400 font-bold text-sm mb-4">Owner</p>
+                    <p class="opacity-60 text-sm mb-6">Leading the most innovative BoxSMP on the market.</p>
+                    <a href="https://discord.gg/Fh54yGNazT" target="_blank" class="px-5 py-2 bg-blue-600 text-white rounded-lg font-bold text-xs inline-block">Discord</a>
+                </div>
+                <div class="card p-8 border-l-4 border-blue-500">
+                    <h3 class="text-2xl font-black mb-1">SwiftBox</h3>
+                    <p class="text-blue-400 font-bold text-sm mb-4">Owner</p>
+                    <p class="opacity-60 text-sm mb-6">Competitive server with unique mechanics.</p>
+                    <a href="https://discord.gg/4d2fEQQ2Vu" target="_blank" class="px-5 py-2 bg-blue-600 text-white rounded-lg font-bold text-xs inline-block">Discord</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="proj" class="section max-w-5xl">
+            <h2 class="text-4xl font-black mb-12 italic">Active Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card p-8">
+                    <div class="flex justify-between items-start mb-6">
+                        <h3 class="text-xl font-black">CoreSystem.jar</h3>
+                        <span class="bg-blue-500/20 text-blue-400 text-[10px] px-2 py-1 rounded font-bold">V2.4</span>
                     </div>
+                    <p class="opacity-60 text-sm mb-8 leading-relaxed">Advanced Java plugin for server management, including optimized database handling.</p>
+                    <a href="your-file-link.jar" download class="block w-full text-center py-4 bg-white/5 border border-white/10 rounded-xl font-black hover:bg-blue-600 transition">DOWNLOAD PLUGIN</a>
                 </div>
+            </div>
+        </section>
+
+        <section id="code" class="section max-w-5xl">
+            <h2 class="text-4xl font-black mb-12 italic">Code Showcase</h2>
+            <div class="space-y-10">
                 <div>
-                    <h4 class="text-xs font-black text-slate-400 uppercase mb-4">Skript Automation</h4>
+                    <p class="text-xs font-bold opacity-40 uppercase mb-4 tracking-tighter">Java / NMS Logic</p>
                     <div class="code-block">
-<pre><span class="text-blue-400">on command</span> <span class="text-yellow-400">/admin</span>:
-    <span class="text-blue-400">permission:</span> kaiser.admin
-    <span class="text-blue-400">trigger:</span>
-        <span class="text-yellow-400">open</span> virtual chest with <span class="text-orange-300">3</span> rows named <span class="text-orange-300">"Admin Control"</span>
-        <span class="text-yellow-400">set</span> slot <span class="text-orange-300">13</span> to red wool named <span class="text-orange-300">"&cStop Server"</span></pre>
+                        <pre><span class="text-pink-400">@EventHandler</span>
+<span class="text-blue-400">public void</span> <span class="text-yellow-400">onPlayerJoin</span>(PlayerJoinEvent event) {
+    Player p = event.getPlayer();
+    <span class="text-cyan-400">// Custom logic for Kaiser OS</span>
+    p.sendTitle(ChatColor.BLUE + <span class="text-orange-300">"KAISER DEVELOPMENT"</span>, <span class="text-orange-300">"Welcome back"</span>);
+}</pre>
                     </div>
                 </div>
             </div>
@@ -98,10 +120,14 @@
     </main>
 
     <script>
+        function setTheme(theme) {
+            document.getElementById('body-main').className = theme + ' flex min-h-screen';
+        }
+
         function showSec(id) {
-            document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
-            document.getElementById(id).classList.remove('hidden');
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active', 'bg-blue-100', 'text-blue-600'));
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             event.currentTarget.classList.add('active');
         }
     </script>
