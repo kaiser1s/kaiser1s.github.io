@@ -22,7 +22,7 @@
         .card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
         
         .code-block { background: #1a1b26; border-radius: 1rem; font-family: 'Fira Code', monospace; padding: 1.5rem; color: #a9b1d6; overflow-x: auto; border: 1px solid rgba(42, 195, 222, 0.2); }
-        .nav-link { text-align: left; padding: 0.75rem 1rem; border-radius: 0.75rem; font-weight: 700; transition: 0.2s; opacity: 0.6; display: flex; align-items: center; gap: 0.75rem; }
+        .nav-link { text-align: left; padding: 0.75rem 1rem; border-radius: 0.75rem; font-weight: 700; transition: 0.2s; opacity: 0.6; display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: inherit; }
         .nav-link:hover { opacity: 1; background: rgba(255, 255, 255, 0.05); }
 
         section { padding-top: 100px; padding-bottom: 50px; border-bottom: 1px solid var(--border); }
@@ -113,7 +113,7 @@
                     <div class="p-6">
                         <h3 class="text-xl font-black mb-2">Tag System</h3>
                         <p class="opacity-60 text-sm mb-6">Advanced chat tag system with GUI and color support.</p>
-                        <a href="tag.sk" download class="block w-full text-center py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition">Download .sk</a>
+                        <a href="tag.sk" download class="block w-full text-center py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-500/20">Download .sk</a>
                     </div>
                 </div>
             </div>
@@ -124,40 +124,51 @@
             
             <div class="space-y-12">
                 <div>
-                    <p class="text-[10px] font-bold opacity-40 uppercase mb-4 tracking-widest">Java / Bukkit API (Plugin)</p>
+                    <p class="text-[10px] font-bold opacity-40 uppercase mb-4 tracking-widest">Java / Bukkit API (Advanced Scoreboard)</p>
                     <div class="code-block text-sm">
 <pre>
-<span class="text-pink-400">import</span> org.bukkit.event.EventHandler;
-<span class="text-pink-400">import</span> org.bukkit.event.Listener;
-<span class="text-pink-400">import</span> org.bukkit.event.player.PlayerJoinEvent;
-
-<span class="text-blue-400">public class</span> <span class="text-yellow-400">WelcomePlugin</span> <span class="text-blue-400">implements</span> Listener {
+<span class="text-pink-400">public class</span> <span class="text-yellow-400">ScoreboardManager</span> <span class="text-blue-400">implements</span> Listener {
     
-    <span class="text-pink-400">@EventHandler</span>
-    <span class="text-blue-400">public void</span> <span class="text-yellow-400">onPlayerJoin</span>(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
-        
-        <span class="text-slate-500">// Welcome message with color</span>
-        player.sendMessage(ChatColor.GREEN + <span class="text-orange-300">"Welcome to the server, "</span> + player.getName() + <span class="text-orange-300">"!"</span>);
-        
-        <span class="text-slate-500">// Visual effect</span>
-        player.addPotionEffect(<span class="text-blue-400">new</span> PotionEffect(PotionEffectType.GLOWING, <span class="text-orange-300">200</span>, <span class="text-orange-300">1</span>, <span class="text-blue-400">true</span>, <span class="text-blue-400">true</span>));
+    <span class="text-blue-400">public void</span> <span class="text-yellow-400">createBoard</span>(Player player) {
+        Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
+        Objective obj = board.registerNewObjective(<span class="text-orange-300">"KaiserDev"</span>, <span class="text-orange-300">"dummy"</span>, <span class="text-orange-300">"§b§lKAISER NETWORK"</span>);
+        obj.setDisplaySlot(DisplaySlot.SIDEBAR);
+
+        obj.getScore(<span class="text-orange-300">"§7"</span>).setScore(<span class="text-orange-300">4</span>);
+        obj.getScore(<span class="text-orange-300">"§fPlayer: §b"</span> + player.getName()).setScore(<span class="text-orange-300">3</span>);
+        obj.getScore(<span class="text-orange-300">"§fRank: §e"</span> + getRank(player)).setScore(<span class="text-orange-300">2</span>);
+        obj.getScore(<span class="text-orange-300">"§7"</span>).setScore(<span class="text-orange-300">1</span>);
+        obj.getScore(<span class="text-orange-300">"§bplay.kaiser.com"</span>).setScore(<span class="text-orange-300">0</span>);
+
+        player.setScoreboard(board);
     }
 }</pre>
                     </div>
                 </div>
 
                 <div>
-                    <p class="text-[10px] font-bold opacity-40 uppercase mb-4 tracking-widest">Advanced Skript (Logic)</p>
+                    <p class="text-[10px] font-bold opacity-40 uppercase mb-4 tracking-widest">Skript (Admin Menu & Events)</p>
                     <div class="code-block text-sm">
 <pre>
-<span class="text-blue-400">on command</span> /adminmenu:
+<span class="text-blue-400">command</span> /adminmenu:
     <span class="text-blue-400">permission:</span> staff.admin
     <span class="text-blue-400">trigger:</span>
         <span class="text-yellow-400">open</span> virtual chest inventory with <span class="text-orange-300">3</span> rows named <span class="text-orange-300">"&8Server Control"</span> to player
         <span class="text-yellow-400">set</span> slot <span class="text-orange-300">11</span> of player's current inventory to red wool named <span class="text-orange-300">"&cMaintenance Mode"</span>
         <span class="text-yellow-400">set</span> slot <span class="text-orange-300">13</span> of player's current inventory to sunflower named <span class="text-orange-300">"&eServer Stats"</span>
-        <span class="text-yellow-400">set</span> slot <span class="text-orange-300">15</span> of player's current inventory to lime wool named <span class="text-orange-300">"&aReload Config"</span></pre>
+        <span class="text-yellow-400">set</span> slot <span class="text-orange-300">15</span> of player's current inventory to lime wool named <span class="text-orange-300">"&aReload Config"</span>
+
+<span class="text-blue-400">on inventory click:</span>
+    <span class="text-blue-400">name of event-inventory is</span> <span class="text-orange-300">"&8Server Control"</span>
+    <span class="text-yellow-400">cancel event</span>
+    <span class="text-blue-400">clicked slot is</span> <span class="text-orange-300">11:</span>
+        <span class="text-yellow-400">execute console command</span> <span class="text-orange-300">"/whitelist on"</span>
+        <span class="text-yellow-400">send</span> <span class="text-orange-300">"&cMaintenance Mode Enabled!"</span> to player
+    <span class="text-blue-400">clicked slot is</span> <span class="text-orange-300">13:</span>
+        <span class="text-yellow-400">send</span> <span class="text-orange-300">"&eTPS: %tps% | Players: %number of all players%"</span> to player
+    <span class="text-blue-400">clicked slot is</span> <span class="text-orange-300">15:</span>
+        <span class="text-yellow-400">execute console command</span> <span class="text-orange-300">"/sk reload all"</span>
+        <span class="text-yellow-400">send</span> <span class="text-orange-300">"&aSystem Reloaded!"</span> to player</pre>
                     </div>
                 </div>
             </div>
