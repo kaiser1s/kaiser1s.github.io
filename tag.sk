@@ -1,0 +1,64 @@
+options:
+    prefix: &8[&bTags&8] &r
+    gui_name: &8Tag Menu
+
+command /givetag <player> <text>:
+    permission: op
+    trigger:
+        set {_t} to arg-2
+        give arg-1 1 of name tag named "&bTag: &f%{_t}%" with lore "&7Right-click to unlock this tag!"
+        send "{@prefix} You gave &e%arg-1%&r the &f%{_t}% &rtag."
+
+command /tags:
+    trigger:
+        open_tag_gui(player, 1)
+
+function open_tag_gui(p: player, page: number):
+    create a gui with virtual chest inventory with 6 rows named "{@prefix} Page %{_page}%":
+
+        if {_page} is 1:
+            set {_tags::*} to "PvP", "HT1", "Hacker", "Killer", "Deadly", "VIP", "Pro", "Noob", "God", "Legend", "Mythic", "Slayer", "Warrior", "Demon", "Angel", "King", "Queen", "Prince", "Rich", "Broke", "Toxic", "Friendly", "Sweat", "Tryhard", "Clutch", "Carry", "NoLife", "Farmer", "Miner", "Hunter", "Guard", "Assassin", "Ninja", "Wizard", "Titan", "Ghost", "Shadow", "Light", "Dark", "Fire", "Water", "Earth", "Air", "Chaos", and "Peace"
+
+            loop {_tags::*}:
+                set {_current_tag} to loop-value
+
+                make next gui slot with name tag named "&b&l%{_current_tag}%" with lore "&eClick to use tag!":
+
+                    if {_p} has permission "tag.use.%{_current_tag}%":
+                        if {unlocked_tags::%uuid of {_p}%::*} contains {_current_tag}:
+                            set {active_tag::%uuid of {_p}%} to {_current_tag}
+                            send "{@prefix} Tag set to &f%{_current_tag}%&r!" to {_p}
+                            close {_p}'s inventory
+                        else:
+                            send "{@prefix} &cYou haven't unlocked this tag yet!" to {_p}
+                    else:
+                        send "{@prefix} &cYou need permission &7(tag.use.%{_current_tag}%) &cto use this!" to {_p}
+
+        make gui slot 45 with arrow named "&ePrevious Page":
+            if {_page} > 1:
+                open_tag_gui({_p}, {_page} - 1)
+
+        set {_active} to {active_tag::%uuid of {_p}%} ? "None"
+        make gui slot 49 with anvil named "&7Current: &f%{_active}%"
+
+        make gui slot 53 with arrow named "&eNext Page":
+            open_tag_gui({_p}, {_page} + 1)
+
+    open last gui to {_p}
+
+on right click with name tag:
+    if name of tool contains "&bTag: ":
+        cancel event
+        set {_tag} to name of tool
+        replace all "&bTag: " with "" in {_tag}
+
+        if {unlocked_tags::%uuid of player%::*} contains {_tag}:
+            send "{@prefix} &cYou already have this tag unlocked!" to player
+        else:
+            add {_tag} to {unlocked_tags::%uuid of player%::*}
+            remove 1 of tool from player's tool
+            send "{@prefix} &aSuccess! You unlocked the &f%{_tag}% &atag." to player
+
+on chat:
+    if {active_tag::%uuid of player%} is set:
+        set chat format to "&8[&b%{active_tag::%uuid of player%}%&8] &r%player's display name%&7: &f%message%"
