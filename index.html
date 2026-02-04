@@ -1,1 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaiser OS | Pro Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Outfit', sans-serif; transition: all 0.5s ease; margin: 0; background: #000; overflow-x: hidden; }
+        .glass-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(25px); }
+        
+        .theme-blue { background: radial-gradient(circle at top right, #1e3a8a 0%, #020617 100%); --accent: #3b82f6; }
+        .theme-black { background: radial-gradient(circle at top right, #18181b 0%, #000000 100%); --accent: #8b5cf6; }
+        .theme-brown { background: radial-gradient(circle at top right, #451a03 0%, #0c0a09 100%); --accent: #f59e0b; }
+        .theme-white { background: radial-gradient(circle at top right, #f8fafc 0%, #cbd5e1 100%); --accent: #0f172a; }
 
+        .content-section { display: none; }
+        .content-section.active { display: block; animation: sectionIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        
+        @keyframes sectionIn {
+            from { opacity: 0; transform: translateY(30px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        button:active { transform: scale(0.95); transition: 0.1s; }
+        
+        .progress-bar { height: 10px; border-radius: 20px; background: rgba(255,255,255,0.05); overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #fff); transition: width 1.5s ease-in-out; }
+
+        .star-rating { color: #fbbf24; text-shadow: 0 0 10px rgba(251, 191, 36, 0.4); }
+
+        #toast { visibility: hidden; background: rgba(255,255,255,0.9); color: #000; border-radius: 20px; padding: 12px 25px; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 1000; font-weight: 900; box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
+        #toast.show { visibility: visible; animation: toastIn 0.5s forwards, toastOut 0.5s 2.5s forwards; }
+        @keyframes toastIn { from { bottom: -50px; opacity: 0; } to { bottom: 30px; opacity: 1; } }
+        @keyframes toastOut { from { bottom: 30px; opacity: 1; } to { bottom: -50px; opacity: 0; } }
+    </style>
+</head>
+<body class="theme-black min-h-screen flex items-center justify-center p-4 text-white" id="body-bg">
+
+    <div id="toast">SYSTEM UPDATED ⚡</div>
+
+    <div class="w-full max-w-6xl glass-card rounded-[3.5rem] flex flex-col md:flex-row overflow-hidden shadow-2xl min-h-[750px] border border-white/10">
+        
+        <aside class="w-full md:w-80 bg-black/40 p-10 flex flex-col border-r border-white/5">
+            <div class="mb-12">
+                <div class="flex items-center gap-4 group cursor-pointer" onclick="showSection('profile')">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-2xl font-black shadow-lg shadow-indigo-500/20 group-hover:rotate-12 transition-transform">K</div>
+                    <div>
+                        <h2 class="text-2xl font-black tracking-tighter">KAISER👑</h2>
+                        <span class="text-[9px] bg-indigo-500/20 text-indigo-400 px-2 py-0.5 rounded-full font-bold tracking-widest uppercase">Developer Mode</span>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="space-y-3 flex-1">
+                <button onclick="showSection('profile')" class="nav-btn w-full text-left px-5 py-4 rounded-2xl bg-white/10 text-white font-black flex items-center gap-3 transition-all hover:bg-white/15">🏠 Dashboard</button>
+                <button onclick="showSection('expertise')" class="nav-btn w-full text-left px-5 py-4 rounded-2xl text-gray-400 hover:bg-white/5 font-bold flex items-center gap-3 transition-all">⚡ Expertise</button>
+                <button onclick="showSection('projects')" class="nav-btn w-full text-left px-5 py-4 rounded-2xl text-gray-400 hover:bg-white/5 font-bold flex items-center gap-3 transition-all">📦 MC Projects</button>
+                <button onclick="showSection('skripts')" class="nav-btn w-full text-left px-5 py-4 rounded-2xl text-gray-400 hover:bg-white/5 font-bold flex items-center gap-3 transition-all">📜 Skript Vault</button>
+                <button onclick="showSection('contact')" class="nav-btn w-full text-left px-5 py-4 rounded-2xl text-gray-400 hover:bg-white/5 font-bold flex items-center gap-3 transition-all">✉️ Contact</button>
+            </nav>
+
+            <div class="pt-6 border-t border-white/5 flex gap-2">
+                <button onclick="setTheme('theme-blue')" class="w-5 h-5 rounded-full bg-blue-600 border border-white/20 hover:scale-125 transition"></button>
+                <button onclick="setTheme('theme-black')" class="w-5 h-5 rounded-full bg-zinc-800 border border-white/20 hover:scale-125 transition"></button>
+                <button onclick="setTheme('theme-brown')" class="w-5 h-5 rounded-full bg-orange-900 border border-white/20 hover:scale-125 transition"></button>
+            </div>
+        </aside>
+
+        <main class="flex-1 p-8 md:p-16 overflow-y-auto">
+            
+            <div id="section-profile" class="content-section active">
+                <div class="inline-block px-3 py-1 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-[10px] font-black rounded-lg mb-6 tracking-widest uppercase">Overview</div>
+                <h1 class="text-6xl font-black mb-8 leading-none">Global <br><span class="text-indigo-500">Analytics.</span></h1>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+                    <div class="glass-card p-8 rounded-[2.5rem] border-indigo-500/20 shadow-xl">
+                        <div class="text-indigo-400 text-xs font-bold uppercase mb-4 tracking-widest">Total Downloads</div>
+                        <div class="text-5xl font-black italic">8,429+</div>
+                    </div>
+                    <div class="glass-card p-8 rounded-[2.5rem]">
+                        <div class="text-indigo-400 text-xs font-bold uppercase mb-4 tracking-widest">Client Rating</div>
+                        <div class="text-5xl font-black italic flex items-center gap-2">4.2<span class="text-2xl star-rating">★</span></div>
+                        <div class="mt-4 text-gray-500 text-xs font-bold">Based on 140+ reviews</div>
+                    </div>
+                    <div class="glass-card p-8 rounded-[2.5rem]">
+                        <div class="text-indigo-400 text-xs font-bold uppercase mb-4 tracking-widest">Uptime Stat</div>
+                        <div class="text-5xl font-black italic">99.9%</div>
+                        <div class="mt-4 text-indigo-500/60 text-xs font-bold uppercase italic font-mono tracking-tighter">Server stable</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="section-expertise" class="content-section">
+                <h2 class="text-4xl font-black mb-10 italic">⚡ Skills & Tech</h2>
+                <div class="space-y-8">
+                    <div class="group cursor-default">
+                        <div class="flex justify-between mb-3 px-2 font-black text-sm uppercase tracking-widest text-indigo-400"><span>Java (Minecraft Plugins)</span><span>92%</span></div>
+                        <div class="progress-bar group-hover:border-indigo-500/50 transition"><div class="progress-fill" style="width: 92%;"></div></div>
+                    </div>
+                    <div class="group cursor-default">
+                        <div class="flex justify-between mb-3 px-2 font-black text-sm uppercase tracking-widest text-indigo-400"><span>Skript (Automation)</span><span>95%</span></div>
+                        <div class="progress-bar group-hover:border-indigo-500/50 transition"><div class="progress-fill" style="width: 95%;"></div></div>
+                    </div>
+                    <div class="group cursor-default">
+                        <div class="flex justify-between mb-3 px-2 font-black text-sm uppercase tracking-widest text-indigo-400"><span>Server Security</span><span>88%</span></div>
+                        <div class="progress-bar group-hover:border-indigo-500/50 transition"><div class="progress-fill" style="width: 88%;"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="section-skripts" class="content-section">
+                <h2 class="text-4xl font-black mb-8 italic text-indigo-400">📜 Skript Vault</h2>
+                <div class="grid gap-4">
+                    <div class="p-6 glass-card rounded-3xl border-white/5 hover:bg-white/5 transition group cursor-pointer" onclick="notify('Code Copied to Clipboard!')">
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="font-black text-xl italic tracking-tighter">Advanced_Chat.sk</h3>
+                            <span class="text-[10px] bg-indigo-500 px-2 py-1 rounded-md font-bold">V3.0</span>
+                        </div>
+                        <div class="bg-black/40 p-4 rounded-xl font-mono text-xs text-indigo-300">
+                            options: <br>
+                            &nbsp;&nbsp;prefix: <span class="text-yellow-400">"&8[&bKaiser&8]"</span><br>
+                            on chat:<br>
+                            &nbsp;&nbsp;if player has permission "admin":<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;stop
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="section-projects" class="content-section">
+                <h2 class="text-4xl font-black mb-8 italic">📦 My Works</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-8 glass-card rounded-[2.5rem] border-white/5 hover:border-indigo-500/30 transition group">
+                        <div class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center mb-6 text-2xl">💎</div>
+                        <h4 class="font-black text-xl italic mb-2">EmpireCore Plugin</h4>
+                        <p class="text-gray-500 text-sm leading-relaxed">System for 1.20+ servers with high performance.</p>
+                    </div>
+                    <div class="p-8 glass-card rounded-[2.5rem] border-white/5 hover:border-indigo-500/30 transition group">
+                        <div class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center mb-6 text-2xl">⚙️</div>
+                        <h4 class="font-black text-xl italic mb-2">Automata Scripts</h4>
+                        <p class="text-gray-500 text-sm leading-relaxed">Advanced NPC logic and automation for hubs.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="section-contact" class="content-section">
+                <h2 class="text-4xl font-black mb-8 italic">✉️ Direct Channel</h2>
+                <div class="space-y-4">
+                    <input type="text" placeholder="Discord Username" class="w-full bg-white/5 border border-white/10 p-6 rounded-3xl outline-none focus:border-indigo-500 transition-all font-bold">
+                    <textarea placeholder="Tell me about your vision..." class="w-full bg-white/5 border border-white/10 p-6 rounded-3xl h-44 outline-none focus:border-indigo-500 transition-all font-bold"></textarea>
+                    <button onclick="notify('Data Transmitted! 🚀')" class="w-full bg-white text-black py-6 rounded-3xl font-black text-lg hover:bg-indigo-500 hover:text-white transition duration-300 shadow-xl">INITIALIZE CONTACT</button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        function setTheme(theme) {
+            document.getElementById('body-bg').className = theme + ' min-h-screen flex items-center justify-center p-4 text-white';
+            notify("Theme Switched: " + theme.replace('theme-', ''));
+        }
+
+        function showSection(id) {
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            document.getElementById('section-' + id).classList.add('active');
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-white/10', 'text-white');
+                btn.classList.add('text-gray-400');
+            });
+            event.currentTarget.classList.add('bg-white/10', 'text-white');
+            event.currentTarget.classList.remove('text-gray-400');
+        }
+
+        function notify(msg) {
+            const toast = document.getElementById("toast");
+            toast.innerText = msg;
+            toast.className = "show";
+            setTimeout(() => { toast.className = ""; }, 3000);
+        }
+    </script>
+</body>
+</html>
