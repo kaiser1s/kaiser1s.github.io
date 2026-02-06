@@ -1,0 +1,211 @@
+variables:
+    {ah::sort::%player%} = "Most Recent"
+    {ah::cat::%player%} = "All"
+    {ah::search::%player%} = ""
+    {balance::%player%} = 0
+    {stackbalance::%player%} = 0
+
+options:
+    prefix: &8[&6Auction&8] &7
+
+command /ahadmin <text>:
+    permission: op
+    trigger:
+        if arg-1 is "setcoin":
+            if player's tool is air:
+                send "{@prefix}You must be holding items to convert them to coins!"
+                stop
+            set {_amt} to item amount of player's tool
+            add {_amt} to {balance::%player%}
+            set player's tool to air
+            send "{@prefix}Converted held items into &6%{_amt}% &7Normal Coins!"
+        if arg-1 is "setstackcoin":
+            if player's tool is air:
+                send "{@prefix}You must be holding items to convert them to stack coins!"
+                stop
+            set {_amt} to item amount of player's tool
+            add {_amt} to {stackbalance::%player%}
+            set player's tool to air
+            send "{@prefix}Converted held items into &b%{_amt}% &7Stack Coins!"
+
+command /ahsell <number>:
+    trigger:
+        if player's tool is air:
+            send "{@prefix}You cannot sell air!"
+            stop
+        if arg-1 <= 0:
+            send "{@prefix}Price must be positive."
+            stop
+        add player's tool to {ah::items::*}
+        set {_id} to size of {ah::items::*}
+        set {ah::price::%{_id}%} to arg-1
+        set {ah::seller::%{_id}%} to uuid of player
+        set {ah::listdate::%{_id}%} to now
+        remove player's tool from player's inventory
+        if arg-1 > 64:
+            set {_s} to arg-1 / 64
+            send "{@prefix}Item listed for &b%{_s}% &7Stack Coins!"
+        else:
+            send "{@prefix}Item listed for &6%arg-1% &7Normal Coins!"
+
+command /ah [<text>]:
+    aliases: /auctionhouse
+    trigger:
+        if arg-1 is "sell":
+            send "{@prefix}Use &e/ahsell <price> &7while holding an item."
+            stop
+        openAH(player, 1)
+
+function openAH(p: player, page: number):
+    create a gui with virtual chest inventory with 6 rows named "Large Chest":
+        set {_start} to ({_page} - 1) * 45
+        set {_slot} to 0
+        set {_count} to 0
+        loop {ah::items::*}:
+            set {_i} to loop-value
+            set {_id} to loop-index
+            if {ah::cat::%{_p}%} is "Armor":
+                if "%{_i}%" does not contain "helmet", "chestplate", "leggings" or "boots":
+                    continue
+            else if {ah::cat::%{_p}%} is "Shulker":
+                if "%{_i}%" does not contain "shulker box":
+                    continue
+            if {ah::search::%{_p}%} is not "":
+                set {_name} to name of {_i}
+                if {_name} is not set:
+                    set {_name} to "%type of {_i}%"
+                if {_name} does not contain {ah::search::%{_p}%}:
+                    continue
+            add 1 to {_count}
+            if {_count} > {_start}:
+                if {_slot} < 45:
+                    set {_price} to {ah::price::%{_id}%}
+                    set {_seller_uuid} to {ah::seller::%{_id}%}
+                    set {_seller} to {_seller_uuid} parsed as offline player
+                    set {_item} to {_i}
+                    set line 1 of lore of {_item} to "&8&m----------------"
+                    if {_price} > 64:
+                        set {_stackPrice} to {_price} / 64
+                        set line 2 of lore of {_item} to "&7Price: &b%{_stackPrice}% Stack Coins"
+                    else:
+                        set line 2 of lore of {_item} to "&7Price: &e%{_price}% Coins"
+                    set line 3 of lore of {_item} to "&7Seller: &f%{_seller}%"
+                    set line 4 of lore of {_item} to "&eClick to Buy!"
+                    make gui slot {_slot} with {_item}:
+                        purchaseAH({_p}, {_id})
+                    add 1 to {_slot}
+        loop integers from 45 to 53:
+            make gui slot loop-value with black stained glass pane named " "
+        set {_s} to {ah::sort::%{_p}%}
+        make gui slot 47 with cauldron named "&bToggle Price" with lore "&7Current: &f%{_s}%", "", "&7- Lowest Price", "&7- Highest Price", "&7- Last Listed", "&7- Most Recent", "", "&eClick to Toggle":
+            if {ah::sort::%{_p}%} is "Most Recent":
+                set {ah::sort::%{_p}%} to "Lowest Price"
+            else if {ah::sort::%{_p}%} is "Lowest Price":
+                set {ah::sort::%{_p}%} to "Highest Price"
+            else if {ah::sort::%{_p}%} is "Highest Price":
+                set {ah::sort::%{_p}%} to "Last Listed"
+            else:
+                set {ah::sort::%{_p}%} to "Most Recent"
+            openAH({_p}, {_page})
+        set {_c} to {ah::cat::%{_p}%}
+        make gui slot 48 with hopper named "&bCategory" with lore "&7Current: &f%{_c}%", "", "&71. All", "&72. Armor", "&73. Shulker", "", "&eClick to Toggle":
+            if {ah::cat::%{_p}%} is "All":
+                set {ah::cat::%{_p}%} to "Armor"
+            else if {ah::cat::%{_p}%} is "Armor":
+                set {ah::cat::%{_p}%} to "Shulker"
+            else:
+                set {ah::cat::%{_p}%} to "All"
+            openAH({_p}, {_page})
+        make gui slot 49 with anvil named "&aRefresh Page" with lore "&7Click to update items":
+            openAH({_p}, {_page})
+        set {_txt} to {ah::search::%{_p}%}
+        if {_txt} is "":
+            set {_txt} to "None"
+        make gui slot 50 with name tag named "&eSearch" with lore "&7Filter: &f%{_txt}%", "", "&eClick to type name in chat":
+            set {ah::searching::%{_p}%} to true
+            close {_p}'s inventory
+            send "{@prefix}Type the item name in chat (or 'cancel'):"
+        make gui slot 51 with chest named "&6My Items" with lore "&7Click to manage your listings":
+            openListings({_p})
+        if {_page} > 1:
+            make gui slot 45 with arrow named "&7Previous Page":
+                openAH({_p}, {_page} - 1)
+        make gui slot 53 with arrow named "&7Next Page":
+            openAH({_p}, {_page} + 1)
+    open last gui to {_p}
+
+function openListings(p: player):
+    create a gui with virtual chest inventory with 6 rows named "My Listings":
+        set {_slot} to 0
+        loop {ah::items::*}:
+            set {_id} to loop-index
+            if {ah::seller::%{_id}%} is uuid of {_p}:
+                set {_item} to loop-value
+                set {_price} to {ah::price::%{_id}%}
+                set line 1 of lore of {_item} to "&8&m----------------"
+                if {_price} > 64:
+                    set {_sp} to {_price} / 64
+                    set line 2 of lore of {_item} to "&7Price: &b%{_sp}% Stack Coins"
+                else:
+                    set line 2 of lore of {_item} to "&7Price: &e%{_price}% Coins"
+                set line 3 of lore of {_item} to "&cClick to cancel listing!"
+                make gui slot {_slot} with {_item}:
+                    cancelListing({_p}, {_id})
+                add 1 to {_slot}
+        loop integers from 45 to 53:
+            make gui slot loop-value with black stained glass pane named " "
+        make gui slot 49 with barrier named "&cBack to Menu":
+            openAH({_p}, 1)
+    open last gui to {_p}
+
+function purchaseAH(p: player, id: text):
+    set {_price} to {ah::price::%{_id}%}
+    set {_seller_uuid} to {ah::seller::%{_id}%}
+    if {_price} > 64:
+        set {_cost} to {_price} / 64
+        if {stackbalance::%{_p}%} >= {_cost}:
+            remove {_cost} from {stackbalance::%{_p}%}
+            add {_cost} to {stackbalance::%{_seller_uuid}%}
+            give {ah::items::%{_id}%} to {_p}
+            delete {ah::items::%{_id}%}
+            delete {ah::price::%{_id}%}
+            delete {ah::seller::%{_id}%}
+            delete {ah::listdate::%{_id}%}
+            send "{@prefix}Purchased for &b%{_cost}% Stack Coins&7!" to {_p}
+            openAH({_p}, 1)
+        else:
+            send "{@prefix}You need &b%{_cost}% Stack Coins &7to buy this!" to {_p}
+    else:
+        if {balance::%{_p}%} >= {_price}:
+            remove {_price} from {balance::%{_p}%}
+            add {_price} to {balance::%{_seller_uuid}%}
+            give {ah::items::%{_id}%} to {_p}
+            delete {ah::items::%{_id}%}
+            delete {ah::price::%{_id}%}
+            delete {ah::seller::%{_id}%}
+            delete {ah::listdate::%{_id}%}
+            send "{@prefix}Purchased for &e%{_price}% Coins&7!" to {_p}
+            openAH({_p}, 1)
+        else:
+            send "{@prefix}You need &e%{_price}% Normal Coins &7to buy this!" to {_p}
+
+function cancelListing(p: player, id: text):
+    give {ah::items::%{_id}%} to {_p}
+    delete {ah::items::%{_id}%}
+    delete {ah::price::%{_id}%}
+    delete {ah::seller::%{_id}%}
+    delete {ah::listdate::%{_id}%}
+    send "{@prefix}Listing cancelled and item returned." to {_p}
+    openListings({_p})
+
+on chat:
+    if {ah::searching::%player%} is true:
+        cancel event
+        delete {ah::searching::%player%}
+        if message is not "cancel":
+            set {ah::search::%player%} to message
+            send "{@prefix}Filter set to: &e%message%"
+        else:
+            set {ah::search::%player%} to ""
+            send "{@prefix}Search filter cleared."
+        openAH(player, 1)
