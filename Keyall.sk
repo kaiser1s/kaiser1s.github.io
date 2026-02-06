@@ -1,0 +1,48 @@
+command /keyall:
+    permission: admin.keyall
+    permission message: &cYou do not have permission to perform a keyall!
+    trigger:
+        set {_gui} to a new chest inventory with 3 rows named "&0Keyall Menu"
+
+        set {_slot} to 0
+        loop 27 times:
+            set slot {_slot} of {_gui} to gray stained glass pane named " "
+            add 1 to {_slot}
+
+        set slot 11 of {_gui} to lime candle named "&aSmall Keyall" with lore "&7Go to spawn", "", "&fGives:", "&8• &75 AFK Keys", "&8• &73 Bulbasaur Keys", "&8• &75 Mining Keys"
+        
+        set slot 13 of {_gui} to orange candle named "&eMedium Keyall" with lore "&7Go to spawn", "", "&fGives:", "&8• &75 AFK Keys", "&8• &75 Bulbasaur Keys", "&8• &75 Mining Keys", "&8• &73 Daily Keys"
+        
+        set slot 15 of {_gui} to red candle named "&cBig Keyall" with lore "&7Go to spawn", "", "&fGives:", "&8• &75 AFK Keys", "&8• &75 Bulbasaur Keys", "&8• &75 Mining Keys", "&8• &75 Daily Keys", "&8• &71 Pikachu Key"
+
+        open {_gui} to player
+
+on inventory click:
+    if name of event-inventory is "&0Keyall Menu":
+        cancel event
+        if event-item is :
+            stop
+
+        if index of event-slot is 11:
+            send title "&a&lSmall keyall" with subtitle "&fGo To Spawn To Open it" to all players for 5 seconds
+            execute console command "/crates key giveall afk 5"
+            execute console command "/crates key giveall bulbasaur 3"
+            execute console command "/crates key giveall mining 5"
+            close player's inventory
+
+        if index of event-slot is 13:
+            send title "&e&lMedium Keyall" with subtitle "&fGo To Spawn To Open it" to all players for 5 seconds
+            execute console command "/crates key giveall afk 5"
+            execute console command "/crates key giveall bulbasaur 5"
+            execute console command "/crates key giveall mining 5"
+            execute console command "/crates key giveall daily 3"
+            close player's inventory
+
+        if index of event-slot is 15:
+            send title "&c&lBig Keyall" with subtitle "&fGo To Spawn To Open it" to all players for 5 seconds
+            execute console command "/crates key giveall afk 5"
+            execute console command "/crates key giveall bulbasaur 5"
+            execute console command "/crates key giveall mining 5"
+            execute console command "/crates key giveall daily 5"
+            execute console command "/crates key giveall pikachu 1"
+            close player's inventory
