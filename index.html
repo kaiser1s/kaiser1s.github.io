@@ -148,31 +148,61 @@
             
             <div class="space-y-12">
                 <div>
-                    <p class="text-[10px] font-bold opacity-40 uppercase mb-4 tracking-widest">Java / Bukkit API (Scoreboard Manager)</p>
+                    <p class="text-[10px] font-bold opacity-40 uppercase mb-4 tracking-widest">Java / Bukkit API (MyPlugin.java)</p>
                     <div class="code-block text-sm">
 <pre>
-<span class="text-blue-400">public class</span> <span class="text-yellow-400">ScoreboardManager</span> <span class="text-blue-400">implements</span> Listener {
-    <span class="text-blue-400">public void</span> <span class="text-yellow-400">createBoard</span>(Player player) {
-        Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
-        Objective obj = board.registerNewObjective(<span class="text-orange-300">"KaiserDev"</span>, <span class="text-orange-300">"dummy"</span>, <span class="text-orange-300">"§b§lKAISER"</span>);
-        obj.setDisplaySlot(DisplaySlot.SIDEBAR);
-        obj.getScore(<span class="text-orange-300">"§fPlayer: §b"</span> + player.getName()).setScore(<span class="text-orange-300">3</span>);
-        player.setScoreboard(board);
+<span class="text-pink-400">package</span> com.dev;
+
+<span class="text-blue-400">public class</span> <span class="text-yellow-400">MyPlugin</span> <span class="text-blue-400">extends</span> JavaPlugin <span class="text-blue-400">implements</span> Listener, CommandExecutor {
+
+    <span class="text-pink-400">@Override</span>
+    <span class="text-blue-400">public void</span> <span class="text-yellow-400">onEnable</span>() {
+        Bukkit.getPluginManager().registerEvents(<span class="text-blue-400">this</span>, <span class="text-blue-400">this</span>);
+        getCommand(<span class="text-orange-300">"hello"</span>).setExecutor(<span class="text-blue-400">this</span>);
+        getLogger().info(<span class="text-orange-300">"MyPlugin enabled!"</span>);
+    }
+
+    <span class="text-pink-400">@EventHandler</span>
+    <span class="text-blue-400">public void</span> <span class="text-yellow-400">onJoin</span>(PlayerJoinEvent event) {
+        event.getPlayer().sendMessage(<span class="text-orange-300">"§aWelcome! The plugin is active."</span>);
+    }
+
+    <span class="text-pink-400">@Override</span>
+    <span class="text-blue-400">public boolean</span> <span class="text-yellow-400">onCommand</span>(CommandSender sender, Command command, String label, String[] args) {
+        <span class="text-blue-400">if</span> (sender <span class="text-blue-400">instanceof</span> Player) {
+            Player player = (Player) sender;
+            player.sendMessage(<span class="text-orange-300">"§bHello "</span> + player.getName() + <span class="text-orange-300">"!"</span>);
+        } <span class="text-blue-400">else</span> {
+            sender.sendMessage(<span class="text-orange-300">"Hello console!"</span>);
+        }
+        <span class="text-blue-400">return true</span>;
     }
 }</pre>
                     </div>
                 </div>
 
                 <div>
-                    <p class="text-[10px] font-bold opacity-40 uppercase mb-4 tracking-widest">Skript (GUI Logic)</p>
+                    <p class="text-[10px] font-bold opacity-40 uppercase mb-4 tracking-widest">Skript (Admin Panel GUI)</p>
                     <div class="code-block text-sm">
 <pre>
+<span class="text-blue-400">command</span> /adminpanel:
+    <span class="text-blue-400">permission:</span> op
+    <span class="text-blue-400">trigger:</span>
+        <span class="text-yellow-400">set</span> {_gui} to a new chest inventory with <span class="text-orange-300">2</span> rows named <span class="text-orange-300">"&8&lAdmin Control Panel"</span>
+        <span class="text-yellow-400">set slot 0</span> of {_gui} to red wool named <span class="text-orange-300">"&4&lClose Server"</span>
+        <span class="text-yellow-400">set slot 1</span> of {_gui} to white wool named <span class="text-orange-300">"&e&lSkripts Reload"</span>
+        <span class="text-yellow-400">set slot 10</span> of {_gui} to light blue wool named <span class="text-orange-300">"&b&lCreative Mode"</span>
+        <span class="text-yellow-400">open</span> {_gui} to player
+
 <span class="text-blue-400">on inventory click:</span>
-    <span class="text-blue-400">name of event-inventory is</span> <span class="text-orange-300">"&8Server Control"</span>
-    <span class="text-yellow-400">cancel event</span>
-    <span class="text-blue-400">clicked slot is</span> <span class="text-orange-300">11:</span>
-        <span class="text-yellow-400">execute console command</span> <span class="text-orange-300">"/whitelist on"</span>
-        <span class="text-yellow-400">send</span> <span class="text-orange-300">"&cMaintenance Mode Enabled!"</span> to player</pre>
+    <span class="text-blue-400">if name of event-inventory is</span> <span class="text-orange-300">"&8&lAdmin Control Panel"</span>:
+        <span class="text-yellow-400">cancel event</span>
+        <span class="text-blue-400">if index of event-slot is 0:</span>
+            <span class="text-yellow-400">execute console command</span> <span class="text-orange-300">"restart"</span>
+        <span class="text-blue-400">if index of event-slot is 1:</span>
+            <span class="text-yellow-400">execute player command</span> <span class="text-orange-300">"sk reload scripts"</span>
+        <span class="text-blue-400">if index of event-slot is 10:</span>
+            <span class="text-yellow-400">set player's gamemode to creative</span></pre>
                     </div>
                 </div>
             </div>
