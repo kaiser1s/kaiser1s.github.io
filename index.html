@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kaiser | Professional Portfolio</title>
+    <title>Kaiser | Senior Developer Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root { --accent: #3b82f6; }
-        body { font-family: 'Outfit', sans-serif; transition: 0.5s; scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; transition: 0.5s; scroll-behavior: smooth; margin: 0; }
         
         /* Themes */
         .theme-white { --bg: #f8fafc; --text: #1e293b; --card: #ffffff; --sidebar: #ffffff; --border: #e2e8f0; }
@@ -21,7 +21,7 @@
         .card { background: var(--card); border: 1px solid var(--border); border-radius: 1.5rem; transition: 0.3s; height: 100%; display: flex; flex-direction: column; }
         .card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
         
-        .code-block { background: #1a1b26; border-radius: 1rem; font-family: 'Fira Code', monospace; padding: 1.5rem; color: #a9b1d6; overflow-x: auto; border: 1px solid rgba(42, 195, 222, 0.2); }
+        .code-block { background: #1a1b26; border-radius: 1rem; font-family: 'Fira Code', monospace; padding: 1.5rem; color: #a9b1d6; overflow-x: auto; border: 1px solid rgba(42, 195, 222, 0.2); text-align: left; }
         .nav-link { text-align: left; padding: 0.75rem 1rem; border-radius: 0.75rem; font-weight: 700; transition: 0.2s; opacity: 0.6; display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: inherit; }
         .nav-link:hover { opacity: 1; background: rgba(255, 255, 255, 0.05); }
 
@@ -33,7 +33,7 @@
 
     <aside class="w-72 sidebar p-8 flex flex-col fixed h-full z-50">
         <div class="mb-12 flex items-center gap-3">
-            <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-black">K</div>
+            <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-black shadow-lg">K</div>
             <h1 class="text-xl font-black tracking-tighter">KAISER👑</h1>
         </div>
 
@@ -45,7 +45,7 @@
         </nav>
 
         <div class="pt-6 border-t border-white/5">
-            <p class="text-[10px] font-bold uppercase mb-4 opacity-40 tracking-widest">Select Theme</p>
+            <p class="text-[10px] font-bold uppercase mb-4 opacity-40 tracking-widest">Visual Mode</p>
             <div class="flex gap-3">
                 <button onclick="setTheme('theme-white')" class="w-6 h-6 rounded-full bg-white border border-gray-300 hover:scale-125 transition"></button>
                 <button onclick="setTheme('theme-black')" class="w-6 h-6 rounded-full bg-slate-900 border border-gray-600 hover:scale-125 transition"></button>
@@ -59,12 +59,12 @@
 
         <section id="profile">
             <h2 class="text-7xl font-black mb-6 leading-tight">Digital <br><span class="text-blue-500">Architect.</span></h2>
-            <p class="text-xl opacity-60 mb-12 max-w-2xl leading-relaxed text-right">מפתח Minecraft מנוסה המתמחה בארכיטקטורת שרתים ומכניקות משחק מותאמות אישית.</p>
+            <p class="text-xl opacity-60 mb-12 max-w-2xl leading-relaxed">Experienced Minecraft Developer specializing in high-performance server architecture and custom game mechanics.</p>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="card p-8 text-center">
                     <div class="text-4xl font-black text-blue-500 mb-1">8,429+</div>
-                    <div class="text-xs font-bold opacity-40 uppercase tracking-widest">Total Downloads</div>
+                    <div class="text-xs font-bold opacity-40 uppercase tracking-widest">Downloads</div>
                 </div>
                 <div class="card p-8 text-center">
                     <div class="text-4xl font-black text-blue-500 mb-1">4.2★</div>
@@ -78,64 +78,64 @@
         </section>
 
         <section id="experience">
-            <h2 class="text-4xl font-black mb-10 italic text-blue-500">Professional Journey</h2>
+            <h2 class="text-4xl font-black mb-10 italic text-blue-500">Staff Journey</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="card p-8">
                     <h3 class="text-2xl font-black">ShakeBox</h3>
                     <span class="text-blue-400 font-bold text-sm block mb-4 italic">Owner</span>
-                    <a href="https://discord.gg/Fh54yGNazT" target="_blank" class="inline-block px-6 py-2 bg-blue-600/20 text-blue-400 rounded-lg font-bold text-xs hover:bg-blue-600 hover:text-white transition">Join Discord</a>
+                    <a href="https://discord.gg/Fh54yGNazT" target="_blank" class="inline-block px-6 py-2 bg-blue-600/20 text-blue-400 rounded-lg font-bold text-xs hover:bg-blue-600 hover:text-white transition shadow-sm">Join Discord</a>
                 </div>
                 <div class="card p-8">
                     <h3 class="text-2xl font-black">SwiftBox</h3>
                     <span class="text-blue-400 font-bold text-sm block mb-4 italic">Owner</span>
-                    <a href="https://discord.gg/4d2fEQQ2Vu" target="_blank" class="inline-block px-6 py-2 bg-blue-600/20 text-blue-400 rounded-lg font-bold text-xs hover:bg-blue-600 hover:text-white transition">Join Discord</a>
+                    <a href="https://discord.gg/4d2fEQQ2Vu" target="_blank" class="inline-block px-6 py-2 bg-blue-600/20 text-blue-400 rounded-lg font-bold text-xs hover:bg-blue-600 hover:text-white transition shadow-sm">Join Discord</a>
                 </div>
                 <div class="card p-8">
                     <h3 class="text-2xl font-black">AscendBox</h3>
                     <span class="text-purple-400 font-bold text-sm block mb-4 italic">Developer</span>
-                    <a href="https://discord.gg/ascendbox" target="_blank" class="inline-block px-6 py-2 bg-purple-600/20 text-purple-400 rounded-lg font-bold text-xs hover:bg-purple-600 hover:text-white transition">Join Discord</a>
+                    <a href="https://discord.gg/ascendbox" target="_blank" class="inline-block px-6 py-2 bg-purple-600/20 text-purple-400 rounded-lg font-bold text-xs hover:bg-purple-600 hover:text-white transition shadow-sm">Join Discord</a>
                 </div>
                 <div class="card p-8">
                     <h3 class="text-2xl font-black">IceBox</h3>
                     <span class="text-purple-400 font-bold text-sm block mb-4 italic">Developer</span>
-                    <a href="https://discord.gg/icebox" target="_blank" class="inline-block px-6 py-2 bg-purple-600/20 text-purple-400 rounded-lg font-bold text-xs hover:bg-purple-600 hover:text-white transition">Join Discord</a>
+                    <a href="https://discord.gg/icebox" target="_blank" class="inline-block px-6 py-2 bg-purple-600/20 text-purple-400 rounded-lg font-bold text-xs hover:bg-purple-600 hover:text-white transition shadow-sm">Join Discord</a>
                 </div>
             </div>
         </section>
 
         <section id="projects">
-            <h2 class="text-4xl font-black mb-10 italic text-blue-500">Featured Projects</h2>
+            <h2 class="text-4xl font-black mb-10 italic text-blue-500">Featured Scripts</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 
                 <div class="card overflow-hidden">
-                    <div class="h-24 bg-gradient-to-br from-blue-500 to-cyan-500 p-6 relative">
+                    <div class="h-24 bg-gradient-to-br from-blue-500 to-cyan-500 p-6">
                         <span class="bg-white/20 text-white text-[10px] px-2 py-1 rounded font-bold">Skript</span>
                     </div>
                     <div class="p-6 flex flex-col flex-1">
                         <h3 class="text-xl font-black mb-2">Tag System</h3>
-                        <p class="opacity-60 text-sm mb-6 flex-1 text-right">מערכת תגיות מתקדמת עם תמיכה ב-GUI.</p>
+                        <p class="opacity-60 text-sm mb-6 flex-1">Advanced chat tag system with GUI and color support.</p>
                         <a href="tag.sk" download class="block w-full text-center py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition">Download .sk</a>
                     </div>
                 </div>
 
                 <div class="card overflow-hidden">
-                    <div class="h-24 bg-gradient-to-br from-purple-500 to-pink-500 p-6 relative">
+                    <div class="h-24 bg-gradient-to-br from-purple-500 to-pink-500 p-6">
                         <span class="bg-white/20 text-white text-[10px] px-2 py-1 rounded font-bold">Skript</span>
                     </div>
                     <div class="p-6 flex flex-col flex-1">
                         <h3 class="text-xl font-black mb-2">Auction House</h3>
-                        <p class="opacity-60 text-sm mb-6 flex-1 text-right">מערכת מכירות פומביות (AH) יעילה וקלה לשימוש.</p>
+                        <p class="opacity-60 text-sm mb-6 flex-1">Full auction house system optimized for large player bases.</p>
                         <a href="ah.sk" download class="block w-full text-center py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition">Download .sk</a>
                     </div>
                 </div>
 
                 <div class="card overflow-hidden">
-                    <div class="h-24 bg-gradient-to-br from-orange-400 to-red-500 p-6 relative">
+                    <div class="h-24 bg-gradient-to-br from-orange-400 to-red-500 p-6">
                         <span class="bg-white/20 text-white text-[10px] px-2 py-1 rounded font-bold">Skript</span>
                     </div>
                     <div class="p-6 flex flex-col flex-1">
                         <h3 class="text-xl font-black mb-2">Key All System</h3>
-                        <p class="opacity-60 text-sm mb-6 flex-1 text-right">מערכת לחלוקת מפתחות לכל השרת בפקודה אחת.</p>
+                        <p class="opacity-60 text-sm mb-6 flex-1">Global reward distribution system with one command.</p>
                         <a href="Keyall.sk" download class="block w-full text-center py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition">Download .sk</a>
                     </div>
                 </div>
@@ -144,7 +144,7 @@
         </section>
 
         <section id="showcase">
-            <h2 class="text-4xl font-black mb-10 italic text-blue-500">Development Showcase</h2>
+            <h2 class="text-4xl font-black mb-10 italic text-blue-500">Code Showcase</h2>
             
             <div class="space-y-12">
                 <div>
@@ -164,7 +164,7 @@
                 </div>
 
                 <div>
-                    <p class="text-[10px] font-bold opacity-40 uppercase mb-4 tracking-widest">Skript (Admin GUI & Logic)</p>
+                    <p class="text-[10px] font-bold opacity-40 uppercase mb-4 tracking-widest">Skript (GUI Logic)</p>
                     <div class="code-block text-sm">
 <pre>
 <span class="text-blue-400">on inventory click:</span>
