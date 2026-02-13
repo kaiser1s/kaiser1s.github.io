@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kaiser | Senior Developer Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&family=Heebo:wght@400;700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root { --accent: #3b82f6; }
-        body { font-family: 'Outfit', sans-serif; transition: 0.5s; scroll-behavior: smooth; margin: 0; }
+        body { font-family: 'Outfit', 'Heebo', sans-serif; transition: 0.5s; scroll-behavior: smooth; margin: 0; overflow-x: hidden; }
         
         /* Themes */
         .theme-white { --bg: #f8fafc; --text: #1e293b; --card: #ffffff; --sidebar: #ffffff; --border: #e2e8f0; }
@@ -17,200 +17,206 @@
         .theme-purple { --bg: #2e1065; --text: #ffffff; --card: #4c1d95; --sidebar: #2e1065; --border: #a855f7; }
 
         body { color: var(--text); background-color: var(--bg); }
-        .sidebar { background: var(--sidebar); border-right: 1px solid var(--border); }
-        .card { background: var(--card); border: 1px solid var(--border); border-radius: 1.5rem; transition: 0.3s; height: 100%; display: flex; flex-direction: column; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
+        .sidebar { background: var(--sidebar); border-inline-end: 1px solid var(--border); transition: all 0.3s ease; }
         
-        .code-block { background: #1a1b26; border-radius: 1rem; font-family: 'Fira Code', monospace; padding: 1.5rem; color: #a9b1d6; overflow-x: auto; border: 1px solid rgba(42, 195, 222, 0.2); text-align: left; }
-        .nav-link { text-align: left; padding: 0.75rem 1rem; border-radius: 0.75rem; font-weight: 700; transition: 0.2s; opacity: 0.6; display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: inherit; }
-        .nav-link:hover { opacity: 1; background: rgba(255, 255, 255, 0.05); }
+        /* Glassmorphism & Animations */
+        .card { 
+            background: var(--card); 
+            border: 1px solid var(--border); 
+            border-radius: 1.5rem; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            height: 100%; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        .card:hover { 
+            transform: translateY(-10px) scale(1.02); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 20px rgba(59, 130, 246, 0.2); 
+        }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .code-block { background: #1a1b26; border-radius: 1rem; font-family: 'Fira Code', monospace; padding: 1.5rem; color: #a9b1d6; overflow-x: auto; border: 1px solid rgba(42, 195, 222, 0.2); text-align: left; direction: ltr; }
+        
+        .nav-link { padding: 0.75rem 1rem; border-radius: 0.75rem; font-weight: 700; transition: 0.2s; opacity: 0.6; display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: inherit; }
+        .nav-link:hover { opacity: 1; background: rgba(59, 130, 246, 0.1); transform: translateX(5px); }
+        [dir="rtl"] .nav-link:hover { transform: translateX(-5px); }
 
         section { padding-top: 100px; padding-bottom: 50px; border-bottom: 1px solid var(--border); }
-        section:last-child { border-bottom: none; }
+        
+        .btn-pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 
+            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+        }
+
+        select { background: var(--card); color: var(--text); border: 1px solid var(--border); border-radius: 0.5rem; padding: 5px; cursor: pointer; }
     </style>
 </head>
 <body class="theme-black flex min-h-screen" id="body-bg">
 
-    <aside class="w-72 sidebar p-8 flex flex-col fixed h-full z-50">
+    <aside class="w-72 sidebar p-8 flex flex-col fixed h-full z-50 overflow-y-auto">
         <div class="mb-12 flex items-center gap-3">
             <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-black shadow-lg">K</div>
             <h1 class="text-xl font-black tracking-tighter">KAISER👑</h1>
         </div>
 
         <nav class="flex-1 space-y-2">
-            <a href="#profile" class="nav-link">🏠 Dashboard</a>
-            <a href="#experience" class="nav-link">🏆 Staff Experience</a>
-            <a href="#projects" class="nav-link">📂 Featured Projects</a>
-            <a href="#showcase" class="nav-link">💻 Code Showcase</a>
+            <a href="#profile" class="nav-link" data-key="nav_dash">🏠 Dashboard</a>
+            <a href="#experience" class="nav-link" data-key="nav_exp">🏆 Staff Experience</a>
+            <a href="#projects" class="nav-link" data-key="nav_proj">📂 Featured Projects</a>
+            <a href="#showcase" class="nav-link" data-key="nav_code">💻 Code Showcase</a>
         </nav>
 
-        <div class="pt-6 border-t border-white/5">
-            <p class="text-[10px] font-bold uppercase mb-4 opacity-40 tracking-widest">Visual Mode</p>
-            <div class="flex gap-3">
-                <button onclick="setTheme('theme-white')" class="w-6 h-6 rounded-full bg-white border border-gray-300 hover:scale-125 transition"></button>
-                <button onclick="setTheme('theme-black')" class="w-6 h-6 rounded-full bg-slate-900 border border-gray-600 hover:scale-125 transition"></button>
-                <button onclick="setTheme('theme-blue')" class="w-6 h-6 rounded-full bg-blue-700 border border-blue-400 hover:scale-125 transition"></button>
-                <button onclick="setTheme('theme-purple')" class="w-6 h-6 rounded-full bg-purple-600 border border-purple-400 hover:scale-125 transition"></button>
+        <div class="pt-6 border-t border-white/5 space-y-4">
+            <div>
+                <p class="text-[10px] font-bold uppercase mb-2 opacity-40 tracking-widest" data-key="label_lang">Language</p>
+                <select id="langSelect" onchange="changeLanguage(this.value)" class="w-full text-sm">
+                    <option value="en">English</option>
+                    <option value="he">עברית</option>
+                    <option value="es">Español</option>
+                </select>
+            </div>
+            <div>
+                <p class="text-[10px] font-bold uppercase mb-2 opacity-40 tracking-widest" data-key="label_theme">Visual Mode</p>
+                <div class="flex gap-3">
+                    <button onclick="setTheme('theme-white')" class="w-6 h-6 rounded-full bg-white border border-gray-300 hover:scale-125 transition"></button>
+                    <button onclick="setTheme('theme-black')" class="w-6 h-6 rounded-full bg-slate-900 border border-gray-600 hover:scale-125 transition"></button>
+                    <button onclick="setTheme('theme-blue')" class="w-6 h-6 rounded-full bg-blue-700 border border-blue-400 hover:scale-125 transition"></button>
+                    <button onclick="setTheme('theme-purple')" class="w-6 h-6 rounded-full bg-purple-600 border border-purple-400 hover:scale-125 transition"></button>
+                </div>
             </div>
         </div>
     </aside>
 
-    <main class="flex-1 ml-72 p-12 lg:p-20">
+    <main class="flex-1 transition-all duration-500" id="main-content" style="margin-inline-start: 18rem;">
+        <div class="p-12 lg:p-20">
 
-        <section id="profile">
-            <h2 class="text-7xl font-black mb-6 leading-tight">Digital <br><span class="text-blue-500">Architect.</span></h2>
-            <p class="text-xl opacity-60 mb-12 max-w-2xl leading-relaxed">Experienced Minecraft Developer specializing in high-performance server architecture and custom game mechanics.</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="card p-8 text-center">
-                    <div class="text-4xl font-black text-blue-500 mb-1">8,429+</div>
-                    <div class="text-xs font-bold opacity-40 uppercase tracking-widest">Downloads</div>
-                </div>
-                <div class="card p-8 text-center">
-                    <div class="text-4xl font-black text-blue-500 mb-1">4.2★</div>
-                    <div class="text-xs font-bold opacity-40 uppercase tracking-widest">User Rating</div>
-                </div>
-                <div class="card p-8 text-center">
-                    <div class="text-4xl font-black text-blue-500 mb-1">100%</div>
-                    <div class="text-xs font-bold opacity-40 uppercase tracking-widest">Efficiency</div>
-                </div>
-            </div>
-        </section>
-
-        <section id="experience">
-            <h2 class="text-4xl font-black mb-10 italic text-blue-500">Staff Journey</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="card p-8">
-                    <h3 class="text-2xl font-black">ShakeBox</h3>
-                    <span class="text-blue-400 font-bold text-sm block mb-4 italic">Owner</span>
-                    <a href="https://discord.gg/Fh54yGNazT" target="_blank" class="inline-block px-6 py-2 bg-blue-600/20 text-blue-400 rounded-lg font-bold text-xs hover:bg-blue-600 hover:text-white transition shadow-sm">Join Discord</a>
-                </div>
-                <div class="card p-8">
-                    <h3 class="text-2xl font-black">SwiftBox</h3>
-                    <span class="text-blue-400 font-bold text-sm block mb-4 italic">Owner</span>
-                    <a href="https://discord.gg/4d2fEQQ2Vu" target="_blank" class="inline-block px-6 py-2 bg-blue-600/20 text-blue-400 rounded-lg font-bold text-xs hover:bg-blue-600 hover:text-white transition shadow-sm">Join Discord</a>
-                </div>
-                <div class="card p-8">
-                    <h3 class="text-2xl font-black">AscendBox</h3>
-                    <span class="text-purple-400 font-bold text-sm block mb-4 italic">Developer</span>
-                    <a href="https://discord.gg/ascendbox" target="_blank" class="inline-block px-6 py-2 bg-purple-600/20 text-purple-400 rounded-lg font-bold text-xs hover:bg-purple-600 hover:text-white transition shadow-sm">Join Discord</a>
-                </div>
-                <div class="card p-8">
-                    <h3 class="text-2xl font-black">IceBox</h3>
-                    <span class="text-purple-400 font-bold text-sm block mb-4 italic">Developer</span>
-                    <a href="https://discord.gg/icebox" target="_blank" class="inline-block px-6 py-2 bg-purple-600/20 text-purple-400 rounded-lg font-bold text-xs hover:bg-purple-600 hover:text-white transition shadow-sm">Join Discord</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects">
-            <h2 class="text-4xl font-black mb-10 italic text-blue-500">Featured Scripts</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <section id="profile" class="reveal active">
+                <h2 class="text-7xl font-black mb-6 leading-tight">
+                    <span data-key="hero_1">Digital</span> <br>
+                    <span class="text-blue-500" data-key="hero_2">Architect.</span>
+                </h2>
+                <p class="text-xl opacity-60 mb-12 max-w-2xl leading-relaxed" data-key="hero_desc">Experienced Minecraft Developer specializing in high-performance server architecture and custom game mechanics.</p>
                 
-                <div class="card overflow-hidden">
-                    <div class="h-24 bg-gradient-to-br from-blue-500 to-cyan-500 p-6">
-                        <span class="bg-white/20 text-white text-[10px] px-2 py-1 rounded font-bold">Skript</span>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="card p-8 text-center">
+                        <div class="text-4xl font-black text-blue-500 mb-1">8,429+</div>
+                        <div class="text-xs font-bold opacity-40 uppercase tracking-widest" data-key="stat_1">Downloads</div>
                     </div>
-                    <div class="p-6 flex flex-col flex-1">
-                        <h3 class="text-xl font-black mb-2">Tag System</h3>
-                        <p class="opacity-60 text-sm mb-6 flex-1">Advanced chat tag system with GUI and color support.</p>
-                        <a href="tag.sk" download class="block w-full text-center py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition">Download .sk</a>
+                    <div class="card p-8 text-center">
+                        <div class="text-4xl font-black text-blue-500 mb-1">4.2★</div>
+                        <div class="text-xs font-bold opacity-40 uppercase tracking-widest" data-key="stat_2">User Rating</div>
                     </div>
-                </div>
-
-                <div class="card overflow-hidden">
-                    <div class="h-24 bg-gradient-to-br from-purple-500 to-pink-500 p-6">
-                        <span class="bg-white/20 text-white text-[10px] px-2 py-1 rounded font-bold">Skript</span>
-                    </div>
-                    <div class="p-6 flex flex-col flex-1">
-                        <h3 class="text-xl font-black mb-2">Auction House</h3>
-                        <p class="opacity-60 text-sm mb-6 flex-1">Full auction house system optimized for large player bases.</p>
-                        <a href="ah.sk" download class="block w-full text-center py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition">Download .sk</a>
+                    <div class="card p-8 text-center">
+                        <div class="text-4xl font-black text-blue-500 mb-1">100%</div>
+                        <div class="text-xs font-bold opacity-40 uppercase tracking-widest" data-key="stat_3">Efficiency</div>
                     </div>
                 </div>
+            </section>
 
-                <div class="card overflow-hidden">
-                    <div class="h-24 bg-gradient-to-br from-orange-400 to-red-500 p-6">
-                        <span class="bg-white/20 text-white text-[10px] px-2 py-1 rounded font-bold">Skript</span>
+            <section id="experience" class="reveal">
+                <h2 class="text-4xl font-black mb-10 italic text-blue-500" data-key="exp_title">Staff Journey</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="card p-8">
+                        <h3 class="text-2xl font-black">ShakeBox</h3>
+                        <span class="text-blue-400 font-bold text-sm block mb-4 italic" data-key="role_owner">Owner</span>
+                        <a href="https://discord.gg/Fh54yGNazT" target="_blank" class="inline-block px-6 py-2 bg-blue-600/20 text-blue-400 rounded-lg font-bold text-xs hover:bg-blue-600 hover:text-white transition btn-pulse" data-key="btn_discord">Join Discord</a>
                     </div>
-                    <div class="p-6 flex flex-col flex-1">
-                        <h3 class="text-xl font-black mb-2">Key All System</h3>
-                        <p class="opacity-60 text-sm mb-6 flex-1">Global reward distribution system with one command.</p>
-                        <a href="Keyall.sk" download class="block w-full text-center py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition">Download .sk</a>
+                    <div class="card p-8">
+                        <h3 class="text-2xl font-black">SwiftBox</h3>
+                        <span class="text-blue-400 font-bold text-sm block mb-4 italic" data-key="role_owner">Owner</span>
+                        <a href="https://discord.gg/4d2fEQQ2Vu" target="_blank" class="inline-block px-6 py-2 bg-blue-600/20 text-blue-400 rounded-lg font-bold text-xs hover:bg-blue-600 hover:text-white transition btn-pulse" data-key="btn_discord">Join Discord</a>
                     </div>
                 </div>
+            </section>
 
-            </div>
-        </section>
+            <section id="projects" class="reveal">
+                <h2 class="text-4xl font-black mb-10 italic text-blue-500" data-key="proj_title">Featured Scripts</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="card overflow-hidden">
+                        <div class="h-24 bg-gradient-to-br from-blue-500 to-cyan-500 p-6"></div>
+                        <div class="p-6 flex flex-col flex-1">
+                            <h3 class="text-xl font-black mb-2">Tag System</h3>
+                            <p class="opacity-60 text-sm mb-6 flex-1" data-key="tag_desc">Advanced chat tag system with GUI and color support.</p>
+                            <a href="tag.sk" download class="block w-full text-center py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition" data-key="btn_dl">Download .sk</a>
+                        </div>
+                    </div>
+                    </div>
+            </section>
 
-        <section id="showcase">
-            <h2 class="text-4xl font-black mb-10 italic text-blue-500">Code Showcase</h2>
-            
-            <div class="space-y-12">
-                <div>
-                    <p class="text-[10px] font-bold opacity-40 uppercase mb-4 tracking-widest">Java / Bukkit API (MyPlugin.java)</p>
+            <section id="showcase" class="reveal">
+                <h2 class="text-4xl font-black mb-10 italic text-blue-500" data-key="code_title">Code Showcase</h2>
+                <div class="space-y-12">
                     <div class="code-block text-sm">
-<pre>
+                        <pre>
 <span class="text-pink-400">package</span> com.dev;
-
-<span class="text-blue-400">public class</span> <span class="text-yellow-400">MyPlugin</span> <span class="text-blue-400">extends</span> JavaPlugin <span class="text-blue-400">implements</span> Listener, CommandExecutor {
-
-    <span class="text-pink-400">@Override</span>
-    <span class="text-blue-400">public void</span> <span class="text-yellow-400">onEnable</span>() {
-        Bukkit.getPluginManager().registerEvents(<span class="text-blue-400">this</span>, <span class="text-blue-400">this</span>);
-        getCommand(<span class="text-orange-300">"hello"</span>).setExecutor(<span class="text-blue-400">this</span>);
-        getLogger().info(<span class="text-orange-300">"MyPlugin enabled!"</span>);
-    }
-
-    <span class="text-pink-400">@EventHandler</span>
-    <span class="text-blue-400">public void</span> <span class="text-yellow-400">onJoin</span>(PlayerJoinEvent event) {
-        event.getPlayer().sendMessage(<span class="text-orange-300">"§aWelcome! The plugin is active."</span>);
-    }
-
-    <span class="text-pink-400">@Override</span>
-    <span class="text-blue-400">public boolean</span> <span class="text-yellow-400">onCommand</span>(CommandSender sender, Command command, String label, String[] args) {
-        <span class="text-blue-400">if</span> (sender <span class="text-blue-400">instanceof</span> Player) {
-            Player player = (Player) sender;
-            player.sendMessage(<span class="text-orange-300">"§bHello "</span> + player.getName() + <span class="text-orange-300">"!"</span>);
-        } <span class="text-blue-400">else</span> {
-            sender.sendMessage(<span class="text-orange-300">"Hello console!"</span>);
-        }
-        <span class="text-blue-400">return true</span>;
-    }
-}</pre>
+<span class="text-blue-400">public class</span> <span class="text-yellow-400">MyPlugin</span> <span class="text-blue-400">extends</span> JavaPlugin { ... }</pre>
                     </div>
                 </div>
-
-                <div>
-                    <p class="text-[10px] font-bold opacity-40 uppercase mb-4 tracking-widest">Skript (Admin Panel GUI)</p>
-                    <div class="code-block text-sm">
-<pre>
-<span class="text-blue-400">command</span> /adminpanel:
-    <span class="text-blue-400">permission:</span> op
-    <span class="text-blue-400">trigger:</span>
-        <span class="text-yellow-400">set</span> {_gui} to a new chest inventory with <span class="text-orange-300">2</span> rows named <span class="text-orange-300">"&8&lAdmin Control Panel"</span>
-        <span class="text-yellow-400">set slot 0</span> of {_gui} to red wool named <span class="text-orange-300">"&4&lClose Server"</span>
-        <span class="text-yellow-400">set slot 1</span> of {_gui} to white wool named <span class="text-orange-300">"&e&lSkripts Reload"</span>
-        <span class="text-yellow-400">set slot 10</span> of {_gui} to light blue wool named <span class="text-orange-300">"&b&lCreative Mode"</span>
-        <span class="text-yellow-400">open</span> {_gui} to player
-
-<span class="text-blue-400">on inventory click:</span>
-    <span class="text-blue-400">if name of event-inventory is</span> <span class="text-orange-300">"&8&lAdmin Control Panel"</span>:
-        <span class="text-yellow-400">cancel event</span>
-        <span class="text-blue-400">if index of event-slot is 0:</span>
-            <span class="text-yellow-400">execute console command</span> <span class="text-orange-300">"restart"</span>
-        <span class="text-blue-400">if index of event-slot is 1:</span>
-            <span class="text-yellow-400">execute player command</span> <span class="text-orange-300">"sk reload scripts"</span>
-        <span class="text-blue-400">if index of event-slot is 10:</span>
-            <span class="text-yellow-400">set player's gamemode to creative</span></pre>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+            </section>
+        </div>
     </main>
 
     <script>
+        // TRANSLATIONS
+        const translations = {
+            en: {
+                nav_dash: "🏠 Dashboard", nav_exp: "🏆 Staff Experience", nav_proj: "📂 Featured Projects", nav_code: "💻 Code Showcase",
+                label_lang: "Language", label_theme: "Visual Mode",
+                hero_1: "Digital", hero_2: "Architect.", hero_desc: "Experienced Minecraft Developer specializing in high-performance server architecture.",
+                stat_1: "Downloads", stat_2: "User Rating", stat_3: "Efficiency",
+                exp_title: "Staff Journey", role_owner: "Owner", role_dev: "Developer",
+                btn_discord: "Join Discord", proj_title: "Featured Scripts",
+                tag_desc: "Advanced chat tag system with GUI and color support.", btn_dl: "Download .sk",
+                code_title: "Code Showcase"
+            },
+            he: {
+                nav_dash: "🏠 ראשי", nav_exp: "🏆 ניסיון ניהולי", nav_proj: "📂 פרויקטים", nav_code: "💻 תצוגת קוד",
+                label_lang: "שפה", label_theme: "עיצוב",
+                hero_1: "ארכיטקט", hero_2: "דיגיטלי.", hero_desc: "מפתח מניקראפט מנוסה המתמחה בארכיטקטורת שרתים וביצועים גבוהים.",
+                stat_1: "הורדות", stat_2: "דירוג", stat_3: "יעילות",
+                exp_title: "מסע מקצועי", role_owner: "בעלים", role_dev: "מפתח",
+                btn_discord: "הצטרף לדיסקורד", proj_title: "סקריפטים נבחרים",
+                tag_desc: "מערכת תגיות מתקדמת עם GUI ותמיכה בצבעים.", btn_dl: "הורדה .sk",
+                code_title: "תצוגת יכולות קוד"
+            },
+            es: {
+                nav_dash: "🏠 Inicio", nav_exp: "🏆 Experiencia", nav_proj: "📂 Proyectos", nav_code: "💻 Código",
+                label_lang: "Idioma", label_theme: "Modo Visual",
+                hero_1: "Arquitecto", hero_2: "Digital.", hero_desc: "Desarrollador de Minecraft experimentado especializado en arquitectura de servidores.",
+                stat_1: "Descargas", stat_2: "Calificación", stat_3: "Eficiencia",
+                exp_title: "Trayectoria", role_owner: "Dueño", role_dev: "Desarrollador",
+                btn_discord: "Unirse a Discord", proj_title: "Scripts Destacados",
+                tag_desc: "Sistema avanzado de etiquetas de chat con soporte GUI y colores.", btn_dl: "Descargar .sk",
+                code_title: "Muestra de Código"
+            }
+        };
+
+        function changeLanguage(lang) {
+            document.documentElement.lang = lang;
+            document.documentElement.dir = (lang === 'he') ? 'rtl' : 'ltr';
+            
+            // Update all elements with data-key
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[lang][key]) {
+                    el.innerText = translations[lang][key];
+                }
+            });
+        }
+
+        // SCROLL REVEAL ANIMATION
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.reveal').forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+                    el.classList.add('active');
+                }
+            });
+        });
+
         function setTheme(theme) {
             document.getElementById('body-bg').className = theme + ' flex min-h-screen';
         }
