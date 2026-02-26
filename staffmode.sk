@@ -1,0 +1,147 @@
+options:
+    prefix: &8[&cStaffMode&8]
+    gui-title: &c&lStaff Mode &8- &7Online Players
+    gui-rows: 6
+    no-permission: &cYou do not have permission to use this command.
+    enabled-msg: &aStaffMode has been &2&lENABLED&a.
+    disabled-msg: &cStaffMode has been &4&lDISABLED&c.
+
+on join:
+    if {staffmode::%uuid of player%} is not set:
+        set {staffmode::%uuid of player%} to false
+
+on quit:
+    if {staffmode::%uuid of player%} is true:
+        set {staffmode::%uuid of player%} to false
+    delete {staffmode::gui::%uuid of player%}
+
+command /staffmode:
+    permission: staffmode.use
+    permission message: {@no-permission}
+    trigger:
+        if {staffmode::%uuid of player%} is not set:
+            set {staffmode::%uuid of player%} to false
+
+        if {staffmode::%uuid of player%} is false:
+            set {staffmode::%uuid of player%} to true
+            send "{@prefix} {@enabled-msg}" to player
+            broadcast "&7[&c-%player's name%&7]"
+            make player execute command "/vanish"
+            set {staffmode::inventory::%uuid of player%::*} to all items in player's inventory
+            clear player's inventory
+            wait 2 ticks
+            make player execute command "/tp "
+
+        else:
+            set {staffmode::%uuid of player%} to false
+            send "{@prefix} {@disabled-msg}" to player
+            broadcast "&7[&c-%player's name%&7]"
+            make player execute command "/vanish"
+            clear player's inventory
+            if {staffmode::inventory::%uuid of player%::*} is set:
+                set {_slot} to 0
+                loop {staffmode::inventory::%uuid of player%::*}:
+                    set slot {_slot} of player's inventory to loop-value
+                    add 1 to {_slot}
+                delete {staffmode::inventory::%uuid of player%::*}
+            delete {staffmode::gui::%uuid of player%}
+
+function openStaffGUI(p: player):
+    set {staffmode::gui::%uuid of {_p}%} to true
+    set {_gui} to a new chest inventory with {@gui-rows} rows named "{@gui-title}"
+    set {_slot} to 0
+    loop all players:
+        if {_slot} is less than 54:
+            set {_head} to loop-player's skull
+            set name of {_head} to "&e%loop-player's name%"
+            set lore of {_head} to "&7Click to TP" and "" and "&8UUID: %uuid of loop-player%"
+            set slot {_slot} of {_gui} to {_head}
+            add 1 to {_slot}
+    while {_slot} is less than 54:
+        set {_filler} to gray stained glass pane named "&r"
+        set slot {_slot} of {_gui} to {_filler}
+        add 1 to {_slot}
+    open {_gui} to {_p}
+
+on inventory drag:
+    if {staffmode::gui::%uuid of player%} is true:
+        if name of player's current inventory is "{@gui-title}":
+            cancel event
+
+on inventory close:
+    if {staffmode::gui::%uuid of player%} is true:
+        delete {staffmode::gui::%uuid of player%}
+
+on break:
+    if {staffmode::%uuid of player%} is true:
+        cancel event
+        send action bar "{@prefix} &cYou cannot break blocks in StaffMode." to player
+
+on place:
+    if {staffmode::%uuid of player%} is true:
+        cancel event
+        send action bar "{@prefix} &cYou cannot place blocks in StaffMode." to player
+
+on damage:
+    if attacker is a player:
+        if {staffmode::%uuid of attacker%} is true:
+            cancel event
+            send action bar "{@prefix} &cYou cannot deal damage in StaffMode." to attacker
+
+on damage of player:
+    if {staffmode::%uuid of victim%} is true:
+        cancel event
+
+on drop:
+    if {staffmode::%uuid of player%} is true:
+        cancel event
+        send action bar "{@prefix} &cYou cannot drop items in StaffMode." to player
+
+on pickup:
+    if {staffmode::%uuid of player%} is true:
+        cancel event
+
+on right click on chest:
+    if {staffmode::%uuid of player%} is true:
+        cancel event
+        send action bar "{@prefix} &cYou cannot open containers in StaffMode." to player
+
+on right click on trapped chest:
+    if {staffmode::%uuid of player%} is true:
+        cancel event
+        send action bar "{@prefix} &cYou cannot open containers in StaffMode." to player
+
+on right click on barrel:
+    if {staffmode::%uuid of player%} is true:
+        cancel event
+        send action bar "{@prefix} &cYou cannot open containers in StaffMode." to player
+
+on right click on hopper:
+    if {staffmode::%uuid of player%} is true:
+        cancel event
+        send action bar "{@prefix} &cYou cannot open containers in StaffMode." to player
+
+on right click on dropper:
+    if {staffmode::%uuid of player%} is true:
+        cancel event
+        send action bar "{@prefix} &cYou cannot open containers in StaffMode." to player
+
+on right click on dispenser:
+    if {staffmode::%uuid of player%} is true:
+        cancel event
+        send action bar "{@prefix} &cYou cannot open containers in StaffMode." to player
+
+on right click on furnace:
+    if {staffmode::%uuid of player%} is true:
+        cancel event
+        send action bar "{@prefix} &cYou cannot open containers in StaffMode." to player
+
+on right click on blast furnace:
+    if {staffmode::%uuid of player%} is true:
+        cancel event
+        send action bar "{@prefix} &cYou cannot open containers in StaffMode." to player
+
+on right click on smoker:
+    if {staffmode::%uuid of player%} is true:
+        cancel event
+        send action bar "{@prefix} &cYou cannot open containers in StaffMode." to player
