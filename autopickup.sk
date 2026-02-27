@@ -1,0 +1,174 @@
+options:
+    gui-title: &8Auto Pickup Settings
+    no-perm: &cYou do not have permission to use this.
+
+command /pickup:
+    permission: pickup.open
+    permission message: {@no-perm}
+    cooldown: 1 tick
+    trigger:
+        openPickupGUI(player)
+
+function openPickupGUI(p: player):
+    open chest inventory with 3 rows named "{@gui-title}" to {_p}
+
+    set {_n} to 0
+    loop 27 times:
+        set slot {_n} of {_p}'s current inventory to gray stained glass pane named " "
+        add 1 to {_n}
+
+    if {pickup::%{_p}%} is true:
+        set slot 11 of {_p}'s current inventory to bundle named "&aAuto Pickup" with lore "&7Breaking blocks will automatically" and "&7go to your inventory." and "&7If your inventory is full," and "&7the items will drop normally." and "" and "&eClick to toggle." and "" and "&aENABLED"
+    else:
+        set slot 11 of {_p}'s current inventory to bundle named "&aAuto Pickup" with lore "&7Breaking blocks will automatically" and "&7go to your inventory." and "&7If your inventory is full," and "&7the items will drop normally." and "" and "&eClick to toggle." and "" and "&cDISABLED"
+
+    if {compress::%{_p}%} is true:
+        set slot 13 of {_p}'s current inventory to diamond block named "&bAuto Pickup Compresser" with lore "&79 ores automatically convert" and "&7into 1 ore block." and "" and "&7Example:" and "&79 diamonds -> 1 diamond block" and "" and "&eClick to toggle." and "" and "&aENABLED"
+    else:
+        set slot 13 of {_p}'s current inventory to diamond block named "&bAuto Pickup Compresser" with lore "&79 ores automatically convert" and "&7into 1 ore block." and "" and "&7Example:" and "&79 diamonds -> 1 diamond block" and "" and "&eClick to toggle." and "" and "&cDISABLED"
+
+    if {smelt::%{_p}%} is true:
+        set slot 15 of {_p}'s current inventory to furnace named "&6Auto Pickup Smelt" with lore "&7While Auto Pickup is active," and "&7any smeltable ore will" and "&7be automatically smelted." and "" and "&eClick to toggle." and "" and "&aENABLED"
+    else:
+        set slot 15 of {_p}'s current inventory to furnace named "&6Auto Pickup Smelt" with lore "&7While Auto Pickup is active," and "&7any smeltable ore will" and "&7be automatically smelted." and "" and "&eClick to toggle." and "" and "&cDISABLED"
+
+on inventory click:
+    if name of event-inventory is "{@gui-title}":
+        cancel event
+
+        if event-slot is gray stained glass pane:
+            stop
+
+        set {_s} to index of event-slot
+
+        if {_s} is 11:
+            if {pickup::%player%} is true:
+                delete {pickup::%player%}
+                delete {compress::%player%}
+                delete {smelt::%player%}
+                send "&cAuto Pickup disabled. Linked modules were also turned off." to player
+            else:
+                set {pickup::%player%} to true
+                send "&aAuto Pickup enabled." to player
+            openPickupGUI(player)
+            stop
+
+        else if {_s} is 13:
+            if {pickup::%player%} is not true:
+                send "&cYou must enable Auto Pickup first to use this!" to player
+                stop
+            if {compress::%player%} is true:
+                delete {compress::%player%}
+                send "&cAuto Pickup Compresser disabled." to player
+            else:
+                set {compress::%player%} to true
+                send "&bAuto Pickup Compresser enabled." to player
+            openPickupGUI(player)
+            stop
+
+        else if {_s} is 15:
+            if {pickup::%player%} is not true:
+                send "&cYou must enable Auto Pickup first to use this!" to player
+                stop
+            if {smelt::%player%} is true:
+                delete {smelt::%player%}
+                send "&cAuto Pickup Smelt disabled." to player
+            else:
+                set {smelt::%player%} to true
+                send "&6Auto Pickup Smelt enabled." to player
+            openPickupGUI(player)
+            stop
+
+on inventory drag:
+    if name of event-inventory is "{@gui-title}":
+        cancel event
+
+on place:
+    gamemode of player is survival
+    set {placed::%location of event-block%} to true
+
+on break:
+    event is not cancelled
+    gamemode of player is survival
+    {pickup::%player%} is true
+
+    if {placed::%location of event-block%} is set:
+        delete {placed::%location of event-block%}
+        stop
+
+    if type of event-block is spawner or chest or trapped chest or ender chest or barrel or shulker box or hopper or dropper or dispenser or furnace or blast furnace or smoker or brewing stand:
+        stop
+    if "%type of event-block%" contains "shulker_box":
+        stop
+
+    set {_silk} to false
+    if player's tool is enchanted with silk touch:
+        set {_silk} to true
+
+    set {_drops::*} to drops of event-block using player's tool
+    if size of {_drops::*} is 0:
+        stop
+
+    clear drops
+
+    loop {_drops::*}:
+        set {_item} to loop-value
+
+        if {smelt::%player%} is true:
+            if {_silk} is false:
+                set {_amt} to item amount of {_item}
+                if {_item}'s type is raw iron:
+                    set {_item} to {_amt} of iron ingot
+                else if {_item}'s type is raw gold:
+                    set {_item} to {_amt} of gold ingot
+                else if {_item}'s type is raw copper:
+                    set {_item} to {_amt} of copper ingot
+                else if {_item}'s type is ancient debris:
+                    set {_item} to {_amt} of netherite scrap
+
+        if player can hold {_item}:
+            give {_item} to player
+        else:
+            drop {_item} at location of event-block
+
+    if {compress::%player%} is true:
+        wait 1 tick
+        compressInventory(player)
+
+function compressInventory(p: player):
+    loop 16 times:
+        set {_changed} to false
+
+        if compressPair({_p}, diamond, diamond block) is true:
+            set {_changed} to true
+        if compressPair({_p}, iron ingot, iron block) is true:
+            set {_changed} to true
+        if compressPair({_p}, gold ingot, gold block) is true:
+            set {_changed} to true
+        if compressPair({_p}, emerald, emerald block) is true:
+            set {_changed} to true
+        if compressPair({_p}, redstone, redstone block) is true:
+            set {_changed} to true
+        if compressPair({_p}, lapis lazuli, lapis block) is true:
+            set {_changed} to true
+        if compressPair({_p}, coal, coal block) is true:
+            set {_changed} to true
+        if compressPair({_p}, copper ingot, copper block) is true:
+            set {_changed} to true
+        if compressPair({_p}, netherite scrap, netherite block) is true:
+            set {_changed} to true
+
+        if {_changed} is false:
+            stop loop
+
+function compressPair(p: player, source: item type, blockType: item type) :: boolean:
+    set {_did} to false
+    while {_p} has 9 of {_source}:
+        remove 9 of {_source} from {_p}
+        if {_p} can hold 1 of {_blockType}:
+            give 1 of {_blockType} to {_p}
+            set {_did} to true
+        else:
+            give 9 of {_source} to {_p}
+            stop loop
+    return {_did}
