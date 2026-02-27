@@ -24,11 +24,6 @@
         [dir="rtl"] #main-content { margin-left: 0; margin-right: 18rem; }
         [dir="rtl"] .sidebar { left: auto; right: 0; }
 
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
-
         .card { 
             background: var(--card); 
             border: 1px solid var(--border); 
@@ -44,31 +39,30 @@
             border-color: var(--accent);
         }
 
-        /* Animations */
+        /* All Animations Restored */
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.7s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         .code-block { background: #1a1b26; border-radius: 1rem; font-family: 'Fira Code', monospace; padding: 1.5rem; color: #a9b1d6; overflow-x: auto; border: 1px solid rgba(42, 195, 222, 0.2); text-align: left; direction: ltr; }
-        
         .nav-link { padding: 0.75rem 1rem; border-radius: 0.75rem; font-weight: 700; transition: 0.2s; opacity: 0.6; display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: inherit; }
         .nav-link:hover { opacity: 1; background: rgba(59, 130, 246, 0.1); }
 
-        section { padding-top: 80px; padding-bottom: 80px; border-bottom: 1px solid var(--border); }
+        /* Discord Banner Animation Logic */
+        .discord-banner {
+            background: linear-gradient(135deg, #5865F2 0%, #3b82f6 50%, #7c3aed 100%);
+            border-radius: 1.5rem; padding: 3rem; position: relative; overflow: hidden; border: 1px solid rgba(88, 101, 242, 0.4);
+        }
+        .discord-banner::before {
+            content: ''; position: absolute; top: -50%; right: -50%; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+        @keyframes pulse-glow { 0%, 100% { opacity: 0.5; transform: scale(1); } 50% { opacity: 1; transform: scale(1.1); } }
+        .floating-icon { animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
 
         .lang-btn { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; border: 1px solid var(--border); transition: 0.3s; cursor: pointer; }
         .lang-btn.active { background: #3b82f6; color: white; border-color: #3b82f6; }
-
-        .discord-banner {
-            background: linear-gradient(135deg, #5865F2 0%, #3b82f6 50%, #7c3aed 100%);
-            border-radius: 1.5rem;
-            padding: 3rem;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(88, 101, 242, 0.4);
-        }
-        
-        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
-        .floating-icon { animation: float 3s ease-in-out infinite; }
     </style>
 </head>
 <body class="theme-black flex min-h-screen" id="body-bg">
@@ -78,7 +72,6 @@
             <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-black shadow-lg">K</div>
             <h1 class="text-xl font-black tracking-tighter">KAISER👑</h1>
         </div>
-
         <nav class="flex-1 space-y-2">
             <a href="#profile" class="nav-link" data-key="nav_dash">🏠 Dashboard</a>
             <a href="#experience" class="nav-link" data-key="nav_exp">🏆 Staff Experience</a>
@@ -86,7 +79,6 @@
             <a href="#showcase" class="nav-link" data-key="nav_code">💻 Code Showcase</a>
             <a href="#discord" class="nav-link" data-key="nav_discord">🎮 Discord Server</a>
         </nav>
-
         <div class="pt-6 border-t border-white/5 space-y-6">
             <div>
                 <p class="text-[10px] font-bold uppercase mb-3 opacity-40 tracking-widest" data-key="label_lang">Language</p>
@@ -116,7 +108,7 @@
                     <span data-key="hero_1">Digital</span> <br>
                     <span class="text-blue-500" data-key="hero_2">Architect.</span>
                 </h2>
-                <p class="text-xl opacity-60 mb-12 max-w-2xl leading-relaxed" data-key="hero_desc">Experienced Minecraft Developer specializing in high-performance server architecture and custom game mechanics.</p>
+                <p class="text-xl opacity-60 mb-12 max-w-2xl leading-relaxed" data-key="hero_desc">Experienced Minecraft Developer specializing in high-performance server architecture.</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="card p-8 text-center"><div class="text-4xl font-black text-blue-500 mb-1">8,429+</div><div class="text-xs font-bold opacity-40 uppercase tracking-widest" data-key="stat_1">Downloads</div></div>
                     <div class="card p-8 text-center"><div class="text-4xl font-black text-blue-500 mb-1">4.2★</div><div class="text-xs font-bold opacity-40 uppercase tracking-widest" data-key="stat_2">User Rating</div></div>
@@ -136,54 +128,63 @@
 
             <section id="projects" class="reveal">
                 <h2 class="text-4xl font-black mb-10 italic text-blue-500" data-key="proj_title">Featured Projects</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card p-6">
+                        <h3 class="text-xl font-black mb-2">AutoPickup</h3>
+                        <p class="opacity-60 text-sm mb-6 flex-1" data-key="auto_desc">Automatic item collection with inventory full alerts.</p>
+                        <a href="autopickup.sk" download class="w-full text-center py-3 bg-blue-600 text-white rounded-lg font-bold">Download .sk</a>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="text-xl font-black mb-2">StaffMode</h3>
+                        <p class="opacity-60 text-sm mb-6 flex-1" data-key="staff_desc">Full moderation suite with vanish, freeze and inspector tools.</p>
+                        <a href="staffmode.sk" download class="w-full text-center py-3 bg-blue-600 text-white rounded-lg font-bold">Download .sk</a>
+                    </div>
                     <div class="card p-6">
                         <h3 class="text-xl font-black mb-2">Tag System</h3>
-                        <p class="opacity-60 text-sm mb-6 flex-1" data-key="tag_desc">Advanced chat tag system with GUI and color support.</p>
-                        <a href="#" class="w-full text-center py-3 bg-blue-600 text-white rounded-lg font-bold" data-key="btn_dl">Download .sk</a>
+                        <p class="opacity-60 text-sm mb-6 flex-1" data-key="tag_desc">Advanced chat tag system with GUI.</p>
+                        <a href="tag.sk" download class="w-full text-center py-3 bg-blue-600 text-white rounded-lg font-bold">Download .sk</a>
                     </div>
                     <div class="card p-6">
                         <h3 class="text-xl font-black mb-2">Auction House</h3>
-                        <p class="opacity-60 text-sm mb-6 flex-1" data-key="ah_desc">Full auction house system optimized for large player bases.</p>
-                        <a href="#" class="w-full text-center py-3 bg-blue-600 text-white rounded-lg font-bold" data-key="btn_dl">Download .sk</a>
+                        <p class="opacity-60 text-sm mb-6 flex-1" data-key="ah_desc">Optimized Auction House system.</p>
+                        <a href="ah.sk" download class="w-full text-center py-3 bg-blue-600 text-white rounded-lg font-bold">Download .sk</a>
                     </div>
                     <div class="card p-6">
                         <h3 class="text-xl font-black mb-2">Key All</h3>
-                        <p class="opacity-60 text-sm mb-6 flex-1" data-key="key_desc">Global reward distribution system with one command.</p>
-                        <a href="#" class="w-full text-center py-3 bg-blue-600 text-white rounded-lg font-bold" data-key="btn_dl">Download .sk</a>
+                        <p class="opacity-60 text-sm mb-6 flex-1" data-key="key_desc">Global reward distribution system.</p>
+                        <a href="Keyall.sk" download class="w-full text-center py-3 bg-blue-600 text-white rounded-lg font-bold">Download .sk</a>
                     </div>
                 </div>
             </section>
 
             <section id="showcase" class="reveal">
-                <h2 class="text-4xl font-black mb-10 italic text-blue-500" data-key="code_title">Full Code Showcase</h2>
-                <div class="space-y-12">
-                    <div>
-                        <p class="text-xs font-bold opacity-40 uppercase mb-4 tracking-widest">MyPlugin.java</p>
-                        <div class="code-block text-xs">
+                <h2 class="text-4xl font-black mb-10 italic text-blue-500" data-key="code_title">Code Showcase</h2>
+                <div class="space-y-8">
+                    <div class="code-block text-xs">
+                        <p class="mb-2 opacity-50">// MyPlugin.java</p>
 <pre>
 public class MyPlugin extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         Bukkit.getPluginManager().registerEvents(this, this);
-        getLogger().info("Kaiser Engine Activated.");
-    }
-
-    @EventHandler
-    public void onJoin(PlayerJoinEvent event) {
-        event.getPlayer().sendMessage("§bWelcome to the network!");
+        getLogger().info("Kaiser System Online.");
     }
 }</pre>
-                        </div>
                     </div>
                 </div>
             </section>
 
             <section id="discord" class="reveal">
-                <div class="discord-banner mb-10">
+                <div class="discord-banner">
                     <div class="relative z-10">
-                        <h3 class="text-3xl font-black text-white" data-key="discord_heading">Join Our Community!</h3>
-                        <p class="text-white/90 text-lg mb-8 max-w-2xl" data-key="discord_desc">Need help with setup? Upgrade to Premium Plan for exclusive features and priority support.</p>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="floating-icon text-6xl">🎮</div>
+                            <div>
+                                <h3 class="text-3xl font-black text-white" data-key="discord_heading">Join Our Community!</h3>
+                                <p class="text-white/70 text-sm font-bold" data-key="discord_sub">Connect • Get Support • Upgrade</p>
+                            </div>
+                        </div>
+                        <p class="text-white/90 text-lg mb-8 max-w-2xl" data-key="discord_desc">Need help with setup? Join our Discord and open a ticket for priority support and premium plans!</p>
                         <a href="https://discord.gg/gE8UtGG9" target="_blank" class="px-8 py-4 bg-white text-indigo-600 rounded-xl font-black hover:scale-105 transition-all inline-block">🚀 Join Now</a>
                     </div>
                 </div>
@@ -194,25 +195,18 @@ public class MyPlugin extends JavaPlugin implements Listener {
     <script>
         const translations = {
             en: {
-                nav_dash: "🏠 Dashboard", nav_exp: "🏆 Staff Experience", nav_proj: "📂 Featured Projects", nav_code: "💻 Code Showcase", nav_discord: "🎮 Discord Server",
-                hero_1: "Digital", hero_2: "Architect.", hero_desc: "Experienced Minecraft Developer specializing in high-performance server architecture.",
-                stat_1: "Downloads", stat_2: "Rating", stat_3: "Efficiency", exp_title: "Staff Journey", role_owner: "Owner", role_dev: "Developer",
-                proj_title: "Featured Projects", tag_desc: "Advanced chat tag system.", ah_desc: "Optimized Auction House system.", key_desc: "Global key reward system.", btn_dl: "Download", code_title: "Code Showcase",
-                discord_heading: "Join Our Community!", discord_desc: "Need help with setup? Upgrade to Premium for exclusive plugins and priority support."
+                nav_dash: "🏠 Dashboard", nav_exp: "🏆 Experience", nav_proj: "📂 Projects", nav_code: "💻 Code", nav_discord: "🎮 Discord",
+                hero_1: "Digital", hero_2: "Architect.", hero_desc: "Experienced Minecraft Developer specializing in high-performance architecture.",
+                stat_1: "Downloads", stat_2: "Rating", stat_3: "Efficiency", exp_title: "Staff Journey",
+                proj_title: "Featured Projects", auto_desc: "Automatic item collection system.", staff_desc: "Advanced moderation suite.", tag_desc: "Chat tag system with GUI.", ah_desc: "Optimized Auction House.", key_desc: "Global reward system.",
+                discord_heading: "Join Our Community!", discord_desc: "Need help? Join Discord and open a ticket for premium plans!"
             },
             he: {
                 nav_dash: "🏠 ראשי", nav_exp: "🏆 ניסיון", nav_proj: "📂 פרויקטים", nav_code: "💻 קוד", nav_discord: "🎮 דיסקורד",
-                hero_1: "ארכיטקט", hero_2: "דיגיטלי.", hero_desc: "מפתח מניקראפט מנוסה המתמחה בביצועים גבוהים ומכניקות משחק.",
-                stat_1: "הורדות", stat_2: "דירוג", stat_3: "יעילות", exp_title: "ניסיון ניהולי", role_owner: "בעלים", role_dev: "מפתח",
-                proj_title: "פרויקטים", tag_desc: "מערכת תגיות מתקדמת.", ah_desc: "בית מכירות פומביות יעיל.", key_desc: "חלוקת מפתחות גלובלית.", btn_dl: "הורדה", code_title: "תצוגת קוד",
-                discord_heading: "!הצטרפו לקהילה", discord_desc: "צריכים עזרה? שדרגו לפרימיום לקבלת תוספים בלעדיים ותמיכה מועדפת."
-            },
-            es: {
-                nav_dash: "🏠 Inicio", nav_exp: "🏆 Experiencia", nav_proj: "📂 Proyectos", nav_code: "💻 Código", nav_discord: "🎮 Discord",
-                hero_1: "Arquitecto", hero_2: "Digital.", hero_desc: "Desarrollador de Minecraft especializado en servidores de alto rendimiento.",
-                stat_1: "Descargas", stat_2: "Votos", stat_3: "Eficiencia", exp_title: "Trayectoria", role_owner: "Dueño", role_dev: "Desarrollador",
-                proj_title: "Proyectos", tag_desc: "Sistema de etiquetas.", ah_desc: "Subastas optimizadas.", key_desc: "Recompensas globales.", btn_dl: "Descargar", code_title: "Muestra de Código",
-                discord_heading: "¡Únete!", discord_desc: "¿Necesitas ayuda? Pásate a Premium para plugins exclusivos."
+                hero_1: "ארכיטקט", hero_2: "דיגיטלי.", hero_desc: "מפתח מניקראפט מנוסה המתמחה בביצועים גבוהים.",
+                stat_1: "הורדות", stat_2: "דירוג", stat_3: "יעילות", exp_title: "ניסיון ניהולי",
+                proj_title: "פרויקטים נבחרים", auto_desc: "מערכת איסוף חפצים אוטומטית.", staff_desc: "מערכת ניהול צוות מתקדמת.", tag_desc: "מערכת תגיות מעוצבת.", ah_desc: "בית מכירות פומביות.", key_desc: "חלוקת מפתחות גלובלית.",
+                discord_heading: "!הצטרפו לקהילה", discord_desc: "צריכים עזרה? הצטרפו לדיסקורד ופתחו טיקט לשדרוג לפרימיום!"
             }
         };
 
@@ -223,7 +217,7 @@ public class MyPlugin extends JavaPlugin implements Listener {
             document.getElementById('btn-' + lang).classList.add('active');
             document.querySelectorAll('[data-key]').forEach(el => {
                 const key = el.getAttribute('data-key');
-                if (translations[lang][key]) el.innerText = translations[lang][key];
+                if (translations[lang] && translations[lang][key]) el.innerText = translations[lang][key];
             });
         }
 
