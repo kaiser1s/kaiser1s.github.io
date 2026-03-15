@@ -78,14 +78,14 @@
         }
 
         #main-content {
-            margin-left: 18rem;
+            margin-left: 16rem;
             margin-right: 0;
             transition: margin 0.5s ease;
         }
 
         [dir="rtl"] #main-content {
             margin-left: 0;
-            margin-right: 18rem;
+            margin-right: 16rem;
         }
 
         [dir="rtl"] .sidebar {
@@ -96,7 +96,7 @@
         .card {
             background: var(--card);
             border: 1px solid var(--border);
-            border-radius: 1.5rem;
+            border-radius: 1.2rem;
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             height: 100%;
             display: flex;
@@ -122,8 +122,8 @@
         }
 
         .card:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
             border-color: var(--accent);
         }
 
@@ -193,9 +193,9 @@
 
         .code-block {
             background: var(--code-bg);
-            border-radius: 1rem;
+            border-radius: 0.8rem;
             font-family: 'Fira Code', monospace;
-            padding: 2rem;
+            padding: 1.2rem;
             color: #a9b1d6;
             overflow-x: auto;
             border: 1px solid var(--border);
@@ -207,28 +207,31 @@
         .code-block .line-numbers {
             position: absolute;
             left: 0;
-            top: 2rem;
-            padding: 0 0.75rem;
+            top: 1.2rem;
+            padding: 0 0.5rem;
             color: rgba(169, 177, 214, 0.25);
-            font-size: 0.7rem;
-            line-height: 1.65rem;
+            font-size: 0.65rem;
+            line-height: 1.55rem;
             user-select: none;
             border-right: 1px solid var(--border);
         }
 
         .code-block pre {
-            padding-left: 2.5rem;
+            padding-left: 2rem;
+            font-size: 0.8rem;
+            line-height: 1.55rem;
         }
 
         .nav-link {
-            padding: 0.85rem 1.2rem;
-            border-radius: 0.75rem;
+            padding: 0.6rem 1rem;
+            border-radius: 0.6rem;
             font-weight: 700;
+            font-size: 0.85rem;
             transition: all 0.3s ease;
             opacity: 0.55;
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.6rem;
             text-decoration: none;
             color: inherit;
             position: relative;
@@ -256,7 +259,7 @@
         .nav-link:hover {
             opacity: 1;
             background: rgba(59, 130, 246, 0.08);
-            padding-left: 1.5rem;
+            padding-left: 1.3rem;
         }
 
         .nav-link.active-link {
@@ -266,8 +269,8 @@
 
         .discord-banner {
             background: linear-gradient(135deg, #5865F2 0%, #3b82f6 50%, #7c3aed 100%);
-            border-radius: 2rem;
-            padding: 4rem;
+            border-radius: 1.5rem;
+            padding: 2.5rem;
             position: relative;
             overflow: hidden;
             border: 1px solid rgba(88, 101, 242, 0.4);
@@ -337,7 +340,7 @@
             content: '';
             position: absolute;
             inset: -2px;
-            border-radius: 1.7rem;
+            border-radius: 1.4rem;
             background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6);
             background-size: 300% 300%;
             animation: gradient-shift 6s ease infinite;
@@ -351,9 +354,9 @@
         }
 
         .lang-btn {
-            padding: 5px 14px;
+            padding: 4px 12px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
             border: 1px solid var(--border);
             transition: all 0.3s ease;
@@ -419,7 +422,7 @@
 
         .progress-bar-container {
             width: 100%;
-            height: 8px;
+            height: 6px;
             background: var(--border);
             border-radius: 10px;
             overflow: hidden;
@@ -450,9 +453,9 @@
             background: var(--card);
             border: 1px solid var(--border);
             color: var(--text);
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 10px;
             font-weight: 600;
             white-space: nowrap;
             transition: all 0.3s ease;
@@ -473,11 +476,12 @@
             display: inline-block;
             width: 100%;
             text-align: center;
-            padding: 0.85rem 1.5rem;
+            padding: 0.6rem 1rem;
             background: linear-gradient(135deg, #2563eb, #3b82f6);
             color: white;
-            border-radius: 0.85rem;
+            border-radius: 0.7rem;
             font-weight: 800;
+            font-size: 0.85rem;
             text-decoration: none;
             transition: all 0.35s ease;
             position: relative;
@@ -505,24 +509,24 @@
         }
 
         .section-divider {
-            width: 80px;
-            height: 4px;
+            width: 60px;
+            height: 3px;
             background: linear-gradient(90deg, var(--accent), transparent);
             border-radius: 4px;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .back-to-top {
             position: fixed;
             bottom: 2rem;
             right: 2rem;
-            width: 50px;
-            height: 50px;
+            width: 44px;
+            height: 44px;
             background: var(--accent);
             color: white;
             border: none;
             border-radius: 50%;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             cursor: pointer;
             z-index: 999;
             opacity: 0;
@@ -542,8 +546,8 @@
         }
 
         .status-dot {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             background: #22c55e;
             border-radius: 50%;
             display: inline-block;
@@ -552,13 +556,13 @@
 
         @keyframes pulse-dot {
             0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5); }
-            50% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+            50% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
         }
 
         .marquee-track {
             display: flex;
             animation: marquee 25s linear infinite;
-            gap: 3rem;
+            gap: 2rem;
         }
 
         @keyframes marquee {
@@ -567,12 +571,12 @@
         }
 
         .tech-badge {
-            padding: 0.5rem 1.25rem;
+            padding: 0.35rem 1rem;
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 2rem;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             white-space: nowrap;
             transition: all 0.3s ease;
         }
@@ -584,7 +588,7 @@
 
         .timeline-line {
             position: absolute;
-            left: 1.5rem;
+            left: 1.2rem;
             top: 0;
             bottom: 0;
             width: 2px;
@@ -593,47 +597,47 @@
 
         [dir="rtl"] .timeline-line {
             left: auto;
-            right: 1.5rem;
+            right: 1.2rem;
         }
 
         .timeline-dot {
-            width: 14px;
-            height: 14px;
+            width: 12px;
+            height: 12px;
             background: var(--accent);
             border-radius: 50%;
             position: absolute;
-            left: calc(1.5rem - 6px);
-            top: 1.5rem;
+            left: calc(1.2rem - 5px);
+            top: 1.2rem;
             z-index: 2;
             box-shadow: 0 0 0 4px var(--bg);
         }
 
         [dir="rtl"] .timeline-dot {
             left: auto;
-            right: calc(1.5rem - 6px);
+            right: calc(1.2rem - 5px);
         }
 
         .testimonial-card {
             background: var(--card);
             border: 1px solid var(--border);
-            border-radius: 1.5rem;
-            padding: 2.5rem;
+            border-radius: 1.2rem;
+            padding: 1.5rem;
             position: relative;
             transition: all 0.4s ease;
         }
 
         .testimonial-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
             border-color: var(--accent);
         }
 
         .testimonial-card::before {
             content: '\201C';
             position: absolute;
-            top: 0.8rem;
-            left: 1.5rem;
-            font-size: 4rem;
+            top: 0.5rem;
+            left: 1rem;
+            font-size: 2.5rem;
             color: var(--accent);
             opacity: 0.2;
             font-family: Georgia, serif;
@@ -642,13 +646,17 @@
 
         [dir="rtl"] .testimonial-card::before {
             left: auto;
-            right: 1.5rem;
+            right: 1rem;
         }
 
         .review-stars {
             color: #fbbf24;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+
+        .review-stars .empty-star {
+            color: var(--border);
         }
 
         @keyframes spin-slow {
@@ -681,12 +689,12 @@
         }
 
         .mobile-nav a {
-            padding: 0.6rem;
-            font-size: 1.3rem;
+            padding: 0.5rem;
+            font-size: 1.1rem;
             text-decoration: none;
             opacity: 0.6;
             transition: 0.3s;
-            border-radius: 0.75rem;
+            border-radius: 0.6rem;
         }
 
         .mobile-nav a:hover {
@@ -696,9 +704,9 @@
 
         .experience-badge {
             display: inline-block;
-            padding: 0.35rem 1rem;
+            padding: 0.25rem 0.8rem;
             border-radius: 2rem;
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             font-weight: 800;
             letter-spacing: 0.05em;
         }
@@ -717,7 +725,7 @@
 
         .reviews-grid {
             columns: 1;
-            column-gap: 1.5rem;
+            column-gap: 1rem;
         }
 
         @media (min-width: 768px) {
@@ -734,7 +742,7 @@
 
         .reviews-grid .testimonial-card {
             break-inside: avoid;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .scroll-progress {
@@ -765,7 +773,7 @@
 
         @keyframes ring-pulse {
             0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
-            50% { box-shadow: 0 0 0 12px rgba(59, 130, 246, 0); }
+            50% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
         }
     </style>
 </head>
@@ -774,19 +782,20 @@
     <div class="scroll-progress" id="scrollProgress"></div>
     <div class="particle-bg" id="particles"></div>
 
-    <aside class="w-72 sidebar p-8 flex flex-col fixed h-full z-50">
-        <div class="mb-14 flex items-center gap-3">
-            <div class="w-11 h-11 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center text-white font-black shadow-lg shadow-blue-500/20 text-lg glow-ring">K</div>
+    <!-- SIDEBAR -->
+    <aside class="w-64 sidebar p-6 flex flex-col fixed h-full z-50">
+        <div class="mb-10 flex items-center gap-3">
+            <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center text-white font-black shadow-lg shadow-blue-500/20 text-base glow-ring">K</div>
             <div>
-                <h1 class="text-xl font-black tracking-tighter leading-none">KAISER</h1>
+                <h1 class="text-lg font-black tracking-tighter leading-none">KAISER</h1>
                 <div class="flex items-center gap-2 mt-1">
                     <span class="status-dot"></span>
-                    <span class="text-[10px] font-bold uppercase tracking-widest opacity-50">Online</span>
+                    <span class="text-[9px] font-bold uppercase tracking-widest opacity-50">Online</span>
                 </div>
             </div>
         </div>
 
-        <nav class="flex-1 space-y-1">
+        <nav class="flex-1 space-y-0.5">
             <a href="#profile" class="nav-link" data-key="nav_dash" data-section="profile">🏠 Dashboard</a>
             <a href="#skills" class="nav-link" data-key="nav_skills" data-section="skills">⚡ Skills</a>
             <a href="#experience" class="nav-link" data-key="nav_exp" data-section="experience">🏆 Experience</a>
@@ -796,42 +805,43 @@
             <a href="#discord" class="nav-link" data-key="nav_discord" data-section="discord">🎮 Discord</a>
         </nav>
 
-        <div class="pt-6 border-t space-y-6" style="border-color: var(--border);">
+        <div class="pt-4 border-t space-y-4" style="border-color: var(--border);">
             <div>
-                <p class="text-[10px] font-bold uppercase mb-3 opacity-30 tracking-widest" data-key="label_lang">Language</p>
-                <div class="flex flex-wrap gap-2">
+                <p class="text-[9px] font-bold uppercase mb-2 opacity-30 tracking-widest" data-key="label_lang">Language</p>
+                <div class="flex flex-wrap gap-1.5">
                     <button onclick="changeLanguage('en')" id="btn-en" class="lang-btn active">EN</button>
                     <button onclick="changeLanguage('he')" id="btn-he" class="lang-btn">HE</button>
                     <button onclick="changeLanguage('es')" id="btn-es" class="lang-btn">ES</button>
                 </div>
             </div>
             <div>
-                <p class="text-[10px] font-bold uppercase mb-3 opacity-30 tracking-widest" data-key="label_theme">Theme</p>
-                <div class="flex gap-3">
+                <p class="text-[9px] font-bold uppercase mb-2 opacity-30 tracking-widest" data-key="label_theme">Theme</p>
+                <div class="flex gap-2">
                     <div class="tooltip-wrap">
-                        <button onclick="setTheme('theme-white')" class="w-7 h-7 rounded-full bg-white border-2 border-gray-300 hover:scale-125 transition-all duration-300"></button>
+                        <button onclick="setTheme('theme-white')" class="w-6 h-6 rounded-full bg-white border-2 border-gray-300 hover:scale-125 transition-all duration-300"></button>
                         <span class="tooltip-text">Light</span>
                     </div>
                     <div class="tooltip-wrap">
-                        <button onclick="setTheme('theme-black')" class="w-7 h-7 rounded-full bg-slate-900 border-2 border-gray-600 hover:scale-125 transition-all duration-300"></button>
+                        <button onclick="setTheme('theme-black')" class="w-6 h-6 rounded-full bg-slate-900 border-2 border-gray-600 hover:scale-125 transition-all duration-300"></button>
                         <span class="tooltip-text">Dark</span>
                     </div>
                     <div class="tooltip-wrap">
-                        <button onclick="setTheme('theme-blue')" class="w-7 h-7 rounded-full bg-blue-700 border-2 border-blue-400 hover:scale-125 transition-all duration-300"></button>
+                        <button onclick="setTheme('theme-blue')" class="w-6 h-6 rounded-full bg-blue-700 border-2 border-blue-400 hover:scale-125 transition-all duration-300"></button>
                         <span class="tooltip-text">Ocean</span>
                     </div>
                     <div class="tooltip-wrap">
-                        <button onclick="setTheme('theme-purple')" class="w-7 h-7 rounded-full bg-purple-600 border-2 border-purple-400 hover:scale-125 transition-all duration-300"></button>
+                        <button onclick="setTheme('theme-purple')" class="w-6 h-6 rounded-full bg-purple-600 border-2 border-purple-400 hover:scale-125 transition-all duration-300"></button>
                         <span class="tooltip-text">Amethyst</span>
                     </div>
                 </div>
             </div>
-            <div class="text-[10px] opacity-20 font-bold tracking-wider pt-2">
+            <div class="text-[9px] opacity-20 font-bold tracking-wider pt-1">
                 v2.4.1 &middot; 2025
             </div>
         </div>
     </aside>
 
+    <!-- MOBILE NAV -->
     <div class="mobile-nav">
         <a href="#profile">🏠</a>
         <a href="#skills">⚡</a>
@@ -842,35 +852,37 @@
         <a href="#discord">🎮</a>
     </div>
 
+    <!-- MAIN CONTENT -->
     <main class="flex-1 transition-all duration-500" id="main-content">
-        <div class="p-8 lg:p-16 xl:p-24">
+        <div class="p-6 lg:p-10 xl:p-14">
 
-            <section id="profile" style="padding-bottom: 16rem;">
-                <div class="mb-8 anim-up">
-                    <span class="text-sm font-bold tracking-widest uppercase opacity-40" data-key="hero_welcome">Welcome to my portfolio</span>
+            <!-- HERO -->
+            <section id="profile" class="pb-24">
+                <div class="mb-4 anim-up">
+                    <span class="text-xs font-bold tracking-widest uppercase opacity-40" data-key="hero_welcome">Welcome to my portfolio</span>
                 </div>
-                <h2 class="text-6xl lg:text-8xl font-black mb-8 leading-[0.95] anim-up wait-1">
+                <h2 class="text-4xl lg:text-6xl font-black mb-5 leading-[0.95] anim-up wait-1">
                     <span data-key="hero_1">Digital</span> <br>
                     <span class="shimmer-text" data-key="hero_2">Architect.</span><span class="typing-cursor"></span>
                 </h2>
-                <p class="text-xl opacity-50 mb-20 max-w-2xl leading-relaxed anim-up wait-2" data-key="hero_desc">Experienced Minecraft Developer specializing in high-performance server architecture, custom plugins, and next-level Skript development.</p>
+                <p class="text-base opacity-50 mb-12 max-w-2xl leading-relaxed anim-up wait-2" data-key="hero_desc">Experienced Minecraft Developer specializing in high-performance server architecture, custom plugins, and next-level Skript development.</p>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-                    <div class="card p-10 text-center anim-scale wait-1">
-                        <div class="text-5xl font-black text-blue-500 mb-2 stat-counter" data-target="8429">0</div>
-                        <div class="text-xs font-bold uppercase tracking-widest opacity-30 mt-2" data-key="stat_1">Downloads</div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
+                    <div class="card p-6 text-center anim-scale wait-1">
+                        <div class="text-3xl font-black text-blue-500 mb-1 stat-counter" data-target="8429">0</div>
+                        <div class="text-[10px] font-bold uppercase tracking-widest opacity-30 mt-1" data-key="stat_1">Downloads</div>
                     </div>
-                    <div class="card p-10 text-center anim-scale wait-2">
-                        <div class="text-5xl font-black text-blue-500 mb-2">4.2<span class="text-3xl">★</span></div>
-                        <div class="text-xs font-bold uppercase tracking-widest opacity-30 mt-2" data-key="stat_2">User Rating</div>
+                    <div class="card p-6 text-center anim-scale wait-2">
+                        <div class="text-3xl font-black text-blue-500 mb-1">4.2<span class="text-xl">★</span></div>
+                        <div class="text-[10px] font-bold uppercase tracking-widest opacity-30 mt-1" data-key="stat_2">User Rating</div>
                     </div>
-                    <div class="card p-10 text-center anim-scale wait-3">
-                        <div class="text-5xl font-black text-blue-500 mb-2">100<span class="text-3xl">%</span></div>
-                        <div class="text-xs font-bold uppercase tracking-widest opacity-30 mt-2" data-key="stat_3">Efficiency</div>
+                    <div class="card p-6 text-center anim-scale wait-3">
+                        <div class="text-3xl font-black text-blue-500 mb-1">100<span class="text-xl">%</span></div>
+                        <div class="text-[10px] font-bold uppercase tracking-widest opacity-30 mt-1" data-key="stat_3">Efficiency</div>
                     </div>
                 </div>
 
-                <div class="overflow-hidden py-8 anim-up wait-4" style="mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);">
+                <div class="overflow-hidden py-4 anim-up wait-4" style="mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);">
                     <div class="marquee-track">
                         <span class="tech-badge">☕ Java</span>
                         <span class="tech-badge">📜 Skript</span>
@@ -900,61 +912,62 @@
                 </div>
             </section>
 
-            <section id="skills" style="padding-bottom: 18rem;">
+            <!-- SKILLS -->
+            <section id="skills" class="pb-24">
                 <div class="section-divider anim-up"></div>
-                <span class="text-xs font-bold tracking-widest uppercase opacity-30 block mb-4 anim-up" data-key="skills_label">What I Work With</span>
-                <h2 class="text-5xl font-black mb-20 anim-up wait-1" data-key="skills_title">Skills & Expertise</h2>
+                <span class="text-xs font-bold tracking-widest uppercase opacity-30 block mb-3 anim-up" data-key="skills_label">What I Work With</span>
+                <h2 class="text-3xl font-black mb-12 anim-up wait-1" data-key="skills_title">Skills & Expertise</h2>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="anim-left wait-1">
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="font-bold text-lg">Java / Spigot</span>
-                            <span class="text-sm font-bold text-blue-400">95%</span>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-bold text-sm">Java / Spigot</span>
+                            <span class="text-xs font-bold text-blue-400">95%</span>
                         </div>
                         <div class="progress-bar-container">
                             <div class="progress-bar-fill" style="--target-width: 95%; background: linear-gradient(90deg, #3b82f6, #60a5fa);"></div>
                         </div>
                     </div>
                     <div class="anim-right wait-1">
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="font-bold text-lg">Skript</span>
-                            <span class="text-sm font-bold text-blue-400">98%</span>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-bold text-sm">Skript</span>
+                            <span class="text-xs font-bold text-blue-400">98%</span>
                         </div>
                         <div class="progress-bar-container">
                             <div class="progress-bar-fill" style="--target-width: 98%; background: linear-gradient(90deg, #8b5cf6, #a78bfa);"></div>
                         </div>
                     </div>
                     <div class="anim-left wait-2">
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="font-bold text-lg">Server Architecture</span>
-                            <span class="text-sm font-bold text-blue-400">90%</span>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-bold text-sm">Server Architecture</span>
+                            <span class="text-xs font-bold text-blue-400">90%</span>
                         </div>
                         <div class="progress-bar-container">
                             <div class="progress-bar-fill" style="--target-width: 90%; background: linear-gradient(90deg, #06b6d4, #22d3ee);"></div>
                         </div>
                     </div>
                     <div class="anim-right wait-2">
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="font-bold text-lg">Database Design</span>
-                            <span class="text-sm font-bold text-blue-400">85%</span>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-bold text-sm">Database Design</span>
+                            <span class="text-xs font-bold text-blue-400">85%</span>
                         </div>
                         <div class="progress-bar-container">
                             <div class="progress-bar-fill" style="--target-width: 85%; background: linear-gradient(90deg, #f59e0b, #fbbf24);"></div>
                         </div>
                     </div>
                     <div class="anim-left wait-3">
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="font-bold text-lg">Python</span>
-                            <span class="text-sm font-bold text-blue-400">80%</span>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-bold text-sm">Python</span>
+                            <span class="text-xs font-bold text-blue-400">80%</span>
                         </div>
                         <div class="progress-bar-container">
                             <div class="progress-bar-fill" style="--target-width: 80%; background: linear-gradient(90deg, #10b981, #34d399);"></div>
                         </div>
                     </div>
                     <div class="anim-right wait-3">
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="font-bold text-lg">Web Development</span>
-                            <span class="text-sm font-bold text-blue-400">75%</span>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-bold text-sm">Web Development</span>
+                            <span class="text-xs font-bold text-blue-400">75%</span>
                         </div>
                         <div class="progress-bar-container">
                             <div class="progress-bar-fill" style="--target-width: 75%; background: linear-gradient(90deg, #ec4899, #f472b6);"></div>
@@ -963,173 +976,175 @@
                 </div>
             </section>
 
-            <section id="experience" style="padding-bottom: 18rem;">
+            <!-- EXPERIENCE -->
+            <section id="experience" class="pb-24">
                 <div class="section-divider anim-up"></div>
-                <span class="text-xs font-bold tracking-widest uppercase opacity-30 block mb-4 anim-up" data-key="exp_label">Where I've Been</span>
-                <h2 class="text-5xl font-black mb-20 anim-up wait-1" data-key="exp_title">Staff Journey</h2>
+                <span class="text-xs font-bold tracking-widest uppercase opacity-30 block mb-3 anim-up" data-key="exp_label">Where I've Been</span>
+                <h2 class="text-3xl font-black mb-12 anim-up wait-1" data-key="exp_title">Staff Journey</h2>
 
-                <div class="relative" style="padding-left: 4rem;">
+                <div class="relative" style="padding-left: 3rem;">
                     <div class="timeline-line"></div>
 
-                    <div class="relative mb-20 anim-left wait-1">
+                    <div class="relative mb-10 anim-left wait-1">
                         <div class="timeline-dot"></div>
-                        <div class="card p-8">
-                            <div class="flex items-start justify-between flex-wrap gap-4 mb-4">
+                        <div class="card p-5">
+                            <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
                                 <div>
-                                    <h3 class="text-2xl font-black">ShakeBox</h3>
-                                    <span class="experience-badge badge-owner mt-2" data-key="role_owner">OWNER</span>
+                                    <h3 class="text-lg font-black">ShakeBox</h3>
+                                    <span class="experience-badge badge-owner mt-1" data-key="role_owner">OWNER</span>
                                 </div>
-                                <span class="text-xs font-bold opacity-30">2024 - Present</span>
+                                <span class="text-[10px] font-bold opacity-30">2024 - Present</span>
                             </div>
-                            <p class="opacity-50 text-sm mb-5 leading-relaxed" data-key="shake_desc">Founded and managing a growing Minecraft community server with custom gameplay features and dedicated player base.</p>
-                            <a href="https://discord.gg/Fh54yGNazT" target="_blank" class="text-blue-400 font-bold text-sm hover:text-blue-300 transition-colors">Join Discord →</a>
+                            <p class="opacity-50 text-xs mb-3 leading-relaxed" data-key="shake_desc">Founded and managing a growing Minecraft community server with custom gameplay features and dedicated player base.</p>
+                            <a href="https://discord.gg/Fh54yGNazT" target="_blank" class="text-blue-400 font-bold text-xs hover:text-blue-300 transition-colors">Join Discord →</a>
                         </div>
                     </div>
 
-                    <div class="relative mb-20 anim-left wait-2">
+                    <div class="relative mb-10 anim-left wait-2">
                         <div class="timeline-dot"></div>
-                        <div class="card p-8">
-                            <div class="flex items-start justify-between flex-wrap gap-4 mb-4">
+                        <div class="card p-5">
+                            <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
                                 <div>
-                                    <h3 class="text-2xl font-black">SwiftBox</h3>
-                                    <span class="experience-badge badge-owner mt-2" data-key="role_owner2">OWNER</span>
+                                    <h3 class="text-lg font-black">SwiftBox</h3>
+                                    <span class="experience-badge badge-owner mt-1" data-key="role_owner2">OWNER</span>
                                 </div>
-                                <span class="text-xs font-bold opacity-30">2024 - Present</span>
+                                <span class="text-[10px] font-bold opacity-30">2024 - Present</span>
                             </div>
-                            <p class="opacity-50 text-sm mb-5 leading-relaxed" data-key="swift_desc">Built from scratch with optimized performance, custom economy system, and unique game modes.</p>
-                            <a href="https://discord.gg/4d2fEQQ2Vu" target="_blank" class="text-blue-400 font-bold text-sm hover:text-blue-300 transition-colors">Join Discord →</a>
+                            <p class="opacity-50 text-xs mb-3 leading-relaxed" data-key="swift_desc">Built from scratch with optimized performance, custom economy system, and unique game modes.</p>
+                            <a href="https://discord.gg/4d2fEQQ2Vu" target="_blank" class="text-blue-400 font-bold text-xs hover:text-blue-300 transition-colors">Join Discord →</a>
                         </div>
                     </div>
 
-                    <div class="relative mb-20 anim-left wait-3">
+                    <div class="relative mb-10 anim-left wait-3">
                         <div class="timeline-dot"></div>
-                        <div class="card p-8">
-                            <div class="flex items-start justify-between flex-wrap gap-4 mb-4">
+                        <div class="card p-5">
+                            <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
                                 <div>
-                                    <h3 class="text-2xl font-black">AscendBox</h3>
-                                    <span class="experience-badge badge-dev mt-2" data-key="role_dev">DEVELOPER</span>
+                                    <h3 class="text-lg font-black">AscendBox</h3>
+                                    <span class="experience-badge badge-dev mt-1" data-key="role_dev">DEVELOPER</span>
                                 </div>
-                                <span class="text-xs font-bold opacity-30">2023 - 2024</span>
+                                <span class="text-[10px] font-bold opacity-30">2023 - 2024</span>
                             </div>
-                            <p class="opacity-50 text-sm mb-5 leading-relaxed" data-key="ascend_desc">Developed core gameplay plugins and systems including custom enchants, crate mechanics, and anti-cheat integration.</p>
-                            <a href="https://discord.gg/ascendbox" target="_blank" class="text-purple-400 font-bold text-sm hover:text-purple-300 transition-colors">Join Discord →</a>
+                            <p class="opacity-50 text-xs mb-3 leading-relaxed" data-key="ascend_desc">Developed core gameplay plugins and systems including custom enchants, crate mechanics, and anti-cheat integration.</p>
+                            <a href="https://discord.gg/ascendbox" target="_blank" class="text-purple-400 font-bold text-xs hover:text-purple-300 transition-colors">Join Discord →</a>
                         </div>
                     </div>
 
-                    <div class="relative mb-8 anim-left wait-4">
+                    <div class="relative mb-4 anim-left wait-4">
                         <div class="timeline-dot"></div>
-                        <div class="card p-8">
-                            <div class="flex items-start justify-between flex-wrap gap-4 mb-4">
+                        <div class="card p-5">
+                            <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
                                 <div>
-                                    <h3 class="text-2xl font-black">IceBox</h3>
-                                    <span class="experience-badge badge-dev mt-2" data-key="role_dev2">DEVELOPER</span>
+                                    <h3 class="text-lg font-black">IceBox</h3>
+                                    <span class="experience-badge badge-dev mt-1" data-key="role_dev2">DEVELOPER</span>
                                 </div>
-                                <span class="text-xs font-bold opacity-30">2023</span>
+                                <span class="text-[10px] font-bold opacity-30">2023</span>
                             </div>
-                            <p class="opacity-50 text-sm mb-5 leading-relaxed" data-key="ice_desc">Contributed to server infrastructure, wrote performance-critical Skript addons, and improved server stability.</p>
-                            <a href="https://discord.gg/icebox" target="_blank" class="text-purple-400 font-bold text-sm hover:text-purple-300 transition-colors">Join Discord →</a>
+                            <p class="opacity-50 text-xs mb-3 leading-relaxed" data-key="ice_desc">Contributed to server infrastructure, wrote performance-critical Skript addons, and improved server stability.</p>
+                            <a href="https://discord.gg/icebox" target="_blank" class="text-purple-400 font-bold text-xs hover:text-purple-300 transition-colors">Join Discord →</a>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section id="projects" style="padding-bottom: 18rem;">
+            <!-- PROJECTS -->
+            <section id="projects" class="pb-24">
                 <div class="section-divider anim-up"></div>
-                <span class="text-xs font-bold tracking-widest uppercase opacity-30 block mb-4 anim-up" data-key="proj_label">Stuff I've Built</span>
-                <h2 class="text-5xl font-black mb-6 anim-up wait-1" data-key="proj_title">Featured Projects</h2>
-                <p class="opacity-40 text-lg mb-20 max-w-xl anim-up wait-2" data-key="proj_sub">Production-ready scripts and plugins, downloaded by thousands of server owners worldwide.</p>
+                <span class="text-xs font-bold tracking-widest uppercase opacity-30 block mb-3 anim-up" data-key="proj_label">Stuff I've Built</span>
+                <h2 class="text-3xl font-black mb-4 anim-up wait-1" data-key="proj_title">Featured Projects</h2>
+                <p class="opacity-40 text-sm mb-12 max-w-xl anim-up wait-2" data-key="proj_sub">Production-ready scripts and plugins, downloaded by thousands of server owners worldwide.</p>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="card gradient-border p-8 anim-scale wait-1">
-                        <div class="flex items-center gap-3 mb-4">
-                            <span class="text-3xl hover-wiggle">📦</span>
-                            <h3 class="text-xl font-black">AutoPickup</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <div class="card gradient-border p-5 anim-scale wait-1">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-2xl hover-wiggle">📦</span>
+                            <h3 class="text-base font-black">AutoPickup</h3>
                         </div>
-                        <p class="opacity-50 text-sm mb-3 flex-1 leading-relaxed" data-key="auto_desc">Automatic item collection with smart inventory full alerts and configurable drop filters.</p>
-                        <div class="flex gap-2 mb-6 flex-wrap">
-                            <span class="text-[10px] font-bold px-2 py-1 rounded-full opacity-40" style="background: var(--border);">Skript</span>
-                            <span class="text-[10px] font-bold px-2 py-1 rounded-full opacity-40" style="background: var(--border);">v1.2</span>
+                        <p class="opacity-50 text-xs mb-2 flex-1 leading-relaxed" data-key="auto_desc">Automatic item collection with smart inventory full alerts and configurable drop filters.</p>
+                        <div class="flex gap-2 mb-4 flex-wrap">
+                            <span class="text-[9px] font-bold px-2 py-0.5 rounded-full opacity-40" style="background: var(--border);">Skript</span>
+                            <span class="text-[9px] font-bold px-2 py-0.5 rounded-full opacity-40" style="background: var(--border);">v1.2</span>
                         </div>
                         <a href="autopickup.sk" download class="download-btn">⬇ Download .sk</a>
                     </div>
 
-                    <div class="card gradient-border p-8 anim-scale wait-2">
-                        <div class="flex items-center gap-3 mb-4">
-                            <span class="text-3xl hover-wiggle">🛡️</span>
-                            <h3 class="text-xl font-black">StaffMode</h3>
+                    <div class="card gradient-border p-5 anim-scale wait-2">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-2xl hover-wiggle">🛡️</span>
+                            <h3 class="text-base font-black">StaffMode</h3>
                         </div>
-                        <p class="opacity-50 text-sm mb-3 flex-1 leading-relaxed" data-key="staff_desc">Full moderation suite with vanish, freeze, inspector tools, and staff chat integration.</p>
-                        <div class="flex gap-2 mb-6 flex-wrap">
-                            <span class="text-[10px] font-bold px-2 py-1 rounded-full opacity-40" style="background: var(--border);">Skript</span>
-                            <span class="text-[10px] font-bold px-2 py-1 rounded-full opacity-40" style="background: var(--border);">v3.1</span>
+                        <p class="opacity-50 text-xs mb-2 flex-1 leading-relaxed" data-key="staff_desc">Full moderation suite with vanish, freeze, inspector tools, and staff chat integration.</p>
+                        <div class="flex gap-2 mb-4 flex-wrap">
+                            <span class="text-[9px] font-bold px-2 py-0.5 rounded-full opacity-40" style="background: var(--border);">Skript</span>
+                            <span class="text-[9px] font-bold px-2 py-0.5 rounded-full opacity-40" style="background: var(--border);">v3.1</span>
                         </div>
                         <a href="staffmode.sk" download class="download-btn">⬇ Download .sk</a>
                     </div>
 
-                    <div class="card gradient-border p-8 anim-scale wait-3">
-                        <div class="flex items-center gap-3 mb-4">
-                            <span class="text-3xl hover-wiggle">🏷️</span>
-                            <h3 class="text-xl font-black">Tag System</h3>
+                    <div class="card gradient-border p-5 anim-scale wait-3">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-2xl hover-wiggle">🏷️</span>
+                            <h3 class="text-base font-black">Tag System</h3>
                         </div>
-                        <p class="opacity-50 text-sm mb-3 flex-1 leading-relaxed" data-key="tag_desc">Advanced chat tag system with GUI selector, custom colors, and permission-based unlocks.</p>
-                        <div class="flex gap-2 mb-6 flex-wrap">
-                            <span class="text-[10px] font-bold px-2 py-1 rounded-full opacity-40" style="background: var(--border);">Skript</span>
-                            <span class="text-[10px] font-bold px-2 py-1 rounded-full opacity-40" style="background: var(--border);">v2.0</span>
+                        <p class="opacity-50 text-xs mb-2 flex-1 leading-relaxed" data-key="tag_desc">Advanced chat tag system with GUI selector, custom colors, and permission-based unlocks.</p>
+                        <div class="flex gap-2 mb-4 flex-wrap">
+                            <span class="text-[9px] font-bold px-2 py-0.5 rounded-full opacity-40" style="background: var(--border);">Skript</span>
+                            <span class="text-[9px] font-bold px-2 py-0.5 rounded-full opacity-40" style="background: var(--border);">v2.0</span>
                         </div>
                         <a href="tag.sk" download class="download-btn">⬇ Download .sk</a>
                     </div>
 
-                    <div class="card gradient-border p-8 anim-scale wait-4">
-                        <div class="flex items-center gap-3 mb-4">
-                            <span class="text-3xl hover-wiggle">🏪</span>
-                            <h3 class="text-xl font-black">Auction House</h3>
+                    <div class="card gradient-border p-5 anim-scale wait-4">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-2xl hover-wiggle">🏪</span>
+                            <h3 class="text-base font-black">Auction House</h3>
                         </div>
-                        <p class="opacity-50 text-sm mb-3 flex-1 leading-relaxed" data-key="ah_desc">Optimized Auction House system with search, categories, and bid history tracking.</p>
-                        <div class="flex gap-2 mb-6 flex-wrap">
-                            <span class="text-[10px] font-bold px-2 py-1 rounded-full opacity-40" style="background: var(--border);">Skript</span>
-                            <span class="text-[10px] font-bold px-2 py-1 rounded-full opacity-40" style="background: var(--border);">v1.8</span>
+                        <p class="opacity-50 text-xs mb-2 flex-1 leading-relaxed" data-key="ah_desc">Optimized Auction House system with search, categories, and bid history tracking.</p>
+                        <div class="flex gap-2 mb-4 flex-wrap">
+                            <span class="text-[9px] font-bold px-2 py-0.5 rounded-full opacity-40" style="background: var(--border);">Skript</span>
+                            <span class="text-[9px] font-bold px-2 py-0.5 rounded-full opacity-40" style="background: var(--border);">v1.8</span>
                         </div>
                         <a href="ah.sk" download class="download-btn">⬇ Download .sk</a>
                     </div>
 
-                    <div class="card gradient-border p-8 anim-scale wait-5">
-                        <div class="flex items-center gap-3 mb-4">
-                            <span class="text-3xl hover-wiggle">🔑</span>
-                            <h3 class="text-xl font-black">Key All</h3>
+                    <div class="card gradient-border p-5 anim-scale wait-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-2xl hover-wiggle">🔑</span>
+                            <h3 class="text-base font-black">Key All</h3>
                         </div>
-                        <p class="opacity-50 text-sm mb-3 flex-1 leading-relaxed" data-key="key_desc">Global reward distribution system with customizable crate keys and broadcast alerts.</p>
-                        <div class="flex gap-2 mb-6 flex-wrap">
-                            <span class="text-[10px] font-bold px-2 py-1 rounded-full opacity-40" style="background: var(--border);">Skript</span>
-                            <span class="text-[10px] font-bold px-2 py-1 rounded-full opacity-40" style="background: var(--border);">v1.0</span>
+                        <p class="opacity-50 text-xs mb-2 flex-1 leading-relaxed" data-key="key_desc">Global reward distribution system with customizable crate keys and broadcast alerts.</p>
+                        <div class="flex gap-2 mb-4 flex-wrap">
+                            <span class="text-[9px] font-bold px-2 py-0.5 rounded-full opacity-40" style="background: var(--border);">Skript</span>
+                            <span class="text-[9px] font-bold px-2 py-0.5 rounded-full opacity-40" style="background: var(--border);">v1.0</span>
                         </div>
                         <a href="Keyall.sk" download class="download-btn">⬇ Download .sk</a>
                     </div>
 
-                    <div class="card p-8 anim-scale wait-6" style="border-style: dashed; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1rem;">
-                        <span class="text-5xl opacity-20 spin-slow">🚧</span>
-                        <span class="font-bold opacity-30 text-center" data-key="proj_more">More projects coming soon...</span>
+                    <div class="card p-5 anim-scale wait-6" style="border-style: dashed; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 0.75rem;">
+                        <span class="text-4xl opacity-20 spin-slow">🚧</span>
+                        <span class="font-bold opacity-30 text-center text-sm" data-key="proj_more">More projects coming soon...</span>
                     </div>
                 </div>
             </section>
 
-            <section id="showcase" style="padding-bottom: 18rem;">
+            <!-- CODE SHOWCASE -->
+            <section id="showcase" class="pb-24">
                 <div class="section-divider anim-up"></div>
-                <span class="text-xs font-bold tracking-widest uppercase opacity-30 block mb-4 anim-up" data-key="code_label">Under The Hood</span>
-                <h2 class="text-5xl font-black mb-20 anim-up wait-1" data-key="code_title">Code Showcase</h2>
+                <span class="text-xs font-bold tracking-widest uppercase opacity-30 block mb-3 anim-up" data-key="code_label">Under The Hood</span>
+                <h2 class="text-3xl font-black mb-12 anim-up wait-1" data-key="code_title">Code Showcase</h2>
 
-                <div class="space-y-16">
+                <div class="space-y-10">
                     <div class="anim-rotate wait-1">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                            <span class="text-xs font-bold opacity-30 ml-3">MyPlugin.java</span>
+                        <div class="flex items-center gap-2 mb-3">
+                            <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+                            <span class="text-[10px] font-bold opacity-30 ml-2">MyPlugin.java</span>
                         </div>
-                        <div class="code-block text-sm">
+                        <div class="code-block text-xs">
                             <div class="line-numbers">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12</div>
 <pre>
 <span style="color:#bb9af7">public class</span> <span style="color:#7aa2f7">MyPlugin</span> <span style="color:#bb9af7">extends</span> <span style="color:#2ac3de">JavaPlugin</span> <span style="color:#bb9af7">implements</span> <span style="color:#2ac3de">Listener</span> {
-
     <span style="color:#7aa2f7">@Override</span>
     <span style="color:#bb9af7">public void</span> <span style="color:#7aa2f7">onEnable</span>() {
         <span style="color:#2ac3de">Bukkit</span>.getPluginManager().registerEvents(<span style="color:#ff9e64">this</span>, <span style="color:#ff9e64">this</span>);
@@ -1146,13 +1161,13 @@
                     </div>
 
                     <div class="anim-rotate wait-2">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                            <span class="text-xs font-bold opacity-30 ml-3">autopickup.sk</span>
+                        <div class="flex items-center gap-2 mb-3">
+                            <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+                            <span class="text-[10px] font-bold opacity-30 ml-2">autopickup.sk</span>
                         </div>
-                        <div class="code-block text-sm">
+                        <div class="code-block text-xs">
                             <div class="line-numbers">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9</div>
 <pre>
 <span style="color:#bb9af7">on</span> <span style="color:#7aa2f7">break</span>:
@@ -1170,223 +1185,252 @@
                 </div>
             </section>
 
-            <section id="testimonials" style="padding-bottom: 18rem;">
+            <!-- REVIEWS -->
+            <section id="testimonials" class="pb-24">
                 <div class="section-divider anim-up"></div>
-                <span class="text-xs font-bold tracking-widest uppercase opacity-30 block mb-4 anim-up" data-key="test_label">What People Say</span>
-                <h2 class="text-5xl font-black mb-6 anim-up wait-1" data-key="test_title">Reviews</h2>
-                <p class="opacity-40 text-lg mb-20 max-w-xl anim-up wait-2" data-key="test_sub">Real feedback from server owners and admins who use my work.</p>
+                <span class="text-xs font-bold tracking-widest uppercase opacity-30 block mb-3 anim-up" data-key="test_label">What People Say</span>
+                <h2 class="text-3xl font-black mb-4 anim-up wait-1" data-key="test_title">Reviews</h2>
+                <p class="opacity-40 text-sm mb-12 max-w-xl anim-up wait-2" data-key="test_sub">Real feedback from server owners and admins who use my work.</p>
 
                 <div class="reviews-grid">
 
                     <div class="testimonial-card anim-scale wait-1">
-                        <p class="opacity-60 text-sm leading-relaxed mb-6 pt-6">Bought the StaffMode skript and it worked perfectly out of the box. No config issues, no errors. Just clean code. Really impressed.</p>
-                        <div class="review-stars mb-3">★★★★★</div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-black text-sm">M</div>
-                            <div><p class="font-bold text-sm">MineKing</p><p class="text-xs opacity-30">Server Owner</p></div>
+                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Bought the StaffMode skript and it worked perfectly out of the box. No config issues, no errors. Just clean code. Really impressed.</p>
+                        <div class="review-stars mb-2">★★★★★</div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-black text-xs">M</div>
+                            <div><p class="font-bold text-xs">MineKing</p><p class="text-[10px] opacity-30">Server Owner</p></div>
                         </div>
                     </div>
 
                     <div class="testimonial-card anim-scale wait-2">
-                        <p class="opacity-60 text-sm leading-relaxed mb-6 pt-6">The AutoPickup script saved us so much lag from item entities on the ground. Players love it too. Super smooth experience.</p>
-                        <div class="review-stars mb-3">★★★★★</div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center text-white font-black text-sm">Z</div>
-                            <div><p class="font-bold text-sm">ZephyrMC</p><p class="text-xs opacity-30">Admin</p></div>
+                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">The AutoPickup script saved us so much lag from item entities on the ground. Players love it too. Super smooth experience.</p>
+                        <div class="review-stars mb-2">★★★★★</div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center text-white font-black text-xs">Z</div>
+                            <div><p class="font-bold text-xs">ZephyrMC</p><p class="text-[10px] opacity-30">Admin</p></div>
                         </div>
                     </div>
 
                     <div class="testimonial-card anim-scale wait-3">
-                        <p class="opacity-60 text-sm leading-relaxed mb-6 pt-6">Got custom work done for our network. Communication was great and delivery was fast. Kaiser knows his stuff.</p>
-                        <div class="review-stars mb-3">★★★★★</div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white font-black text-sm">R</div>
-                            <div><p class="font-bold text-sm">RaidNetwork</p><p class="text-xs opacity-30">Network Owner</p></div>
+                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Got custom work done for our network. Communication was great and delivery was fast. Kaiser knows his stuff.</p>
+                        <div class="review-stars mb-2">★★★★<span class="empty-star">★</span></div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white font-black text-xs">R</div>
+                            <div><p class="font-bold text-xs">RaidNetwork</p><p class="text-[10px] opacity-30">Network Owner</p></div>
                         </div>
                     </div>
 
                     <div class="testimonial-card anim-scale wait-1">
-                        <p class="opacity-60 text-sm leading-relaxed mb-6 pt-6">The Auction House skript is cleaner than most paid Java plugins I've tried. Seriously underrated developer.</p>
-                        <div class="review-stars mb-3">★★★★★</div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center text-white font-black text-sm">D</div>
-                            <div><p class="font-bold text-sm">DarkFire</p><p class="text-xs opacity-30">Server Owner</p></div>
+                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">The Auction House skript is cleaner than most paid Java plugins I've tried. Seriously underrated developer.</p>
+                        <div class="review-stars mb-2">★★★★★</div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center text-white font-black text-xs">D</div>
+                            <div><p class="font-bold text-xs">DarkFire</p><p class="text-[10px] opacity-30">Server Owner</p></div>
                         </div>
                     </div>
 
                     <div class="testimonial-card anim-scale wait-2">
-                        <p class="opacity-60 text-sm leading-relaxed mb-6 pt-6">We needed a custom crate system and Kaiser delivered it in under 2 days. Clean, configurable, no bugs. Will order again.</p>
-                        <div class="review-stars mb-3">★★★★★</div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center text-white font-black text-sm">V</div>
-                            <div><p class="font-bold text-sm">VortexPvP</p><p class="text-xs opacity-30">Owner</p></div>
+                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Script took a bit to configure but once it was set up it worked fine. Would've liked better docs. Still decent overall.</p>
+                        <div class="review-stars mb-2">★★★<span class="empty-star">★★</span></div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center text-white font-black text-xs">Q</div>
+                            <div><p class="font-bold text-xs">QuickMC</p><p class="text-[10px] opacity-30">Admin</p></div>
                         </div>
                     </div>
 
                     <div class="testimonial-card anim-scale wait-3">
-                        <p class="opacity-60 text-sm leading-relaxed mb-6 pt-6">Tried 3 other tag systems before finding Kaiser's. This one actually works properly with LuckPerms. Finally.</p>
-                        <div class="review-stars mb-3">★★★★☆</div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-600 flex items-center justify-center text-white font-black text-sm">L</div>
-                            <div><p class="font-bold text-sm">LunarCraft</p><p class="text-xs opacity-30">Admin</p></div>
+                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Tried 3 other tag systems before finding Kaiser's. This one actually works properly with LuckPerms. Finally.</p>
+                        <div class="review-stars mb-2">★★★★<span class="empty-star">★</span></div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-600 flex items-center justify-center text-white font-black text-xs">L</div>
+                            <div><p class="font-bold text-xs">LunarCraft</p><p class="text-[10px] opacity-30">Admin</p></div>
                         </div>
                     </div>
 
                     <div class="testimonial-card anim-scale wait-1">
-                        <p class="opacity-60 text-sm leading-relaxed mb-6 pt-6">Best Skript developer I've worked with. Fast response times and actually listens to what you want. Rare combo.</p>
-                        <div class="review-stars mb-3">★★★★★</div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center text-white font-black text-sm">S</div>
-                            <div><p class="font-bold text-sm">SkyRealm</p><p class="text-xs opacity-30">Server Owner</p></div>
+                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Best Skript developer I've worked with. Fast response times and actually listens to what you want. Rare combo.</p>
+                        <div class="review-stars mb-2">★★★★★</div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center text-white font-black text-xs">S</div>
+                            <div><p class="font-bold text-xs">SkyRealm</p><p class="text-[10px] opacity-30">Server Owner</p></div>
                         </div>
                     </div>
 
                     <div class="testimonial-card anim-scale wait-2">
-                        <p class="opacity-60 text-sm leading-relaxed mb-6 pt-6">Downloaded the Key All system. Setup took literally 2 minutes. My players go crazy every time we do a keyall event now lol.</p>
-                        <div class="review-stars mb-3">★★★★★</div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-white font-black text-sm">N</div>
-                            <div><p class="font-bold text-sm">NovaMC</p><p class="text-xs opacity-30">Owner</p></div>
+                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Had some compatibility issues with our setup. Kaiser helped fix it but it took a couple days. End result was good though.</p>
+                        <div class="review-stars mb-2">★★★★<span class="empty-star">★</span></div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-white font-black text-xs">N</div>
+                            <div><p class="font-bold text-xs">NovaMC</p><p class="text-[10px] opacity-30">Owner</p></div>
                         </div>
                     </div>
 
                     <div class="testimonial-card anim-scale wait-3">
-                        <p class="opacity-60 text-sm leading-relaxed mb-6 pt-6">We migrated our entire staff tools to Kaiser's StaffMode. The freeze system and vanish are way better than what we had before.</p>
-                        <div class="review-stars mb-3">★★★★★</div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center text-white font-black text-sm">A</div>
-                            <div><p class="font-bold text-sm">ArcadePvP</p><p class="text-xs opacity-30">Manager</p></div>
+                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">We migrated our entire staff tools to Kaiser's StaffMode. The freeze system and vanish are way better than what we had before.</p>
+                        <div class="review-stars mb-2">★★★★★</div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center text-white font-black text-xs">A</div>
+                            <div><p class="font-bold text-xs">ArcadePvP</p><p class="text-[10px] opacity-30">Manager</p></div>
                         </div>
                     </div>
 
                     <div class="testimonial-card anim-scale wait-1">
-                        <p class="opacity-60 text-sm leading-relaxed mb-6 pt-6">Kaiser helped us set up our entire server from zero. Economy, ranks, custom items, everything. Dude is a machine.</p>
-                        <div class="review-stars mb-3">★★★★★</div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white font-black text-sm">B</div>
-                            <div><p class="font-bold text-sm">BlitzSMP</p><p class="text-xs opacity-30">Owner</p></div>
+                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">It's okay. Basic functionality works but I expected more features for the price. Might update my review later if more stuff gets added.</p>
+                        <div class="review-stars mb-2">★★<span class="empty-star">★★★</span></div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-slate-400 to-slate-600 flex items-center justify-center text-white font-black text-xs">O</div>
+                            <div><p class="font-bold text-xs">OmegaSMP</p><p class="text-[10px] opacity-30">Owner</p></div>
                         </div>
                     </div>
 
                     <div class="testimonial-card anim-scale wait-2">
-                        <p class="opacity-60 text-sm leading-relaxed mb-6 pt-6">Needed an urgent fix for our auction house at 2am. Kaiser was online and fixed it within the hour. Absolute legend.</p>
-                        <div class="review-stars mb-3">★★★★★</div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-rose-400 to-rose-600 flex items-center justify-center text-white font-black text-sm">F</div>
-                            <div><p class="font-bold text-sm">FrostBite</p><p class="text-xs opacity-30">Admin</p></div>
+                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Kaiser helped us set up our entire server from zero. Economy, ranks, custom items, everything. Dude is a machine.</p>
+                        <div class="review-stars mb-2">★★★★★</div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white font-black text-xs">B</div>
+                            <div><p class="font-bold text-xs">BlitzSMP</p><p class="text-[10px] opacity-30">Owner</p></div>
                         </div>
                     </div>
 
                     <div class="testimonial-card anim-scale wait-3">
-                        <p class="opacity-60 text-sm leading-relaxed mb-6 pt-6">The code quality is actually insane for Skript. Proper variable management, no redundant triggers. Professional level stuff.</p>
-                        <div class="review-stars mb-3">★★★★★</div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-white font-black text-sm">C</div>
-                            <div><p class="font-bold text-sm">CodedMC</p><p class="text-xs opacity-30">Developer</p></div>
+                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Needed an urgent fix for our auction house at 2am. Kaiser was online and fixed it within the hour. Absolute legend.</p>
+                        <div class="review-stars mb-2">★★★★★</div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-rose-400 to-rose-600 flex items-center justify-center text-white font-black text-xs">F</div>
+                            <div><p class="font-bold text-xs">FrostBite</p><p class="text-[10px] opacity-30">Admin</p></div>
                         </div>
                     </div>
 
                     <div class="testimonial-card anim-scale wait-1">
-                        <p class="opacity-60 text-sm leading-relaxed mb-6 pt-6">Running Kaiser's scripts on a 200 player server. Zero issues. They handle high load like a champ compared to other skripts I tried.</p>
-                        <div class="review-stars mb-3">★★★★★</div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-violet-400 to-violet-600 flex items-center justify-center text-white font-black text-sm">T</div>
-                            <div><p class="font-bold text-sm">TitanNetwork</p><p class="text-xs opacity-30">Network Owner</p></div>
+                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Not bad but the script conflicted with another plugin we use. Had to do some manual tweaking. Works now though.</p>
+                        <div class="review-stars mb-2">★★★<span class="empty-star">★★</span></div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-white font-black text-xs">I</div>
+                            <div><p class="font-bold text-xs">IronForge</p><p class="text-[10px] opacity-30">Developer</p></div>
                         </div>
                     </div>
 
                     <div class="testimonial-card anim-scale wait-2">
-                        <p class="opacity-60 text-sm leading-relaxed mb-6 pt-6">Hired Kaiser for a custom minigame. He built the whole thing in like 4 days. Lobby system, teams, scoreboards, everything. Crazy fast.</p>
-                        <div class="review-stars mb-3">★★★★★</div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-white font-black text-sm">G</div>
-                            <div><p class="font-bold text-sm">GameZone</p><p class="text-xs opacity-30">Owner</p></div>
+                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">The code quality is actually insane for Skript. Proper variable management, no redundant triggers. Professional level stuff.</p>
+                        <div class="review-stars mb-2">★★★★★</div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-white font-black text-xs">C</div>
+                            <div><p class="font-bold text-xs">CodedMC</p><p class="text-[10px] opacity-30">Developer</p></div>
                         </div>
                     </div>
 
                     <div class="testimonial-card anim-scale wait-3">
-                        <p class="opacity-60 text-sm leading-relaxed mb-6 pt-6">Finally someone who writes clean Skript. No spaghetti code, proper functions, good documentation. Easy to customize if you need to.</p>
-                        <div class="review-stars mb-3">★★★★☆</div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-sky-400 to-sky-600 flex items-center justify-center text-white font-black text-sm">P</div>
-                            <div><p class="font-bold text-sm">PixelWorld</p><p class="text-xs opacity-30">Developer</p></div>
+                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Running Kaiser's scripts on a 200 player server. Zero issues. They handle high load like a champ compared to other skripts I tried.</p>
+                        <div class="review-stars mb-2">★★★★★</div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-violet-400 to-violet-600 flex items-center justify-center text-white font-black text-xs">T</div>
+                            <div><p class="font-bold text-xs">TitanNetwork</p><p class="text-[10px] opacity-30">Network Owner</p></div>
                         </div>
                     </div>
 
                     <div class="testimonial-card anim-scale wait-1">
-                        <p class="opacity-60 text-sm leading-relaxed mb-6 pt-6">Our players constantly compliment the tag system. The GUI is super clean and the colors look great in chat. Nice work.</p>
-                        <div class="review-stars mb-3">★★★★★</div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-lime-400 to-lime-600 flex items-center justify-center text-white font-black text-sm">W</div>
-                            <div><p class="font-bold text-sm">WildSurvival</p><p class="text-xs opacity-30">Owner</p></div>
+                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Honestly didn't work on my server at all. Might be a version issue. No response to my DM yet. Updating if it gets fixed.</p>
+                        <div class="review-stars mb-2">★<span class="empty-star">★★★★</span></div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center text-white font-black text-xs">U</div>
+                            <div><p class="font-bold text-xs">UltraPvP</p><p class="text-[10px] opacity-30">Owner</p></div>
                         </div>
                     </div>
 
                     <div class="testimonial-card anim-scale wait-2">
-                        <p class="opacity-60 text-sm leading-relaxed mb-6 pt-6">I've bought scripts from 10+ developers and Kaiser is easily top 3. Reliability, quality, support - he's got it all covered.</p>
-                        <div class="review-stars mb-3">★★★★★</div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-fuchsia-400 to-fuchsia-600 flex items-center justify-center text-white font-black text-sm">E</div>
-                            <div><p class="font-bold text-sm">ElitePvP</p><p class="text-xs opacity-30">Owner</p></div>
+                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Hired Kaiser for a custom minigame. He built the whole thing in like 4 days. Lobby system, teams, scoreboards, everything. Crazy fast.</p>
+                        <div class="review-stars mb-2">★★★★★</div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-white font-black text-xs">G</div>
+                            <div><p class="font-bold text-xs">GameZone</p><p class="text-[10px] opacity-30">Owner</p></div>
                         </div>
                     </div>
 
                     <div class="testimonial-card anim-scale wait-3">
-                        <p class="opacity-60 text-sm leading-relaxed mb-6 pt-6">The Key All system is simple but effective. Exactly what we needed. No bloat, just works. Appreciate that approach.</p>
-                        <div class="review-stars mb-3">★★★★☆</div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-stone-400 to-stone-600 flex items-center justify-center text-white font-black text-sm">J</div>
-                            <div><p class="font-bold text-sm">JungleSMP</p><p class="text-xs opacity-30">Admin</p></div>
+                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Finally someone who writes clean Skript. No spaghetti code, proper functions, good documentation. Easy to customize if you need to.</p>
+                        <div class="review-stars mb-2">★★★★<span class="empty-star">★</span></div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-sky-400 to-sky-600 flex items-center justify-center text-white font-black text-xs">P</div>
+                            <div><p class="font-bold text-xs">PixelWorld</p><p class="text-[10px] opacity-30">Developer</p></div>
                         </div>
                     </div>
 
                     <div class="testimonial-card anim-scale wait-1">
-                        <p class="opacity-60 text-sm leading-relaxed mb-6 pt-6">Switched from a paid Java AH plugin to Kaiser's Skript version. Honestly can't tell the difference in features. Way cheaper too.</p>
-                        <div class="review-stars mb-3">★★★★★</div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-300 to-indigo-500 flex items-center justify-center text-white font-black text-sm">H</div>
-                            <div><p class="font-bold text-sm">HorizonMC</p><p class="text-xs opacity-30">Owner</p></div>
+                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Our players constantly compliment the tag system. The GUI is super clean and the colors look great in chat. Nice work.</p>
+                        <div class="review-stars mb-2">★★★★★</div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-lime-400 to-lime-600 flex items-center justify-center text-white font-black text-xs">W</div>
+                            <div><p class="font-bold text-xs">WildSurvival</p><p class="text-[10px] opacity-30">Owner</p></div>
                         </div>
                     </div>
 
                     <div class="testimonial-card anim-scale wait-2">
-                        <p class="opacity-60 text-sm leading-relaxed mb-6 pt-6">Kaiser built us a custom punishment system with appeals through Discord. Integration was flawless. Our staff loves it.</p>
-                        <div class="review-stars mb-3">★★★★★</div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-red-300 to-pink-500 flex items-center justify-center text-white font-black text-sm">X</div>
-                            <div><p class="font-bold text-sm">XenonPvP</p><p class="text-xs opacity-30">Manager</p></div>
+                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">I've bought scripts from 10+ developers and Kaiser is easily top 3. Reliability, quality, support - he's got it all covered.</p>
+                        <div class="review-stars mb-2">★★★★★</div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-fuchsia-400 to-fuchsia-600 flex items-center justify-center text-white font-black text-xs">E</div>
+                            <div><p class="font-bold text-xs">ElitePvP</p><p class="text-[10px] opacity-30">Owner</p></div>
                         </div>
                     </div>
 
                     <div class="testimonial-card anim-scale wait-3">
-                        <p class="opacity-60 text-sm leading-relaxed mb-6 pt-6">Great developer, fair prices, and actually delivers on time. In the MC dev world that's basically a unicorn lol. Highly recommend.</p>
-                        <div class="review-stars mb-3">★★★★★</div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-300 to-teal-500 flex items-center justify-center text-white font-black text-sm">K</div>
-                            <div><p class="font-bold text-sm">KryptonMC</p><p class="text-xs opacity-30">Owner</p></div>
+                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">The Key All system is simple but effective. Exactly what we needed. No bloat, just works. Appreciate that approach.</p>
+                        <div class="review-stars mb-2">★★★★<span class="empty-star">★</span></div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-stone-400 to-stone-600 flex items-center justify-center text-white font-black text-xs">J</div>
+                            <div><p class="font-bold text-xs">JungleSMP</p><p class="text-[10px] opacity-30">Admin</p></div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card anim-scale wait-1">
+                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Switched from a paid Java AH plugin to Kaiser's Skript version. Honestly can't tell the difference in features. Way cheaper too.</p>
+                        <div class="review-stars mb-2">★★★★★</div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-300 to-indigo-500 flex items-center justify-center text-white font-black text-xs">H</div>
+                            <div><p class="font-bold text-xs">HorizonMC</p><p class="text-[10px] opacity-30">Owner</p></div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card anim-scale wait-2">
+                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Kaiser built us a custom punishment system with appeals through Discord. Integration was flawless. Our staff loves it.</p>
+                        <div class="review-stars mb-2">★★★★★</div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-red-300 to-pink-500 flex items-center justify-center text-white font-black text-xs">X</div>
+                            <div><p class="font-bold text-xs">XenonPvP</p><p class="text-[10px] opacity-30">Manager</p></div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card anim-scale wait-3">
+                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Great developer, fair prices, and actually delivers on time. In the MC dev world that's basically a unicorn lol. Highly recommend.</p>
+                        <div class="review-stars mb-2">★★★★★</div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-green-300 to-teal-500 flex items-center justify-center text-white font-black text-xs">K</div>
+                            <div><p class="font-bold text-xs">KryptonMC</p><p class="text-[10px] opacity-30">Owner</p></div>
                         </div>
                     </div>
 
                 </div>
             </section>
 
-            <section id="discord" style="padding-bottom: 12rem;">
+            <!-- DISCORD -->
+            <section id="discord" class="pb-16">
                 <div class="anim-scale">
                     <div class="discord-banner">
                         <div class="relative z-10">
-                            <div class="flex items-center gap-5 mb-8">
-                                <div class="floating-icon text-7xl">🎮</div>
+                            <div class="flex items-center gap-4 mb-6">
+                                <div class="floating-icon text-5xl">🎮</div>
                                 <div>
-                                    <h3 class="text-4xl font-black text-white leading-tight" data-key="discord_heading">Join Our<br>Community!</h3>
-                                    <p class="text-white/60 text-sm font-bold mt-2" data-key="discord_sub">Connect &bull; Get Support &bull; Upgrade</p>
+                                    <h3 class="text-3xl font-black text-white leading-tight" data-key="discord_heading">Join Our<br>Community!</h3>
+                                    <p class="text-white/60 text-xs font-bold mt-1" data-key="discord_sub">Connect &bull; Get Support &bull; Upgrade</p>
                                 </div>
                             </div>
-                            <p class="text-white/80 text-lg mb-10 max-w-2xl leading-relaxed" data-key="discord_desc">Need help with setup? Want custom work? Join our Discord server and open a ticket for priority support, premium plans, and exclusive early access to new projects!</p>
-                            <div class="flex flex-wrap gap-6 items-center">
-                                <a href="https://discord.gg/gE8UtGG9" target="_blank" class="px-10 py-4 bg-white text-indigo-600 rounded-2xl font-black hover:scale-105 hover:shadow-xl hover:shadow-white/20 transition-all duration-300 inline-block text-lg">🚀 Join Now</a>
-                                <div class="flex items-center gap-3 text-white/60">
+                            <p class="text-white/80 text-sm mb-8 max-w-2xl leading-relaxed" data-key="discord_desc">Need help with setup? Want custom work? Join our Discord server and open a ticket for priority support, premium plans, and exclusive early access to new projects!</p>
+                            <div class="flex flex-wrap gap-4 items-center">
+                                <a href="https://discord.gg/gE8UtGG9" target="_blank" class="px-8 py-3 bg-white text-indigo-600 rounded-xl font-black hover:scale-105 hover:shadow-xl hover:shadow-white/20 transition-all duration-300 inline-block text-base">🚀 Join Now</a>
+                                <div class="flex items-center gap-2 text-white/60">
                                     <span class="status-dot"></span>
-                                    <span class="font-bold text-sm" data-key="discord_online">Members online now</span>
+                                    <span class="font-bold text-xs" data-key="discord_online">Members online now</span>
                                 </div>
                             </div>
                         </div>
@@ -1394,9 +1438,10 @@
                 </div>
             </section>
 
-            <footer class="text-center py-20 opacity-20">
-                <p class="text-sm font-bold">Built by Kaiser &middot; 2025</p>
-                <p class="text-xs mt-2">All rights reserved.</p>
+            <!-- FOOTER -->
+            <footer class="text-center py-12 opacity-20">
+                <p class="text-xs font-bold">Built by Kaiser &middot; 2025</p>
+                <p class="text-[10px] mt-1">All rights reserved.</p>
             </footer>
 
         </div>
@@ -1605,5 +1650,6 @@
         setTimeout(checkVisibility, 1000);
         setTimeout(checkVisibility, 2000);
     </script>
+
 </body>
 </html>
