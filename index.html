@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kaiser | Senior Developer Portfolio</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&family=Heebo:wght@400;700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --accent: #3b82f6;
@@ -18,11 +21,16 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Outfit', 'Heebo', sans-serif;
             transition: background-color 0.6s ease, color 0.6s ease;
-            scroll-behavior: smooth;
             overflow-x: hidden;
+            color: var(--text);
+            background-color: var(--bg);
         }
 
         .theme-white {
@@ -32,7 +40,7 @@
             --sidebar: #ffffff;
             --border: #e2e8f0;
             --code-bg: #f1f5f9;
-            --muted: rgba(30, 41, 59, 0.5);
+            --muted: rgba(30, 41, 59, 0.55);
         }
 
         .theme-black {
@@ -42,7 +50,7 @@
             --sidebar: #060a14;
             --border: #1e293b;
             --code-bg: #0d1117;
-            --muted: rgba(226, 232, 240, 0.4);
+            --muted: rgba(226, 232, 240, 0.45);
         }
 
         .theme-blue {
@@ -52,7 +60,7 @@
             --sidebar: #081638;
             --border: #1e3a8a;
             --code-bg: #0a1836;
-            --muted: rgba(224, 234, 255, 0.4);
+            --muted: rgba(224, 234, 255, 0.45);
         }
 
         .theme-purple {
@@ -62,12 +70,7 @@
             --sidebar: #12072a;
             --border: #4c1d95;
             --code-bg: #150930;
-            --muted: rgba(237, 233, 254, 0.4);
-        }
-
-        body {
-            color: var(--text);
-            background-color: var(--bg);
+            --muted: rgba(237, 233, 254, 0.45);
         }
 
         .sidebar {
@@ -80,12 +83,15 @@
         #main-content {
             margin-left: 16rem;
             margin-right: 0;
-            transition: margin 0.5s ease;
+            width: calc(100vw - 16rem);
+            min-width: 0;
+            transition: margin 0.5s ease, width 0.5s ease;
         }
 
         [dir="rtl"] #main-content {
             margin-left: 0;
             margin-right: 16rem;
+            width: calc(100vw - 16rem);
         }
 
         [dir="rtl"] .sidebar {
@@ -97,7 +103,7 @@
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 1.2rem;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             height: 100%;
             display: flex;
             flex-direction: column;
@@ -122,64 +128,100 @@
         }
 
         .card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            transform: translateY(-8px) scale(1.015);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
             border-color: var(--accent);
         }
 
-        .anim-up {
-            opacity: 0;
-            transform: translateY(60px);
-            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        .muted {
+            color: var(--muted);
         }
 
-        .anim-up.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .code-block {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 0.8rem;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .nav-link {
+            color: var(--muted);
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover,
+        .nav-link.active-link {
+            color: var(--text);
+            background: var(--glow);
+            border-color: var(--border);
+            transform: translateX(4px);
+        }
+
+        [dir="rtl"] .nav-link:hover,
+        [dir="rtl"] .nav-link.active-link {
+            transform: translateX(-4px);
+        }
+
+        .section-title {
+            font-weight: 900;
+            letter-spacing: -0.04em;
+        }
+
+        .accent-text {
+            color: var(--accent);
+        }
+
+        .accent-bg {
+            background: var(--accent);
+        }
+
+        .hero-gradient {
+            background:
+                radial-gradient(circle at top left, var(--glow), transparent 35%),
+                radial-gradient(circle at bottom right, rgba(147, 51, 234, 0.12), transparent 35%);
+        }
+
+        .badge {
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+        }
+
+        .anim-up,
+        .anim-left,
+        .anim-right,
+        .anim-scale,
+        .anim-rotate {
+            opacity: 0;
+            transition:
+                opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .anim-up {
+            transform: translateY(60px);
         }
 
         .anim-left {
-            opacity: 0;
             transform: translateX(-80px);
-            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .anim-left.visible {
-            opacity: 1;
-            transform: translateX(0);
         }
 
         .anim-right {
-            opacity: 0;
             transform: translateX(80px);
-            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .anim-right.visible {
-            opacity: 1;
-            transform: translateX(0);
         }
 
         .anim-scale {
-            opacity: 0;
             transform: scale(0.85);
-            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .anim-scale.visible {
-            opacity: 1;
-            transform: scale(1);
         }
 
         .anim-rotate {
-            opacity: 0;
             transform: translateY(40px) rotate(-2deg);
-            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .anim-rotate.visible {
+        .visible {
             opacity: 1;
-            transform: translateY(0) rotate(0deg);
+            transform: translate(0, 0) scale(1) rotate(0deg);
         }
 
         .wait-1 { transition-delay: 0.1s; }
@@ -188,490 +230,41 @@
         .wait-4 { transition-delay: 0.4s; }
         .wait-5 { transition-delay: 0.5s; }
         .wait-6 { transition-delay: 0.6s; }
-        .wait-7 { transition-delay: 0.7s; }
-        .wait-8 { transition-delay: 0.8s; }
 
-        .code-block {
-            background: var(--code-bg);
-            border-radius: 0.8rem;
-            font-family: 'Fira Code', monospace;
-            padding: 1.2rem;
-            color: #a9b1d6;
-            overflow-x: auto;
-            border: 1px solid var(--border);
-            text-align: left;
-            direction: ltr;
-            position: relative;
-        }
-
-        .code-block .line-numbers {
-            position: absolute;
-            left: 0;
-            top: 1.2rem;
-            padding: 0 0.5rem;
-            color: rgba(169, 177, 214, 0.25);
-            font-size: 0.65rem;
-            line-height: 1.55rem;
-            user-select: none;
-            border-right: 1px solid var(--border);
-        }
-
-        .code-block pre {
-            padding-left: 2rem;
-            font-size: 0.8rem;
-            line-height: 1.55rem;
-        }
-
-        .nav-link {
-            padding: 0.6rem 1rem;
-            border-radius: 0.6rem;
-            font-weight: 700;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
-            opacity: 0.55;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            text-decoration: none;
-            color: inherit;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 3px;
-            height: 0;
-            background: var(--accent);
-            border-radius: 2px;
-            transition: height 0.3s ease;
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active-link::after {
-            height: 60%;
-        }
-
-        .nav-link:hover {
-            opacity: 1;
-            background: rgba(59, 130, 246, 0.08);
-            padding-left: 1.3rem;
-        }
-
-        .nav-link.active-link {
-            opacity: 1;
-            background: rgba(59, 130, 246, 0.12);
-        }
-
-        .discord-banner {
-            background: linear-gradient(135deg, #5865F2 0%, #3b82f6 50%, #7c3aed 100%);
-            border-radius: 1.5rem;
-            padding: 2.5rem;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(88, 101, 242, 0.4);
-        }
-
-        .discord-banner::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: pulse-glow 4s ease-in-out infinite;
-        }
-
-        .discord-banner::after {
-            content: '';
-            position: absolute;
-            bottom: -30%;
-            left: -20%;
-            width: 60%;
-            height: 60%;
-            background: radial-gradient(circle, rgba(124, 58, 237, 0.3) 0%, transparent 70%);
-            animation: pulse-glow 5s ease-in-out infinite reverse;
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.1); }
-        }
-
-        .floating-icon {
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
-        }
-
-        .shimmer-text {
-            background: linear-gradient(90deg, var(--text) 40%, var(--accent) 50%, var(--text) 60%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shimmer 4s linear infinite;
-        }
-
-        @keyframes gradient-shift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .gradient-border {
-            position: relative;
-        }
-
-        .gradient-border::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: 1.4rem;
-            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6);
-            background-size: 300% 300%;
-            animation: gradient-shift 6s ease infinite;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .gradient-border:hover::before {
-            opacity: 1;
-        }
-
-        .lang-btn {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: bold;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            background: transparent;
-            color: var(--text);
-        }
-
-        .lang-btn.active {
-            background: #3b82f6;
-            color: white;
-            border-color: #3b82f6;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-        }
-
-        .lang-btn:hover:not(.active) {
-            border-color: var(--accent);
-            background: rgba(59, 130, 246, 0.1);
-        }
-
-        .particle-bg {
+        #scrollProgress {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: var(--accent);
-            border-radius: 50%;
-            opacity: 0.15;
-            animation: drift linear infinite;
-        }
-
-        @keyframes drift {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.15; }
-            90% { opacity: 0.15; }
-            100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
-        }
-
-        .typing-cursor {
-            display: inline-block;
-            width: 3px;
-            height: 1em;
-            background: var(--accent);
-            margin-left: 4px;
-            animation: blink 1s step-end infinite;
-            vertical-align: text-bottom;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        .progress-bar-container {
-            width: 100%;
-            height: 6px;
-            background: var(--border);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            border-radius: 10px;
-            transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            height: 4px;
             width: 0;
-        }
-
-        .progress-bar-fill.bar-animated {
-            width: var(--target-width);
-        }
-
-        .tooltip-wrap {
-            position: relative;
-        }
-
-        .tooltip-wrap .tooltip-text {
-            visibility: hidden;
-            opacity: 0;
-            position: absolute;
-            bottom: 120%;
-            left: 50%;
-            transform: translateX(-50%) translateY(10px);
-            background: var(--card);
-            border: 1px solid var(--border);
-            color: var(--text);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 10px;
-            font-weight: 600;
-            white-space: nowrap;
-            transition: all 0.3s ease;
-            z-index: 100;
-        }
-
-        .tooltip-wrap:hover .tooltip-text {
-            visibility: visible;
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        .stat-counter {
-            font-variant-numeric: tabular-nums;
-        }
-
-        .download-btn {
-            display: inline-block;
-            width: 100%;
-            text-align: center;
-            padding: 0.6rem 1rem;
-            background: linear-gradient(135deg, #2563eb, #3b82f6);
-            color: white;
-            border-radius: 0.7rem;
-            font-weight: 800;
-            font-size: 0.85rem;
-            text-decoration: none;
-            transition: all 0.35s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .download-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .download-btn:hover::before {
-            left: 100%;
-        }
-
-        .download-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
-        }
-
-        .section-divider {
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), transparent);
-            border-radius: 4px;
-            margin-bottom: 2rem;
+            background: var(--accent);
+            z-index: 2000;
+            transition: width 0.1s linear;
         }
 
         .back-to-top {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 44px;
-            height: 44px;
+            right: 1.25rem;
+            bottom: 1.25rem;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 999px;
             background: var(--accent);
             color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 1.1rem;
-            cursor: pointer;
-            z-index: 999;
+            display: grid;
+            place-items: center;
             opacity: 0;
+            pointer-events: none;
             transform: translateY(20px);
-            transition: all 0.4s ease;
-            box-shadow: 0 5px 20px rgba(59, 130, 246, 0.4);
+            transition: all 0.35s ease;
+            z-index: 1500;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.35);
         }
 
         .back-to-top.shown {
             opacity: 1;
+            pointer-events: auto;
             transform: translateY(0);
-        }
-
-        .back-to-top:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.5);
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: #22c55e;
-            border-radius: 50%;
-            display: inline-block;
-            animation: pulse-dot 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-dot {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5); }
-            50% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
-        }
-
-        .marquee-track {
-            display: flex;
-            animation: marquee 25s linear infinite;
-            gap: 2rem;
-        }
-
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        .tech-badge {
-            padding: 0.35rem 1rem;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 2rem;
-            font-weight: 700;
-            font-size: 0.75rem;
-            white-space: nowrap;
-            transition: all 0.3s ease;
-        }
-
-        .tech-badge:hover {
-            border-color: var(--accent);
-            transform: scale(1.08);
-        }
-
-        .timeline-line {
-            position: absolute;
-            left: 1.2rem;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--accent), transparent);
-        }
-
-        [dir="rtl"] .timeline-line {
-            left: auto;
-            right: 1.2rem;
-        }
-
-        .timeline-dot {
-            width: 12px;
-            height: 12px;
-            background: var(--accent);
-            border-radius: 50%;
-            position: absolute;
-            left: calc(1.2rem - 5px);
-            top: 1.2rem;
-            z-index: 2;
-            box-shadow: 0 0 0 4px var(--bg);
-        }
-
-        [dir="rtl"] .timeline-dot {
-            left: auto;
-            right: calc(1.2rem - 5px);
-        }
-
-        .testimonial-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 1.2rem;
-            padding: 1.5rem;
-            position: relative;
-            transition: all 0.4s ease;
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
-            border-color: var(--accent);
-        }
-
-        .testimonial-card::before {
-            content: '\201C';
-            position: absolute;
-            top: 0.5rem;
-            left: 1rem;
-            font-size: 2.5rem;
-            color: var(--accent);
-            opacity: 0.2;
-            font-family: Georgia, serif;
-            line-height: 1;
-        }
-
-        [dir="rtl"] .testimonial-card::before {
-            left: auto;
-            right: 1rem;
-        }
-
-        .review-stars {
-            color: #fbbf24;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-        }
-
-        .review-stars .empty-star {
-            color: var(--border);
-        }
-
-        @keyframes spin-slow {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .spin-slow {
-            animation: spin-slow 20s linear infinite;
-        }
-
-        @media (max-width: 1024px) {
-            .sidebar { display: none; }
-            #main-content { margin-left: 0 !important; margin-right: 0 !important; }
-            .mobile-nav { display: flex !important; }
         }
 
         .mobile-nav {
@@ -688,967 +281,460 @@
             backdrop-filter: blur(20px);
         }
 
-        .mobile-nav a {
-            padding: 0.5rem;
-            font-size: 1.1rem;
-            text-decoration: none;
-            opacity: 0.6;
-            transition: 0.3s;
-            border-radius: 0.6rem;
-        }
-
-        .mobile-nav a:hover {
-            opacity: 1;
-            background: rgba(59, 130, 246, 0.1);
-        }
-
-        .experience-badge {
-            display: inline-block;
-            padding: 0.25rem 0.8rem;
-            border-radius: 2rem;
-            font-size: 0.65rem;
-            font-weight: 800;
-            letter-spacing: 0.05em;
-        }
-
-        .badge-owner {
-            background: rgba(59, 130, 246, 0.15);
-            color: #60a5fa;
-            border: 1px solid rgba(59, 130, 246, 0.3);
-        }
-
-        .badge-dev {
-            background: rgba(168, 85, 247, 0.15);
-            color: #c084fc;
-            border: 1px solid rgba(168, 85, 247, 0.3);
-        }
-
-        .reviews-grid {
-            columns: 1;
-            column-gap: 1rem;
-        }
-
-        @media (min-width: 768px) {
-            .reviews-grid {
-                columns: 2;
+        @media (max-width: 1024px) {
+            .sidebar {
+                display: none;
             }
-        }
 
-        @media (min-width: 1280px) {
-            .reviews-grid {
-                columns: 3;
+            #main-content {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                width: 100vw !important;
             }
-        }
 
-        .reviews-grid .testimonial-card {
-            break-inside: avoid;
-            margin-bottom: 1rem;
-        }
+            .mobile-nav {
+                display: flex !important;
+            }
 
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
-            z-index: 9999;
-            transition: width 0.1s linear;
-            width: 0%;
-        }
-
-        @keyframes wiggle {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-3deg); }
-            75% { transform: rotate(3deg); }
-        }
-
-        .hover-wiggle:hover {
-            animation: wiggle 0.4s ease;
-        }
-
-        .glow-ring {
-            box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
-            animation: ring-pulse 3s ease-in-out infinite;
-        }
-
-        @keyframes ring-pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
-            50% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+            body {
+                padding-bottom: 4.5rem;
+            }
         }
     </style>
 </head>
-<body class="theme-black flex min-h-screen" id="body-bg">
 
-    <div class="scroll-progress" id="scrollProgress"></div>
-    <div class="particle-bg" id="particles"></div>
+<body class="theme-black">
 
-    <!-- SIDEBAR -->
-    <aside class="w-64 sidebar p-6 flex flex-col fixed h-full z-50">
-        <div class="mb-10 flex items-center gap-3">
-            <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center text-white font-black shadow-lg shadow-blue-500/20 text-base glow-ring">K</div>
-            <div>
-                <h1 class="text-lg font-black tracking-tighter leading-none">KAISER</h1>
-                <div class="flex items-center gap-2 mt-1">
-                    <span class="status-dot"></span>
-                    <span class="text-[9px] font-bold uppercase tracking-widest opacity-50">Online</span>
-                </div>
-            </div>
-        </div>
+    <div id="scrollProgress"></div>
 
-        <nav class="flex-1 space-y-0.5">
-            <a href="#profile" class="nav-link" data-key="nav_dash" data-section="profile">🏠 Dashboard</a>
-            <a href="#skills" class="nav-link" data-key="nav_skills" data-section="skills">⚡ Skills</a>
-            <a href="#experience" class="nav-link" data-key="nav_exp" data-section="experience">🏆 Experience</a>
-            <a href="#projects" class="nav-link" data-key="nav_proj" data-section="projects">📂 Projects</a>
-            <a href="#showcase" class="nav-link" data-key="nav_code" data-section="showcase">💻 Code</a>
-            <a href="#testimonials" class="nav-link" data-key="nav_test" data-section="testimonials">💬 Reviews</a>
-            <a href="#discord" class="nav-link" data-key="nav_discord" data-section="discord">🎮 Discord</a>
+    <!-- Sidebar -->
+    <aside class="sidebar fixed left-0 top-0 h-screen w-64 z-50 px-6 py-8 flex flex-col">
+        <a href="#home" class="text-3xl font-black tracking-tight mb-10">
+            Kai<span class="accent-text">ser</span>
+        </a>
+
+        <nav class="flex flex-col gap-3">
+            <a href="#home" class="nav-link rounded-xl px-4 py-3 active-link" data-section="home">Home</a>
+            <a href="#about" class="nav-link rounded-xl px-4 py-3" data-section="about">About</a>
+            <a href="#skills" class="nav-link rounded-xl px-4 py-3" data-section="skills">Skills</a>
+            <a href="#projects" class="nav-link rounded-xl px-4 py-3" data-section="projects">Projects</a>
+            <a href="#experience" class="nav-link rounded-xl px-4 py-3" data-section="experience">Experience</a>
+            <a href="#contact" class="nav-link rounded-xl px-4 py-3" data-section="contact">Contact</a>
         </nav>
 
-        <div class="pt-4 border-t space-y-4" style="border-color: var(--border);">
+        <div class="mt-auto space-y-4">
             <div>
-                <p class="text-[9px] font-bold uppercase mb-2 opacity-30 tracking-widest" data-key="label_lang">Language</p>
-                <div class="flex flex-wrap gap-1.5">
-                    <button onclick="changeLanguage('en')" id="btn-en" class="lang-btn active">EN</button>
-                    <button onclick="changeLanguage('he')" id="btn-he" class="lang-btn">HE</button>
-                    <button onclick="changeLanguage('es')" id="btn-es" class="lang-btn">ES</button>
+                <p class="text-sm muted mb-2">Theme</p>
+                <div class="grid grid-cols-4 gap-2">
+                    <button class="theme-btn h-8 rounded-lg border" style="background:#f8fafc" data-theme="theme-white" title="White"></button>
+                    <button class="theme-btn h-8 rounded-lg border" style="background:#0a0e1a" data-theme="theme-black" title="Black"></button>
+                    <button class="theme-btn h-8 rounded-lg border" style="background:#0c1e4a" data-theme="theme-blue" title="Blue"></button>
+                    <button class="theme-btn h-8 rounded-lg border" style="background:#1a0a2e" data-theme="theme-purple" title="Purple"></button>
                 </div>
             </div>
-            <div>
-                <p class="text-[9px] font-bold uppercase mb-2 opacity-30 tracking-widest" data-key="label_theme">Theme</p>
-                <div class="flex gap-2">
-                    <div class="tooltip-wrap">
-                        <button onclick="setTheme('theme-white')" class="w-6 h-6 rounded-full bg-white border-2 border-gray-300 hover:scale-125 transition-all duration-300"></button>
-                        <span class="tooltip-text">Light</span>
-                    </div>
-                    <div class="tooltip-wrap">
-                        <button onclick="setTheme('theme-black')" class="w-6 h-6 rounded-full bg-slate-900 border-2 border-gray-600 hover:scale-125 transition-all duration-300"></button>
-                        <span class="tooltip-text">Dark</span>
-                    </div>
-                    <div class="tooltip-wrap">
-                        <button onclick="setTheme('theme-blue')" class="w-6 h-6 rounded-full bg-blue-700 border-2 border-blue-400 hover:scale-125 transition-all duration-300"></button>
-                        <span class="tooltip-text">Ocean</span>
-                    </div>
-                    <div class="tooltip-wrap">
-                        <button onclick="setTheme('theme-purple')" class="w-6 h-6 rounded-full bg-purple-600 border-2 border-purple-400 hover:scale-125 transition-all duration-300"></button>
-                        <span class="tooltip-text">Amethyst</span>
-                    </div>
-                </div>
-            </div>
-            <div class="text-[9px] opacity-20 font-bold tracking-wider pt-1">
-                v2.4.1 &middot; 2025
-            </div>
+
+            <button id="dirToggle" class="w-full rounded-xl px-4 py-3 border text-sm" style="border-color: var(--border);">
+                Toggle RTL / LTR
+            </button>
         </div>
     </aside>
 
-    <!-- MOBILE NAV -->
-    <div class="mobile-nav">
-        <a href="#profile">🏠</a>
-        <a href="#skills">⚡</a>
-        <a href="#experience">🏆</a>
-        <a href="#projects">📂</a>
-        <a href="#showcase">💻</a>
-        <a href="#testimonials">💬</a>
-        <a href="#discord">🎮</a>
-    </div>
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+        <a href="#home" class="nav-link rounded-xl px-3 py-2 text-sm" data-section="home">Home</a>
+        <a href="#about" class="nav-link rounded-xl px-3 py-2 text-sm" data-section="about">About</a>
+        <a href="#skills" class="nav-link rounded-xl px-3 py-2 text-sm" data-section="skills">Skills</a>
+        <a href="#projects" class="nav-link rounded-xl px-3 py-2 text-sm" data-section="projects">Work</a>
+        <a href="#contact" class="nav-link rounded-xl px-3 py-2 text-sm" data-section="contact">Contact</a>
+    </nav>
 
-    <!-- MAIN CONTENT -->
-    <main class="flex-1 transition-all duration-500" id="main-content">
-        <div class="p-6 lg:p-10 xl:p-14">
+    <!-- Main Content -->
+    <main id="main-content">
 
-            <!-- HERO -->
-            <section id="profile" class="pb-24">
-                <div class="mb-4 anim-up">
-                    <span class="text-xs font-bold tracking-widest uppercase opacity-40" data-key="hero_welcome">Welcome to my portfolio</span>
-                </div>
-                <h2 class="text-4xl lg:text-6xl font-black mb-5 leading-[0.95] anim-up wait-1">
-                    <span data-key="hero_1">Digital</span> <br>
-                    <span class="shimmer-text" data-key="hero_2">Architect.</span><span class="typing-cursor"></span>
-                </h2>
-                <p class="text-base opacity-50 mb-12 max-w-2xl leading-relaxed anim-up wait-2" data-key="hero_desc">Experienced Minecraft Developer specializing in high-performance server architecture, custom plugins, and next-level Skript development.</p>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
-                    <div class="card p-6 text-center anim-scale wait-1">
-                        <div class="text-3xl font-black text-blue-500 mb-1 stat-counter" data-target="8429">0</div>
-                        <div class="text-[10px] font-bold uppercase tracking-widest opacity-30 mt-1" data-key="stat_1">Downloads</div>
+        <!-- Hero -->
+        <section id="home" class="min-h-screen hero-gradient flex items-center px-6 md:px-12 lg:px-20 py-24">
+            <div class="max-w-6xl w-full mx-auto grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="anim-up badge inline-flex rounded-full px-4 py-2 text-sm mb-6">
+                        Available for senior developer roles
                     </div>
-                    <div class="card p-6 text-center anim-scale wait-2">
-                        <div class="text-3xl font-black text-blue-500 mb-1">4.2<span class="text-xl">★</span></div>
-                        <div class="text-[10px] font-bold uppercase tracking-widest opacity-30 mt-1" data-key="stat_2">User Rating</div>
-                    </div>
-                    <div class="card p-6 text-center anim-scale wait-3">
-                        <div class="text-3xl font-black text-blue-500 mb-1">100<span class="text-xl">%</span></div>
-                        <div class="text-[10px] font-bold uppercase tracking-widest opacity-30 mt-1" data-key="stat_3">Efficiency</div>
-                    </div>
-                </div>
 
-                <div class="overflow-hidden py-4 anim-up wait-4" style="mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);">
-                    <div class="marquee-track">
-                        <span class="tech-badge">☕ Java</span>
-                        <span class="tech-badge">📜 Skript</span>
-                        <span class="tech-badge">🔧 Spigot API</span>
-                        <span class="tech-badge">📦 Paper</span>
-                        <span class="tech-badge">🗄️ MySQL</span>
-                        <span class="tech-badge">🐍 Python</span>
-                        <span class="tech-badge">🌐 HTML/CSS</span>
-                        <span class="tech-badge">⚡ JavaScript</span>
-                        <span class="tech-badge">🐳 Docker</span>
-                        <span class="tech-badge">🔒 BungeeCord</span>
-                        <span class="tech-badge">📡 Redis</span>
-                        <span class="tech-badge">🎨 Figma</span>
-                        <span class="tech-badge">☕ Java</span>
-                        <span class="tech-badge">📜 Skript</span>
-                        <span class="tech-badge">🔧 Spigot API</span>
-                        <span class="tech-badge">📦 Paper</span>
-                        <span class="tech-badge">🗄️ MySQL</span>
-                        <span class="tech-badge">🐍 Python</span>
-                        <span class="tech-badge">🌐 HTML/CSS</span>
-                        <span class="tech-badge">⚡ JavaScript</span>
-                        <span class="tech-badge">🐳 Docker</span>
-                        <span class="tech-badge">🔒 BungeeCord</span>
-                        <span class="tech-badge">📡 Redis</span>
-                        <span class="tech-badge">🎨 Figma</span>
+                    <h1 class="anim-up wait-1 text-5xl md:text-7xl font-black leading-tight tracking-tight">
+                        Building clean,
+                        <span class="accent-text">scalable</span>
+                        web systems.
+                    </h1>
+
+                    <p class="anim-up wait-2 muted mt-6 text-lg md:text-xl max-w-2xl leading-relaxed">
+                        I am Kaiser, a senior developer focused on modern frontend, backend architecture,
+                        performance optimization, and production-ready applications.
+                    </p>
+
+                    <div class="anim-up wait-3 mt-8 flex flex-wrap gap-4">
+                        <a href="#projects" class="accent-bg text-white rounded-2xl px-6 py-4 font-bold shadow-lg">
+                            View Projects
+                        </a>
+                        <a href="#contact" class="rounded-2xl px-6 py-4 font-bold border" style="border-color: var(--border);">
+                            Contact Me
+                        </a>
                     </div>
                 </div>
-            </section>
 
-            <!-- SKILLS -->
-            <section id="skills" class="pb-24">
-                <div class="section-divider anim-up"></div>
-                <span class="text-xs font-bold tracking-widest uppercase opacity-30 block mb-3 anim-up" data-key="skills_label">What I Work With</span>
-                <h2 class="text-3xl font-black mb-12 anim-up wait-1" data-key="skills_title">Skills & Expertise</h2>
+                <div class="anim-scale wait-2">
+                    <div class="code-block p-6 shadow-2xl">
+<pre class="text-sm overflow-x-auto"><code><span style="color:#60a5fa">const</span> developer = {
+  name: <span style="color:#34d399">'Kaiser'</span>,
+  role: <span style="color:#34d399">'Senior Developer'</span>,
+  stack: [
+    <span style="color:#34d399">'JavaScript'</span>,
+    <span style="color:#34d399">'React'</span>,
+    <span style="color:#34d399">'Node.js'</span>,
+    <span style="color:#34d399">'APIs'</span>
+  ],
+  focus: <span style="color:#34d399">'Clean scalable systems'</span>
+};
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="anim-left wait-1">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="font-bold text-sm">Java / Spigot</span>
-                            <span class="text-xs font-bold text-blue-400">95%</span>
-                        </div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-fill" style="--target-width: 95%; background: linear-gradient(90deg, #3b82f6, #60a5fa);"></div>
-                        </div>
-                    </div>
-                    <div class="anim-right wait-1">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="font-bold text-sm">Skript</span>
-                            <span class="text-xs font-bold text-blue-400">98%</span>
-                        </div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-fill" style="--target-width: 98%; background: linear-gradient(90deg, #8b5cf6, #a78bfa);"></div>
-                        </div>
-                    </div>
-                    <div class="anim-left wait-2">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="font-bold text-sm">Server Architecture</span>
-                            <span class="text-xs font-bold text-blue-400">90%</span>
-                        </div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-fill" style="--target-width: 90%; background: linear-gradient(90deg, #06b6d4, #22d3ee);"></div>
-                        </div>
-                    </div>
-                    <div class="anim-right wait-2">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="font-bold text-sm">Database Design</span>
-                            <span class="text-xs font-bold text-blue-400">85%</span>
-                        </div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-fill" style="--target-width: 85%; background: linear-gradient(90deg, #f59e0b, #fbbf24);"></div>
-                        </div>
-                    </div>
-                    <div class="anim-left wait-3">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="font-bold text-sm">Python</span>
-                            <span class="text-xs font-bold text-blue-400">80%</span>
-                        </div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-fill" style="--target-width: 80%; background: linear-gradient(90deg, #10b981, #34d399);"></div>
-                        </div>
-                    </div>
-                    <div class="anim-right wait-3">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="font-bold text-sm">Web Development</span>
-                            <span class="text-xs font-bold text-blue-400">75%</span>
-                        </div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-fill" style="--target-width: 75%; background: linear-gradient(90deg, #ec4899, #f472b6);"></div>
-                        </div>
+developer.build();</code></pre>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- EXPERIENCE -->
-            <section id="experience" class="pb-24">
-                <div class="section-divider anim-up"></div>
-                <span class="text-xs font-bold tracking-widest uppercase opacity-30 block mb-3 anim-up" data-key="exp_label">Where I've Been</span>
-                <h2 class="text-3xl font-black mb-12 anim-up wait-1" data-key="exp_title">Staff Journey</h2>
+        <!-- Stats -->
+        <section class="px-6 md:px-12 lg:px-20 py-10">
+            <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
+                <div class="card anim-up p-8 text-center">
+                    <div class="counter text-5xl font-black accent-text" data-target="120">0+</div>
+                    <p class="muted mt-2">Projects Completed</p>
+                </div>
+                <div class="card anim-up wait-1 p-8 text-center">
+                    <div class="counter text-5xl font-black accent-text" data-target="8">0+</div>
+                    <p class="muted mt-2">Years Experience</p>
+                </div>
+                <div class="card anim-up wait-2 p-8 text-center">
+                    <div class="counter text-5xl font-black accent-text" data-target="50">0+</div>
+                    <p class="muted mt-2">Happy Clients</p>
+                </div>
+            </div>
+        </section>
 
-                <div class="relative" style="padding-left: 3rem;">
-                    <div class="timeline-line"></div>
+        <!-- About -->
+        <section id="about" class="px-6 md:px-12 lg:px-20 py-24">
+            <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
+                <div class="anim-left">
+                    <h2 class="section-title text-4xl md:text-5xl mb-6">About Me</h2>
+                    <p class="muted text-lg leading-relaxed">
+                        I specialize in creating fast, maintainable, and user-friendly applications.
+                        My work covers frontend interfaces, backend APIs, authentication systems,
+                        dashboards, admin panels, SaaS products, and deployment workflows.
+                    </p>
+                    <p class="muted text-lg leading-relaxed mt-4">
+                        I care about code quality, performance, accessibility, security, and building
+                        products that can grow without becoming hard to maintain.
+                    </p>
+                </div>
 
-                    <div class="relative mb-10 anim-left wait-1">
-                        <div class="timeline-dot"></div>
-                        <div class="card p-5">
-                            <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
-                                <div>
-                                    <h3 class="text-lg font-black">ShakeBox</h3>
-                                    <span class="experience-badge badge-owner mt-1" data-key="role_owner">OWNER</span>
-                                </div>
-                                <span class="text-[10px] font-bold opacity-30">2024 - Present</span>
-                            </div>
-                            <p class="opacity-50 text-xs mb-3 leading-relaxed" data-key="shake_desc">Founded and managing a growing Minecraft community server with custom gameplay features and dedicated player base.</p>
-                            <a href="https://discord.gg/Fh54yGNazT" target="_blank" class="text-blue-400 font-bold text-xs hover:text-blue-300 transition-colors">Join Discord →</a>
+                <div class="card anim-right p-8">
+                    <h3 class="text-2xl font-black mb-4">What I Do</h3>
+                    <ul class="space-y-4 muted">
+                        <li>✓ Full-stack web application development</li>
+                        <li>✓ API design and backend architecture</li>
+                        <li>✓ Responsive frontend interfaces</li>
+                        <li>✓ Database modeling and optimization</li>
+                        <li>✓ Performance and SEO improvements</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills" class="px-6 md:px-12 lg:px-20 py-24">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="section-title anim-up text-4xl md:text-5xl mb-12">Skills</h2>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card anim-up p-7">
+                        <h3 class="text-xl font-black mb-4">Frontend</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="badge rounded-full px-3 py-2">HTML</span>
+                            <span class="badge rounded-full px-3 py-2">CSS</span>
+                            <span class="badge rounded-full px-3 py-2">JavaScript</span>
+                            <span class="badge rounded-full px-3 py-2">React</span>
+                            <span class="badge rounded-full px-3 py-2">Tailwind</span>
                         </div>
                     </div>
 
-                    <div class="relative mb-10 anim-left wait-2">
-                        <div class="timeline-dot"></div>
-                        <div class="card p-5">
-                            <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
-                                <div>
-                                    <h3 class="text-lg font-black">SwiftBox</h3>
-                                    <span class="experience-badge badge-owner mt-1" data-key="role_owner2">OWNER</span>
-                                </div>
-                                <span class="text-[10px] font-bold opacity-30">2024 - Present</span>
-                            </div>
-                            <p class="opacity-50 text-xs mb-3 leading-relaxed" data-key="swift_desc">Built from scratch with optimized performance, custom economy system, and unique game modes.</p>
-                            <a href="https://discord.gg/4d2fEQQ2Vu" target="_blank" class="text-blue-400 font-bold text-xs hover:text-blue-300 transition-colors">Join Discord →</a>
+                    <div class="card anim-up wait-1 p-7">
+                        <h3 class="text-xl font-black mb-4">Backend</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="badge rounded-full px-3 py-2">Node.js</span>
+                            <span class="badge rounded-full px-3 py-2">Express</span>
+                            <span class="badge rounded-full px-3 py-2">REST APIs</span>
+                            <span class="badge rounded-full px-3 py-2">Auth</span>
+                            <span class="badge rounded-full px-3 py-2">Security</span>
                         </div>
                     </div>
 
-                    <div class="relative mb-10 anim-left wait-3">
-                        <div class="timeline-dot"></div>
-                        <div class="card p-5">
-                            <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
-                                <div>
-                                    <h3 class="text-lg font-black">AscendBox</h3>
-                                    <span class="experience-badge badge-dev mt-1" data-key="role_dev">DEVELOPER</span>
-                                </div>
-                                <span class="text-[10px] font-bold opacity-30">2023 - 2024</span>
-                            </div>
-                            <p class="opacity-50 text-xs mb-3 leading-relaxed" data-key="ascend_desc">Developed core gameplay plugins and systems including custom enchants, crate mechanics, and anti-cheat integration.</p>
-                            <a href="https://discord.gg/ascendbox" target="_blank" class="text-purple-400 font-bold text-xs hover:text-purple-300 transition-colors">Join Discord →</a>
-                        </div>
-                    </div>
-
-                    <div class="relative mb-4 anim-left wait-4">
-                        <div class="timeline-dot"></div>
-                        <div class="card p-5">
-                            <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
-                                <div>
-                                    <h3 class="text-lg font-black">IceBox</h3>
-                                    <span class="experience-badge badge-dev mt-1" data-key="role_dev2">DEVELOPER</span>
-                                </div>
-                                <span class="text-[10px] font-bold opacity-30">2023</span>
-                            </div>
-                            <p class="opacity-50 text-xs mb-3 leading-relaxed" data-key="ice_desc">Contributed to server infrastructure, wrote performance-critical Skript addons, and improved server stability.</p>
-                            <a href="https://discord.gg/icebox" target="_blank" class="text-purple-400 font-bold text-xs hover:text-purple-300 transition-colors">Join Discord →</a>
+                    <div class="card anim-up wait-2 p-7">
+                        <h3 class="text-xl font-black mb-4">Database & Tools</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="badge rounded-full px-3 py-2">MongoDB</span>
+                            <span class="badge rounded-full px-3 py-2">PostgreSQL</span>
+                            <span class="badge rounded-full px-3 py-2">Git</span>
+                            <span class="badge rounded-full px-3 py-2">Docker</span>
+                            <span class="badge rounded-full px-3 py-2">Linux</span>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- PROJECTS -->
-            <section id="projects" class="pb-24">
-                <div class="section-divider anim-up"></div>
-                <span class="text-xs font-bold tracking-widest uppercase opacity-30 block mb-3 anim-up" data-key="proj_label">Stuff I've Built</span>
-                <h2 class="text-3xl font-black mb-4 anim-up wait-1" data-key="proj_title">Featured Projects</h2>
-                <p class="opacity-40 text-sm mb-12 max-w-xl anim-up wait-2" data-key="proj_sub">Production-ready scripts and plugins, downloaded by thousands of server owners worldwide.</p>
+        <!-- Projects -->
+        <section id="projects" class="px-6 md:px-12 lg:px-20 py-24">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="section-title anim-up text-4xl md:text-5xl mb-12">Featured Projects</h2>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                    <div class="card gradient-border p-5 anim-scale wait-1">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="text-2xl hover-wiggle">📦</span>
-                            <h3 class="text-base font-black">AutoPickup</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <article class="card anim-up p-7">
+                        <div class="h-40 rounded-2xl mb-6" style="background: linear-gradient(135deg, #3b82f6, #9333ea);"></div>
+                        <h3 class="text-2xl font-black mb-3">SaaS Dashboard</h3>
+                        <p class="muted leading-relaxed">
+                            A modern dashboard with authentication, analytics, subscriptions, and admin controls.
+                        </p>
+                    </article>
+
+                    <article class="card anim-up wait-1 p-7">
+                        <div class="h-40 rounded-2xl mb-6" style="background: linear-gradient(135deg, #10b981, #3b82f6);"></div>
+                        <h3 class="text-2xl font-black mb-3">E-commerce Platform</h3>
+                        <p class="muted leading-relaxed">
+                            Product catalog, cart, checkout flow, orders, payment integration, and inventory tools.
+                        </p>
+                    </article>
+
+                    <article class="card anim-up wait-2 p-7">
+                        <div class="h-40 rounded-2xl mb-6" style="background: linear-gradient(135deg, #f97316, #ec4899);"></div>
+                        <h3 class="text-2xl font-black mb-3">API System</h3>
+                        <p class="muted leading-relaxed">
+                            Secure REST API with role permissions, logs, validation, caching, and documentation.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section id="experience" class="px-6 md:px-12 lg:px-20 py-24">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="section-title anim-up text-4xl md:text-5xl mb-12">Experience</h2>
+
+                <div class="space-y-6">
+                    <div class="card anim-up p-7">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                            <h3 class="text-2xl font-black">Senior Full-Stack Developer</h3>
+                            <span class="muted">2021 - Present</span>
                         </div>
-                        <p class="opacity-50 text-xs mb-2 flex-1 leading-relaxed" data-key="auto_desc">Automatic item collection with smart inventory full alerts and configurable drop filters.</p>
-                        <div class="flex gap-2 mb-4 flex-wrap">
-                            <span class="text-[9px] font-bold px-2 py-0.5 rounded-full opacity-40" style="background: var(--border);">Skript</span>
-                            <span class="text-[9px] font-bold px-2 py-0.5 rounded-full opacity-40" style="background: var(--border);">v1.2</span>
-                        </div>
-                        <a href="autopickup.sk" download class="download-btn">⬇ Download .sk</a>
+                        <p class="muted mt-4 leading-relaxed">
+                            Built scalable web applications, improved performance, led architecture decisions,
+                            and delivered production-ready systems for clients and teams.
+                        </p>
                     </div>
 
-                    <div class="card gradient-border p-5 anim-scale wait-2">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="text-2xl hover-wiggle">🛡️</span>
-                            <h3 class="text-base font-black">StaffMode</h3>
+                    <div class="card anim-up wait-1 p-7">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                            <h3 class="text-2xl font-black">Frontend Developer</h3>
+                            <span class="muted">2018 - 2021</span>
                         </div>
-                        <p class="opacity-50 text-xs mb-2 flex-1 leading-relaxed" data-key="staff_desc">Full moderation suite with vanish, freeze, inspector tools, and staff chat integration.</p>
-                        <div class="flex gap-2 mb-4 flex-wrap">
-                            <span class="text-[9px] font-bold px-2 py-0.5 rounded-full opacity-40" style="background: var(--border);">Skript</span>
-                            <span class="text-[9px] font-bold px-2 py-0.5 rounded-full opacity-40" style="background: var(--border);">v3.1</span>
-                        </div>
-                        <a href="staffmode.sk" download class="download-btn">⬇ Download .sk</a>
-                    </div>
-
-                    <div class="card gradient-border p-5 anim-scale wait-3">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="text-2xl hover-wiggle">🏷️</span>
-                            <h3 class="text-base font-black">Tag System</h3>
-                        </div>
-                        <p class="opacity-50 text-xs mb-2 flex-1 leading-relaxed" data-key="tag_desc">Advanced chat tag system with GUI selector, custom colors, and permission-based unlocks.</p>
-                        <div class="flex gap-2 mb-4 flex-wrap">
-                            <span class="text-[9px] font-bold px-2 py-0.5 rounded-full opacity-40" style="background: var(--border);">Skript</span>
-                            <span class="text-[9px] font-bold px-2 py-0.5 rounded-full opacity-40" style="background: var(--border);">v2.0</span>
-                        </div>
-                        <a href="tag.sk" download class="download-btn">⬇ Download .sk</a>
-                    </div>
-
-                    <div class="card gradient-border p-5 anim-scale wait-4">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="text-2xl hover-wiggle">🏪</span>
-                            <h3 class="text-base font-black">Auction House</h3>
-                        </div>
-                        <p class="opacity-50 text-xs mb-2 flex-1 leading-relaxed" data-key="ah_desc">Optimized Auction House system with search, categories, and bid history tracking.</p>
-                        <div class="flex gap-2 mb-4 flex-wrap">
-                            <span class="text-[9px] font-bold px-2 py-0.5 rounded-full opacity-40" style="background: var(--border);">Skript</span>
-                            <span class="text-[9px] font-bold px-2 py-0.5 rounded-full opacity-40" style="background: var(--border);">v1.8</span>
-                        </div>
-                        <a href="ah.sk" download class="download-btn">⬇ Download .sk</a>
-                    </div>
-
-                    <div class="card gradient-border p-5 anim-scale wait-5">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="text-2xl hover-wiggle">🔑</span>
-                            <h3 class="text-base font-black">Key All</h3>
-                        </div>
-                        <p class="opacity-50 text-xs mb-2 flex-1 leading-relaxed" data-key="key_desc">Global reward distribution system with customizable crate keys and broadcast alerts.</p>
-                        <div class="flex gap-2 mb-4 flex-wrap">
-                            <span class="text-[9px] font-bold px-2 py-0.5 rounded-full opacity-40" style="background: var(--border);">Skript</span>
-                            <span class="text-[9px] font-bold px-2 py-0.5 rounded-full opacity-40" style="background: var(--border);">v1.0</span>
-                        </div>
-                        <a href="Keyall.sk" download class="download-btn">⬇ Download .sk</a>
-                    </div>
-
-                    <div class="card p-5 anim-scale wait-6" style="border-style: dashed; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 0.75rem;">
-                        <span class="text-4xl opacity-20 spin-slow">🚧</span>
-                        <span class="font-bold opacity-30 text-center text-sm" data-key="proj_more">More projects coming soon...</span>
+                        <p class="muted mt-4 leading-relaxed">
+                            Created responsive user interfaces, component libraries, landing pages,
+                            dashboards, and interactive web experiences.
+                        </p>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- CODE SHOWCASE -->
-            <section id="showcase" class="pb-24">
-                <div class="section-divider anim-up"></div>
-                <span class="text-xs font-bold tracking-widest uppercase opacity-30 block mb-3 anim-up" data-key="code_label">Under The Hood</span>
-                <h2 class="text-3xl font-black mb-12 anim-up wait-1" data-key="code_title">Code Showcase</h2>
+        <!-- Contact -->
+        <section id="contact" class="px-6 md:px-12 lg:px-20 py-24">
+            <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10">
+                <div class="anim-left">
+                    <h2 class="section-title text-4xl md:text-5xl mb-6">Let’s Build Something</h2>
+                    <p class="muted text-lg leading-relaxed">
+                        Have a project, job opportunity, or idea? Send a message and I will get back to you.
+                    </p>
 
-                <div class="space-y-10">
-                    <div class="anim-rotate wait-1">
-                        <div class="flex items-center gap-2 mb-3">
-                            <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
-                            <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
-                            <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
-                            <span class="text-[10px] font-bold opacity-30 ml-2">MyPlugin.java</span>
-                        </div>
-                        <div class="code-block text-xs">
-                            <div class="line-numbers">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12</div>
-<pre>
-<span style="color:#bb9af7">public class</span> <span style="color:#7aa2f7">MyPlugin</span> <span style="color:#bb9af7">extends</span> <span style="color:#2ac3de">JavaPlugin</span> <span style="color:#bb9af7">implements</span> <span style="color:#2ac3de">Listener</span> {
-    <span style="color:#7aa2f7">@Override</span>
-    <span style="color:#bb9af7">public void</span> <span style="color:#7aa2f7">onEnable</span>() {
-        <span style="color:#2ac3de">Bukkit</span>.getPluginManager().registerEvents(<span style="color:#ff9e64">this</span>, <span style="color:#ff9e64">this</span>);
-        saveDefaultConfig();
-        loadModules();
-        getLogger().info(<span style="color:#9ece6a">"Kaiser System Online."</span>);
-    }
-
-    <span style="color:#bb9af7">private void</span> <span style="color:#7aa2f7">loadModules</span>() {
-        <span style="color:#565f89">// initialize economy, ranks, permissions</span>
-    }
-}</pre>
-                        </div>
-                    </div>
-
-                    <div class="anim-rotate wait-2">
-                        <div class="flex items-center gap-2 mb-3">
-                            <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
-                            <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
-                            <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
-                            <span class="text-[10px] font-bold opacity-30 ml-2">autopickup.sk</span>
-                        </div>
-                        <div class="code-block text-xs">
-                            <div class="line-numbers">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9</div>
-<pre>
-<span style="color:#bb9af7">on</span> <span style="color:#7aa2f7">break</span>:
-    <span style="color:#bb9af7">if</span> {autopickup::%<span style="color:#2ac3de">player's uuid</span>%} <span style="color:#bb9af7">is</span> <span style="color:#ff9e64">true</span>:
-        <span style="color:#bb9af7">cancel</span> <span style="color:#7aa2f7">event</span>
-        <span style="color:#bb9af7">set</span> {_drops::*} <span style="color:#bb9af7">to</span> <span style="color:#2ac3de">drops of block</span>
-        <span style="color:#bb9af7">set</span> <span style="color:#2ac3de">event-block</span> <span style="color:#bb9af7">to</span> <span style="color:#9ece6a">air</span>
-        <span style="color:#bb9af7">loop</span> {_drops::*}:
-            <span style="color:#bb9af7">if</span> <span style="color:#2ac3de">player</span> <span style="color:#bb9af7">can hold</span> <span style="color:#7aa2f7">loop-value</span>:
-                <span style="color:#bb9af7">give</span> <span style="color:#7aa2f7">loop-value</span> <span style="color:#bb9af7">to</span> <span style="color:#2ac3de">player</span>
-            <span style="color:#bb9af7">else</span>:
-                <span style="color:#bb9af7">send</span> <span style="color:#9ece6a">"&c&lINVENTORY FULL!"</span> <span style="color:#bb9af7">to</span> <span style="color:#2ac3de">player</span></pre>
-                        </div>
+                    <div class="mt-8 space-y-3">
+                        <p><strong>Email:</strong> kaiser@example.com</p>
+                        <p><strong>Location:</strong> Remote / Worldwide</p>
+                        <p><strong>Availability:</strong> Open to work</p>
                     </div>
                 </div>
-            </section>
 
-            <!-- REVIEWS -->
-            <section id="testimonials" class="pb-24">
-                <div class="section-divider anim-up"></div>
-                <span class="text-xs font-bold tracking-widest uppercase opacity-30 block mb-3 anim-up" data-key="test_label">What People Say</span>
-                <h2 class="text-3xl font-black mb-4 anim-up wait-1" data-key="test_title">Reviews</h2>
-                <p class="opacity-40 text-sm mb-12 max-w-xl anim-up wait-2" data-key="test_sub">Real feedback from server owners and admins who use my work.</p>
+                <form class="card anim-right p-7" onsubmit="event.preventDefault(); alert('Message sent demo!');">
+                    <label class="block mb-2 font-bold">Name</label>
+                    <input class="w-full mb-4 rounded-xl px-4 py-3 outline-none border bg-transparent" style="border-color: var(--border); color: var(--text);" placeholder="Your name">
 
-                <div class="reviews-grid">
+                    <label class="block mb-2 font-bold">Email</label>
+                    <input type="email" class="w-full mb-4 rounded-xl px-4 py-3 outline-none border bg-transparent" style="border-color: var(--border); color: var(--text);" placeholder="you@example.com">
 
-                    <div class="testimonial-card anim-scale wait-1">
-                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Bought the StaffMode skript and it worked perfectly out of the box. No config issues, no errors. Just clean code. Really impressed.</p>
-                        <div class="review-stars mb-2">★★★★★</div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-black text-xs">M</div>
-                            <div><p class="font-bold text-xs">MineKing</p><p class="text-[10px] opacity-30">Server Owner</p></div>
-                        </div>
-                    </div>
+                    <label class="block mb-2 font-bold">Message</label>
+                    <textarea rows="5" class="w-full mb-4 rounded-xl px-4 py-3 outline-none border bg-transparent" style="border-color: var(--border); color: var(--text);" placeholder="Tell me about your project"></textarea>
 
-                    <div class="testimonial-card anim-scale wait-2">
-                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">The AutoPickup script saved us so much lag from item entities on the ground. Players love it too. Super smooth experience.</p>
-                        <div class="review-stars mb-2">★★★★★</div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center text-white font-black text-xs">Z</div>
-                            <div><p class="font-bold text-xs">ZephyrMC</p><p class="text-[10px] opacity-30">Admin</p></div>
-                        </div>
-                    </div>
+                    <button class="accent-bg text-white rounded-2xl px-6 py-4 font-bold">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </section>
 
-                    <div class="testimonial-card anim-scale wait-3">
-                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Got custom work done for our network. Communication was great and delivery was fast. Kaiser knows his stuff.</p>
-                        <div class="review-stars mb-2">★★★★<span class="empty-star">★</span></div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white font-black text-xs">R</div>
-                            <div><p class="font-bold text-xs">RaidNetwork</p><p class="text-[10px] opacity-30">Network Owner</p></div>
-                        </div>
-                    </div>
+        <footer class="px-6 md:px-12 lg:px-20 py-8 border-t text-center muted" style="border-color: var(--border);">
+            © <span id="year"></span> Kaiser. All rights reserved.
+        </footer>
 
-                    <div class="testimonial-card anim-scale wait-1">
-                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">The Auction House skript is cleaner than most paid Java plugins I've tried. Seriously underrated developer.</p>
-                        <div class="review-stars mb-2">★★★★★</div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center text-white font-black text-xs">D</div>
-                            <div><p class="font-bold text-xs">DarkFire</p><p class="text-[10px] opacity-30">Server Owner</p></div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card anim-scale wait-2">
-                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Script took a bit to configure but once it was set up it worked fine. Would've liked better docs. Still decent overall.</p>
-                        <div class="review-stars mb-2">★★★<span class="empty-star">★★</span></div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center text-white font-black text-xs">Q</div>
-                            <div><p class="font-bold text-xs">QuickMC</p><p class="text-[10px] opacity-30">Admin</p></div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card anim-scale wait-3">
-                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Tried 3 other tag systems before finding Kaiser's. This one actually works properly with LuckPerms. Finally.</p>
-                        <div class="review-stars mb-2">★★★★<span class="empty-star">★</span></div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-600 flex items-center justify-center text-white font-black text-xs">L</div>
-                            <div><p class="font-bold text-xs">LunarCraft</p><p class="text-[10px] opacity-30">Admin</p></div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card anim-scale wait-1">
-                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Best Skript developer I've worked with. Fast response times and actually listens to what you want. Rare combo.</p>
-                        <div class="review-stars mb-2">★★★★★</div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center text-white font-black text-xs">S</div>
-                            <div><p class="font-bold text-xs">SkyRealm</p><p class="text-[10px] opacity-30">Server Owner</p></div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card anim-scale wait-2">
-                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Had some compatibility issues with our setup. Kaiser helped fix it but it took a couple days. End result was good though.</p>
-                        <div class="review-stars mb-2">★★★★<span class="empty-star">★</span></div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-white font-black text-xs">N</div>
-                            <div><p class="font-bold text-xs">NovaMC</p><p class="text-[10px] opacity-30">Owner</p></div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card anim-scale wait-3">
-                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">We migrated our entire staff tools to Kaiser's StaffMode. The freeze system and vanish are way better than what we had before.</p>
-                        <div class="review-stars mb-2">★★★★★</div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center text-white font-black text-xs">A</div>
-                            <div><p class="font-bold text-xs">ArcadePvP</p><p class="text-[10px] opacity-30">Manager</p></div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card anim-scale wait-1">
-                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">It's okay. Basic functionality works but I expected more features for the price. Might update my review later if more stuff gets added.</p>
-                        <div class="review-stars mb-2">★★<span class="empty-star">★★★</span></div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-slate-400 to-slate-600 flex items-center justify-center text-white font-black text-xs">O</div>
-                            <div><p class="font-bold text-xs">OmegaSMP</p><p class="text-[10px] opacity-30">Owner</p></div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card anim-scale wait-2">
-                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Kaiser helped us set up our entire server from zero. Economy, ranks, custom items, everything. Dude is a machine.</p>
-                        <div class="review-stars mb-2">★★★★★</div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white font-black text-xs">B</div>
-                            <div><p class="font-bold text-xs">BlitzSMP</p><p class="text-[10px] opacity-30">Owner</p></div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card anim-scale wait-3">
-                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Needed an urgent fix for our auction house at 2am. Kaiser was online and fixed it within the hour. Absolute legend.</p>
-                        <div class="review-stars mb-2">★★★★★</div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-rose-400 to-rose-600 flex items-center justify-center text-white font-black text-xs">F</div>
-                            <div><p class="font-bold text-xs">FrostBite</p><p class="text-[10px] opacity-30">Admin</p></div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card anim-scale wait-1">
-                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Not bad but the script conflicted with another plugin we use. Had to do some manual tweaking. Works now though.</p>
-                        <div class="review-stars mb-2">★★★<span class="empty-star">★★</span></div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-white font-black text-xs">I</div>
-                            <div><p class="font-bold text-xs">IronForge</p><p class="text-[10px] opacity-30">Developer</p></div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card anim-scale wait-2">
-                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">The code quality is actually insane for Skript. Proper variable management, no redundant triggers. Professional level stuff.</p>
-                        <div class="review-stars mb-2">★★★★★</div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-white font-black text-xs">C</div>
-                            <div><p class="font-bold text-xs">CodedMC</p><p class="text-[10px] opacity-30">Developer</p></div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card anim-scale wait-3">
-                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Running Kaiser's scripts on a 200 player server. Zero issues. They handle high load like a champ compared to other skripts I tried.</p>
-                        <div class="review-stars mb-2">★★★★★</div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-violet-400 to-violet-600 flex items-center justify-center text-white font-black text-xs">T</div>
-                            <div><p class="font-bold text-xs">TitanNetwork</p><p class="text-[10px] opacity-30">Network Owner</p></div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card anim-scale wait-1">
-                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Honestly didn't work on my server at all. Might be a version issue. No response to my DM yet. Updating if it gets fixed.</p>
-                        <div class="review-stars mb-2">★<span class="empty-star">★★★★</span></div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center text-white font-black text-xs">U</div>
-                            <div><p class="font-bold text-xs">UltraPvP</p><p class="text-[10px] opacity-30">Owner</p></div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card anim-scale wait-2">
-                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Hired Kaiser for a custom minigame. He built the whole thing in like 4 days. Lobby system, teams, scoreboards, everything. Crazy fast.</p>
-                        <div class="review-stars mb-2">★★★★★</div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-white font-black text-xs">G</div>
-                            <div><p class="font-bold text-xs">GameZone</p><p class="text-[10px] opacity-30">Owner</p></div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card anim-scale wait-3">
-                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Finally someone who writes clean Skript. No spaghetti code, proper functions, good documentation. Easy to customize if you need to.</p>
-                        <div class="review-stars mb-2">★★★★<span class="empty-star">★</span></div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-sky-400 to-sky-600 flex items-center justify-center text-white font-black text-xs">P</div>
-                            <div><p class="font-bold text-xs">PixelWorld</p><p class="text-[10px] opacity-30">Developer</p></div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card anim-scale wait-1">
-                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Our players constantly compliment the tag system. The GUI is super clean and the colors look great in chat. Nice work.</p>
-                        <div class="review-stars mb-2">★★★★★</div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-lime-400 to-lime-600 flex items-center justify-center text-white font-black text-xs">W</div>
-                            <div><p class="font-bold text-xs">WildSurvival</p><p class="text-[10px] opacity-30">Owner</p></div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card anim-scale wait-2">
-                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">I've bought scripts from 10+ developers and Kaiser is easily top 3. Reliability, quality, support - he's got it all covered.</p>
-                        <div class="review-stars mb-2">★★★★★</div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-fuchsia-400 to-fuchsia-600 flex items-center justify-center text-white font-black text-xs">E</div>
-                            <div><p class="font-bold text-xs">ElitePvP</p><p class="text-[10px] opacity-30">Owner</p></div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card anim-scale wait-3">
-                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">The Key All system is simple but effective. Exactly what we needed. No bloat, just works. Appreciate that approach.</p>
-                        <div class="review-stars mb-2">★★★★<span class="empty-star">★</span></div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-stone-400 to-stone-600 flex items-center justify-center text-white font-black text-xs">J</div>
-                            <div><p class="font-bold text-xs">JungleSMP</p><p class="text-[10px] opacity-30">Admin</p></div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card anim-scale wait-1">
-                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Switched from a paid Java AH plugin to Kaiser's Skript version. Honestly can't tell the difference in features. Way cheaper too.</p>
-                        <div class="review-stars mb-2">★★★★★</div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-300 to-indigo-500 flex items-center justify-center text-white font-black text-xs">H</div>
-                            <div><p class="font-bold text-xs">HorizonMC</p><p class="text-[10px] opacity-30">Owner</p></div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card anim-scale wait-2">
-                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Kaiser built us a custom punishment system with appeals through Discord. Integration was flawless. Our staff loves it.</p>
-                        <div class="review-stars mb-2">★★★★★</div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-red-300 to-pink-500 flex items-center justify-center text-white font-black text-xs">X</div>
-                            <div><p class="font-bold text-xs">XenonPvP</p><p class="text-[10px] opacity-30">Manager</p></div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card anim-scale wait-3">
-                        <p class="opacity-60 text-xs leading-relaxed mb-4 pt-4">Great developer, fair prices, and actually delivers on time. In the MC dev world that's basically a unicorn lol. Highly recommend.</p>
-                        <div class="review-stars mb-2">★★★★★</div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-green-300 to-teal-500 flex items-center justify-center text-white font-black text-xs">K</div>
-                            <div><p class="font-bold text-xs">KryptonMC</p><p class="text-[10px] opacity-30">Owner</p></div>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-            <!-- DISCORD -->
-            <section id="discord" class="pb-16">
-                <div class="anim-scale">
-                    <div class="discord-banner">
-                        <div class="relative z-10">
-                            <div class="flex items-center gap-4 mb-6">
-                                <div class="floating-icon text-5xl">🎮</div>
-                                <div>
-                                    <h3 class="text-3xl font-black text-white leading-tight" data-key="discord_heading">Join Our<br>Community!</h3>
-                                    <p class="text-white/60 text-xs font-bold mt-1" data-key="discord_sub">Connect &bull; Get Support &bull; Upgrade</p>
-                                </div>
-                            </div>
-                            <p class="text-white/80 text-sm mb-8 max-w-2xl leading-relaxed" data-key="discord_desc">Need help with setup? Want custom work? Join our Discord server and open a ticket for priority support, premium plans, and exclusive early access to new projects!</p>
-                            <div class="flex flex-wrap gap-4 items-center">
-                                <a href="https://discord.gg/gE8UtGG9" target="_blank" class="px-8 py-3 bg-white text-indigo-600 rounded-xl font-black hover:scale-105 hover:shadow-xl hover:shadow-white/20 transition-all duration-300 inline-block text-base">🚀 Join Now</a>
-                                <div class="flex items-center gap-2 text-white/60">
-                                    <span class="status-dot"></span>
-                                    <span class="font-bold text-xs" data-key="discord_online">Members online now</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- FOOTER -->
-            <footer class="text-center py-12 opacity-20">
-                <p class="text-xs font-bold">Built by Kaiser &middot; 2025</p>
-                <p class="text-[10px] mt-1">All rights reserved.</p>
-            </footer>
-
-        </div>
     </main>
 
-    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
 
     <script>
-        var translations = {
-            en: {
-                nav_dash: "🏠 Dashboard", nav_skills: "⚡ Skills", nav_exp: "🏆 Experience", nav_proj: "📂 Projects", nav_code: "💻 Code", nav_test: "💬 Reviews", nav_discord: "🎮 Discord",
-                hero_welcome: "Welcome to my portfolio", hero_1: "Digital", hero_2: "Architect.", hero_desc: "Experienced Minecraft Developer specializing in high-performance server architecture, custom plugins, and next-level Skript development.",
-                stat_1: "Downloads", stat_2: "Rating", stat_3: "Efficiency",
-                skills_label: "What I Work With", skills_title: "Skills & Expertise",
-                exp_label: "Where I've Been", exp_title: "Staff Journey",
-                role_owner: "OWNER", role_owner2: "OWNER", role_dev: "DEVELOPER", role_dev2: "DEVELOPER",
-                shake_desc: "Founded and managing a growing Minecraft community server with custom gameplay features and dedicated player base.",
-                swift_desc: "Built from scratch with optimized performance, custom economy system, and unique game modes.",
-                ascend_desc: "Developed core gameplay plugins and systems including custom enchants, crate mechanics, and anti-cheat integration.",
-                ice_desc: "Contributed to server infrastructure, wrote performance-critical Skript addons, and improved server stability.",
-                proj_label: "Stuff I've Built", proj_title: "Featured Projects", proj_sub: "Production-ready scripts and plugins, downloaded by thousands of server owners worldwide.", proj_more: "More projects coming soon...",
-                auto_desc: "Automatic item collection with smart inventory full alerts and configurable drop filters.",
-                staff_desc: "Full moderation suite with vanish, freeze, inspector tools, and staff chat integration.",
-                tag_desc: "Advanced chat tag system with GUI selector, custom colors, and permission-based unlocks.",
-                ah_desc: "Optimized Auction House system with search, categories, and bid history tracking.",
-                key_desc: "Global reward distribution system with customizable crate keys and broadcast alerts.",
-                code_label: "Under The Hood", code_title: "Code Showcase",
-                test_label: "What People Say", test_title: "Reviews", test_sub: "Real feedback from server owners and admins who use my work.",
-                discord_heading: "Join Our\nCommunity!", discord_sub: "Connect \u2022 Get Support \u2022 Upgrade",
-                discord_desc: "Need help with setup? Want custom work? Join our Discord server and open a ticket for priority support, premium plans, and exclusive early access to new projects!",
-                discord_online: "Members online now"
-            },
-            he: {
-                nav_dash: "🏠 ראשי", nav_skills: "⚡ מיומנויות", nav_exp: "🏆 ניסיון", nav_proj: "📂 פרויקטים", nav_code: "💻 קוד", nav_test: "💬 ביקורות", nav_discord: "🎮 דיסקורד",
-                hero_welcome: "ברוכים הבאים לתיק העבודות שלי", hero_1: "ארכיטקט", hero_2: "דיגיטלי.", hero_desc: "מפתח מיינקראפט מנוסה המתמחה בארכיטקטורת שרתים בעלי ביצועים גבוהים, תוספים מותאמים אישית ופיתוח סקריפט מתקדם.",
-                stat_1: "הורדות", stat_2: "דירוג", stat_3: "יעילות",
-                skills_label: "מה אני עובד איתו", skills_title: "מיומנויות ומומחיות",
-                exp_label: "איפה הייתי", exp_title: "מסע ניהולי",
-                role_owner: "בעלים", role_owner2: "בעלים", role_dev: "מפתח", role_dev2: "מפתח",
-                shake_desc: "ייסדתי ומנהל שרת קהילה צומח של מיינקראפט עם תכונות משחק מותאמות אישית ובסיס שחקנים מסור.",
-                swift_desc: "נבנה מאפס עם ביצועים אופטימליים, מערכת כלכלה מותאמת ומצבי משחק ייחודיים.",
-                ascend_desc: "פיתחתי תוספי ליבה ומערכות כולל כישופים מותאמים, מכניקת ארגזים ואינטגרציית אנטי-צ'יט.",
-                ice_desc: "תרמתי לתשתית השרת, כתבתי תוספי סקריפט קריטיים לביצועים ושיפרתי את יציבות השרת.",
-                proj_label: "דברים שבניתי", proj_title: "פרויקטים נבחרים", proj_sub: "סקריפטים ותוספים מוכנים לייצור, שהורדו על ידי אלפי בעלי שרתים ברחבי העולם.", proj_more: "פרויקטים נוספים בקרוב...",
-                auto_desc: "איסוף פריטים אוטומטי עם התראות מלאי חכמות ומסנני שליפה הניתנים להגדרה.",
-                staff_desc: "חבילת ניהול מלאה עם היעלמות, הקפאה, כלי בדיקה ואינטגרציית צ'אט צוות.",
-                tag_desc: "מערכת תגיות צ'אט מתקדמת עם בורר גרפי, צבעים מותאמים ופתיחה מבוססת הרשאות.",
-                ah_desc: "מערכת בית מכירות פומביות אופטימלית עם חיפוש, קטגוריות ומעקב היסטוריית הצעות.",
-                key_desc: "מערכת חלוקת תגמולים גלובלית עם מפתחות ארגז הניתנים להתאמה והתראות שידור.",
-                code_label: "מתחת למכסה", code_title: "תצוגת קוד",
-                test_label: "מה אנשים אומרים", test_title: "ביקורות", test_sub: "משוב אמיתי מבעלי שרתים ואדמינים שמשתמשים בעבודה שלי.",
-                discord_heading: "!הצטרפו לקהילה שלנו", discord_sub: "התחברו \u2022 קבלו תמיכה \u2022 שדרגו",
-                discord_desc: "צריכים עזרה עם ההתקנה? רוצים עבודה מותאמת? הצטרפו לשרת הדיסקורד שלנו ופתחו טיקט לתמיכה בעדיפות, תוכניות פרימיום וגישה מוקדמת בלעדית לפרויקטים חדשים!",
-                discord_online: "חברים מחוברים עכשיו"
-            },
-            es: {
-                nav_dash: "🏠 Inicio", nav_skills: "⚡ Habilidades", nav_exp: "🏆 Experiencia", nav_proj: "📂 Proyectos", nav_code: "💻 Código", nav_test: "💬 Reseñas", nav_discord: "🎮 Discord",
-                hero_welcome: "Bienvenido a mi portafolio", hero_1: "Arquitecto", hero_2: "Digital.", hero_desc: "Desarrollador de Minecraft experimentado especializado en arquitectura de servidores de alto rendimiento, plugins personalizados y desarrollo avanzado de Skript.",
-                stat_1: "Descargas", stat_2: "Calificación", stat_3: "Eficiencia",
-                skills_label: "Con lo que trabajo", skills_title: "Habilidades y Experiencia",
-                exp_label: "Dónde he estado", exp_title: "Trayectoria",
-                role_owner: "DUEÑO", role_owner2: "DUEÑO", role_dev: "DESARROLLADOR", role_dev2: "DESARROLLADOR",
-                shake_desc: "Fundé y gestiono un servidor comunitario de Minecraft en crecimiento con características de juego personalizadas.",
-                swift_desc: "Construido desde cero con rendimiento optimizado, sistema de economía personalizado y modos de juego únicos.",
-                ascend_desc: "Desarrollé plugins y sistemas principales incluyendo encantamientos personalizados y mecánicas de cajas.",
-                ice_desc: "Contribuí a la infraestructura del servidor y mejoré la estabilidad del mismo.",
-                proj_label: "Lo que he construido", proj_title: "Proyectos Destacados", proj_sub: "Scripts y plugins listos para producción, descargados por miles de dueños de servidores.", proj_more: "Más proyectos próximamente...",
-                auto_desc: "Recolección automática de objetos con alertas inteligentes de inventario lleno.",
-                staff_desc: "Suite de moderación completa con vanish, congelamiento y herramientas de inspección.",
-                tag_desc: "Sistema avanzado de etiquetas de chat con selector GUI y colores personalizados.",
-                ah_desc: "Sistema de Casa de Subastas optimizado con búsqueda y categorías.",
-                key_desc: "Sistema global de distribución de recompensas con llaves de cofres personalizables.",
-                code_label: "Bajo el capó", code_title: "Muestra de Código",
-                test_label: "Lo que dice la gente", test_title: "Reseñas", test_sub: "Comentarios reales de dueños de servidores y administradores que usan mi trabajo.",
-                discord_heading: "¡Únete a nuestra\ncomunidad!", discord_sub: "Conecta \u2022 Obtén soporte \u2022 Mejora",
-                discord_desc: "¿Necesitas ayuda? ¡Únete a nuestro Discord y abre un ticket para soporte prioritario y planes premium!",
-                discord_online: "Miembros en línea ahora"
-            }
-        };
+        const body = document.body;
+        const html = document.documentElement;
 
-        function changeLanguage(lang) {
-            document.documentElement.lang = lang;
-            document.documentElement.dir = (lang === 'he') ? 'rtl' : 'ltr';
-            var allBtns = document.querySelectorAll('.lang-btn');
-            for (var i = 0; i < allBtns.length; i++) { allBtns[i].classList.remove('active'); }
-            document.getElementById('btn-' + lang).classList.add('active');
-            var elements = document.querySelectorAll('[data-key]');
-            for (var j = 0; j < elements.length; j++) {
-                var key = elements[j].getAttribute('data-key');
-                if (translations[lang] && translations[lang][key]) { elements[j].innerText = translations[lang][key]; }
-            }
-            forceShowAll();
+        document.getElementById('year').innerText = new Date().getFullYear();
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            body.classList.remove('theme-white', 'theme-black', 'theme-blue', 'theme-purple');
+            body.classList.add(savedTheme);
         }
 
-        function setTheme(theme) {
-            document.getElementById('body-bg').className = theme + ' flex min-h-screen';
+        const savedDir = localStorage.getItem('dir');
+        if (savedDir) {
+            html.setAttribute('dir', savedDir);
         }
 
-        function createParticles() {
-            var container = document.getElementById('particles');
-            for (var i = 0; i < 30; i++) {
-                var p = document.createElement('div');
-                p.className = 'particle';
-                p.style.left = Math.random() * 100 + '%';
-                p.style.animationDuration = (8 + Math.random() * 15) + 's';
-                p.style.animationDelay = (Math.random() * 10) + 's';
-                p.style.width = (2 + Math.random() * 3) + 'px';
-                p.style.height = p.style.width;
-                container.appendChild(p);
-            }
-        }
-        createParticles();
+        document.querySelectorAll('.theme-btn').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const theme = this.dataset.theme;
+                body.classList.remove('theme-white', 'theme-black', 'theme-blue', 'theme-purple');
+                body.classList.add(theme);
+                localStorage.setItem('theme', theme);
+            });
+        });
 
-        function forceShowAll() {
-            var allAnim = document.querySelectorAll('.anim-up, .anim-left, .anim-right, .anim-scale, .anim-rotate');
-            for (var i = 0; i < allAnim.length; i++) {
-                allAnim[i].classList.add('visible');
-            }
-            var allBars = document.querySelectorAll('.progress-bar-fill');
-            for (var j = 0; j < allBars.length; j++) {
-                allBars[j].classList.add('bar-animated');
-            }
-        }
+        document.getElementById('dirToggle').addEventListener('click', function() {
+            const current = html.getAttribute('dir') || 'ltr';
+            const next = current === 'ltr' ? 'rtl' : 'ltr';
+            html.setAttribute('dir', next);
+            localStorage.setItem('dir', next);
+        });
 
         function checkVisibility() {
-            var allAnim = document.querySelectorAll('.anim-up, .anim-left, .anim-right, .anim-scale, .anim-rotate');
-            for (var i = 0; i < allAnim.length; i++) {
-                var el = allAnim[i];
-                var rect = el.getBoundingClientRect();
-                var windowH = window.innerHeight || document.documentElement.clientHeight;
-                if (rect.top < windowH + 100 && rect.bottom > -100) {
+            const animated = document.querySelectorAll('.anim-up, .anim-left, .anim-right, .anim-scale, .anim-rotate');
+
+            animated.forEach(function(el) {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 80 && rect.bottom > 0) {
                     el.classList.add('visible');
                 }
-            }
-
-            var allBars = document.querySelectorAll('.progress-bar-fill');
-            for (var j = 0; j < allBars.length; j++) {
-                var barRect = allBars[j].getBoundingClientRect();
-                var winH = window.innerHeight || document.documentElement.clientHeight;
-                if (barRect.top < winH && barRect.bottom > 0) {
-                    allBars[j].classList.add('bar-animated');
-                }
-            }
+            });
         }
 
         function animateCounters() {
-            var counters = document.querySelectorAll('.stat-counter');
-            for (var i = 0; i < counters.length; i++) {
-                var counter = counters[i];
-                var target = parseInt(counter.getAttribute('data-target'));
-                if (!target) continue;
-                if (counter.dataset.done === 'yes') continue;
-                var rect = counter.getBoundingClientRect();
+            const counters = document.querySelectorAll('.counter');
+
+            counters.forEach(function(counter) {
+                if (counter.dataset.done === 'yes') return;
+
+                const rect = counter.getBoundingClientRect();
+
                 if (rect.top < window.innerHeight && rect.bottom > 0) {
                     counter.dataset.done = 'yes';
-                    (function(el, tgt) {
-                        var current = 0;
-                        var increment = Math.ceil(tgt / 80);
-                        var timer = setInterval(function() {
-                            current += increment;
-                            if (current >= tgt) { current = tgt; clearInterval(timer); }
-                            el.innerText = current.toLocaleString() + '+';
-                        }, 20);
-                    })(counter, target);
+
+                    const target = parseInt(counter.dataset.target, 10);
+                    let current = 0;
+                    const increment = Math.max(1, Math.ceil(target / 80));
+
+                    const timer = setInterval(function() {
+                        current += increment;
+
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+
+                        counter.innerText = current.toLocaleString() + '+';
+                    }, 20);
                 }
-            }
+            });
         }
 
         function updateActiveNav() {
-            var sections = document.querySelectorAll('section[id]');
-            var scrollPos = window.scrollY + 250;
-            var links = document.querySelectorAll('.nav-link[data-section]');
-            for (var i = 0; i < links.length; i++) { links[i].classList.remove('active-link'); }
-            for (var j = sections.length - 1; j >= 0; j--) {
-                if (sections[j].offsetTop <= scrollPos) {
-                    var found = document.querySelector('.nav-link[data-section="' + sections[j].id + '"]');
-                    if (found) found.classList.add('active-link');
+            const sections = document.querySelectorAll('section[id]');
+            const scrollPos = window.scrollY + 250;
+            const links = document.querySelectorAll('.nav-link[data-section]');
+
+            links.forEach(function(link) {
+                link.classList.remove('active-link');
+            });
+
+            for (let i = sections.length - 1; i >= 0; i--) {
+                if (sections[i].offsetTop <= scrollPos) {
+                    const id = sections[i].id;
+                    const activeLinks = document.querySelectorAll('.nav-link[data-section="' + id + '"]');
+
+                    activeLinks.forEach(function(link) {
+                        link.classList.add('active-link');
+                    });
+
                     break;
                 }
             }
         }
 
         function updateScrollProgress() {
-            var scrollTop = window.scrollY;
-            var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+
             document.getElementById('scrollProgress').style.width = progress + '%';
         }
 
-        var backToTop = document.getElementById('backToTop');
+        const backToTop = document.getElementById('backToTop');
+
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
         window.addEventListener('scroll', function() {
             checkVisibility();
             animateCounters();
             updateActiveNav();
             updateScrollProgress();
-            if (window.scrollY > 600) { backToTop.classList.add('shown'); }
-            else { backToTop.classList.remove('shown'); }
+
+            if (window.scrollY > 600) {
+                backToTop.classList.add('shown');
+            } else {
+                backToTop.classList.remove('shown');
+            }
+        });
+
+        window.addEventListener('load', function() {
+            checkVisibility();
+            animateCounters();
+            updateActiveNav();
+            updateScrollProgress();
         });
 
         checkVisibility();
         animateCounters();
         updateActiveNav();
+        updateScrollProgress();
 
         setTimeout(checkVisibility, 100);
         setTimeout(checkVisibility, 500);
         setTimeout(checkVisibility, 1000);
-        setTimeout(checkVisibility, 2000);
     </script>
 
 </body>
